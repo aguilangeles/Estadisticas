@@ -6,6 +6,7 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -29,9 +30,13 @@ public class Traza {
     private int idVerificacion;
     private int idUsuario;
     private int idTipoDocumento;
-    private static final Logger LOG = Logger.getLogger(Traza.class.getName());
+    private List<Archivo> archivoList;
+   
 
-    public Traza(int id, Date fecha, String rutaCompleta, String ultmimaCarpeta, int tamanio, int cantidadMuestreada, int nroRechazo, String lineaCaptura, String Digitalizador, int idRango, int estadoLote, int observaciones, int idVerificacion, int idUsuario, int idTipoDocumento) {
+    public Traza() {
+    }
+
+    public Traza(int id, Date fecha, String rutaCompleta, String ultmimaCarpeta, int tamanio, int cantidadMuestreada, int nroRechazo, String lineaCaptura, String Digitalizador, int idRango, int estadoLote, int observaciones, int idVerificacion, int idUsuario, int idTipoDocumento, List<Archivo> archivoList) {
         this.id = id;
         this.fecha = fecha;
         this.rutaCompleta = rutaCompleta;
@@ -47,11 +52,10 @@ public class Traza {
         this.idVerificacion = idVerificacion;
         this.idUsuario = idUsuario;
         this.idTipoDocumento = idTipoDocumento;
+        this.archivoList = archivoList;
     }
 
-    public Traza() {
-    }
-
+    
     public int getId() {
         return id;
     }
@@ -172,10 +176,21 @@ public class Traza {
         this.idTipoDocumento = idTipoDocumento;
     }
 
+    public List<Archivo> getArchivoList() {
+        return archivoList;
+    }
+
+    public void setArchivoList(List<Archivo> archivoList) {
+        this.archivoList = archivoList;
+    }
+    
+
     @Override
     public String toString() {
-        return "Traza{" + "id=" + id + ", fecha=" + fecha + ", rutaCompleta=" + rutaCompleta + ", ultmimaCarpeta=" + ultmimaCarpeta + ", tamanio=" + tamanio + ", cantidadMuestreada=" + cantidadMuestreada + ", nroRechazo=" + nroRechazo + ", lineaCaptura=" + lineaCaptura + ", Digitalizador=" + Digitalizador + ", idRango=" + idRango + ", estadoLote=" + estadoLote + ", observaciones=" + observaciones + ", idVerificacion=" + idVerificacion + ", idUsuario=" + idUsuario + ", idTipoDocumento=" + idTipoDocumento + '}';
+        return "Traza{" + "id=" + id + ", fecha=" + fecha + ", rutaCompleta=" + rutaCompleta + ", ultmimaCarpeta=" + ultmimaCarpeta + ", tamanio=" + tamanio + ", cantidadMuestreada=" + cantidadMuestreada + ", nroRechazo=" + nroRechazo + ", lineaCaptura=" + lineaCaptura + ", Digitalizador=" + Digitalizador + ", idRango=" + idRango + ", estadoLote=" + estadoLote + ", observaciones=" + observaciones + ", idVerificacion=" + idVerificacion + ", idUsuario=" + idUsuario + ", idTipoDocumento=" + idTipoDocumento + ", archivoList=" + archivoList + '}';
     }
+
+ 
     
     
     
