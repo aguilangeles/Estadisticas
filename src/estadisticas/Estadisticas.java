@@ -5,6 +5,10 @@
  */
 package estadisticas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Maria
@@ -15,7 +19,35 @@ public class Estadisticas {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Conexion conexion = new Conexion();
+       if(conexion.isConexion()){
+           System.out.println("conexion exitosa");
+        String query = "select id from traza";
+           conexion.executeQuery(query);
+            try {
+                while (conexion.resulset.next()){
+                    System.out.println(conexion.resulset.getInt(1));
+                }} catch (SQLException ex) {
+                Logger.getLogger(Estadisticas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+       }
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+      
+        
+        
+        
+     
     }
     
 }
