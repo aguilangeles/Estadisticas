@@ -20,64 +20,42 @@ import java.util.logging.Logger;
  */
 public class Conexion {
 
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private Connection conexion;
-    private Statement statement;
-    private ResultSet resultSet;
-    private PreparedStatement preparedStatement;
-    private String url, base, user, password;
-  private int filasAfectadas;
+    private Connection conexion = null;
+    private String servidor = "localhost";
+    private String database = "qualitys";
+    private String usuario = "root";
+    private String password = "root";
+    private String url = "";
 
     public Conexion() {
-    }
-
-    public boolean isconnect() throws SQLException {
         try {
-            Class.forName(DRIVER);
-            String urlext = "jdbc:mysql://" + url + "/" + base;
-            conexion = (Connection) DriverManager.getConnection(urlext, user, password);
+            Class.forName("com.mysql.jdbc.Driver");
+            url = "jdbc:mysql://" + servidor + "/" + database;
+            conexion = (Connection) DriverManager.getConnection(url, usuario, password);
+            System.out.println("Conexion a Base de Datos " + url + " . . . . .Ok");
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return conexion != null;
-    }
-
-    public boolean isConexionClose() {
-
-        try {
-            if (resultSet != null && statement != null && !conexion.isClosed()) {
-                resultSet.close();
-                statement.close();
-                conexion.close();
-                return true;
-            }
         } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
         }
-        return false;
     }
 
+    
+    
+    public Connection getConexion() {
+        return conexion;
+    }
 
-    public void executeQuery(String sql) {
+    public Connection cerrarConexion() {
         try {
-            statement = (Statement) (java.sql.Statement) conexion.createStatement();
-            resultSet = statement.executeQuery(sql);
-
-        } catch (SQLException sqle) {
-//envia mensajes si la consulta tuvo un error
-            do {
-                System.out.println("SQL STATE: " + sqle.getSQLState());
-                System.out.println("ERROR CODE: " + sqle.getErrorCode());
-                System.out.println("MESSAGE: " + sqle.getMessage());
-                System.out.println();
-                sqle = sqle.getNextException();
-            } while (sqle != null);
+            conexion.close();
+            System.out.println("Cerrando conexion a " + url + " . . . . . Ok");
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
+        conexion = null;
+        return conexion;
     }
 
-    public void executeUpdate(String sql) throws SQLException {
-    preparedStatement = (PreparedStatement) conexion.prepareStatement(sql);
-    filasAfectadas = preparedStatement.executeUpdate();
-    }
 }
