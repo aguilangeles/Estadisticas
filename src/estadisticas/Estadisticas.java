@@ -23,7 +23,7 @@ public class Estadisticas {
         Conexion conexion = new Conexion();
        if(conexion.isConexion()){
            System.out.println("conexion exitosa");
-        String query = "select id from traza";
+        String query = "select id from traza order by id";
            conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()){
