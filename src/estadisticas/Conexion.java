@@ -1,61 +1,109 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package estadisticas;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author aguilangeles@gmail.com
+ * @author MUTNPROD003
  */
 public class Conexion {
 
-    private Connection conexion = null;
-    private String servidor = "localhost";
-    private String database = "qualitys";
-    private String usuario = "root";
-    private String password = "root";
-    private String url = "";
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private Connection conexion;
+    public Statement statement = null;
+    public ResultSet resulset = null;
+    private PreparedStatement prepareStatement;
+    private int filasAfectadas;
+    private int messageType = JOptionPane.ERROR_MESSAGE;
+    private String className = Conexion.class.getName();
 
     public Conexion() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            url = "jdbc:mysql://" + servidor + "/" + database;
-            conexion = (Connection) DriverManager.getConnection(url, usuario, password);
-            System.out.println("Conexion a Base de Datos " + url + " . . . . .Ok");
+    }
 
+    public boolean isConexion() {
+        String url = "localhost";
+        String base = "qualitys";
+        String urlExtendida = "jdbc:mysql://" + url + "/" + base;
+        String user = "root";
+        String passw = "root";
+        try {
+            Class.forName(DRIVER);
+            conexion = DriverManager.getConnection(urlExtendida, user, passw);
         } catch (SQLException ex) {
             System.out.println(ex);
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return conexion != null;
+    }
+
+    public boolean isConexionClose() {
+        if (resulset != null) {
+            try {
+                resulset.close();
+            } catch (SQLException ex) {
+
+                System.out.println(ex);
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException ex) {
+
+                System.out.println(ex);
+            }
+        }
+        if (conexion != null) {
+            try {
+                if (!conexion.isClosed()) {
+                    try {
+                        conexion.close();
+
+                        return true;
+                    } catch (SQLException ex) {
+                        System.out.println(ex);
+                        return false;
+                    }
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        return false;
+    }
+//para consultar
+
+    public void executeQuery(String sql) {
+        try {
+            statement = (Statement) conexion.createStatement();
+            resulset = statement.executeQuery(sql);
+
+        } catch (SQLException sqle) {
+//envia mensajes si la consulta tuvo un error
+            do {
+                System.out.println("SQL STATE: " + sqle.getSQLState());
+                System.out.println("ERROR CODE: " + sqle.getErrorCode());
+                System.out.println("MESSAGE: " + sqle.getMessage());
+                System.out.println();
+                sqle = sqle.getNextException();
+            } while (sqle != null);
         }
     }
 
-    
-    
-    public Connection getConexion() {
-        return conexion;
-    }
-
-    public Connection cerrarConexion() {
-        try {
-            conexion.close();
-            System.out.println("Cerrando conexion a " + url + " . . . . . Ok");
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        conexion = null;
-        return conexion;
+    public void executeUpdate(String sql) throws SQLException {
+        prepareStatement = conexion.prepareStatement(sql);
+        filasAfectadas = prepareStatement.executeUpdate();
     }
 
 }
