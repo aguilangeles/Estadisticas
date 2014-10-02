@@ -79,13 +79,13 @@ public class FilterDate extends javax.swing.JFrame {
         });
 
         jcomboEspecifico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcomboEspecifico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcomboEspecificoActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         comboBetween.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -140,9 +140,6 @@ public class FilterDate extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcomboEspecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboEspecificoActionPerformed
-    }//GEN-LAST:event_jcomboEspecificoActionPerformed
-
     private void rButtonEspecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rButtonEspecificoActionPerformed
         comboBetween.setVisible(false);
     }//GEN-LAST:event_rButtonEspecificoActionPerformed
@@ -152,6 +149,19 @@ public class FilterDate extends javax.swing.JFrame {
         comboBetween.setModel(dateFromTraza.getDateFrom());
         comboBetween.setVisible(true);
     }//GEN-LAST:event_rButtonBetweenActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(rButtonEspecifico.isSelected()){
+            String fecha_1 = jcomboEspecifico.getSelectedItem()+"%";
+            GetTrazaSegunFecha trazaSegunFecha = new GetTrazaSegunFecha(1, fecha_1);
+        }else if(rButtonBetween.isSelected()){
+            String fecha_1 = jcomboEspecifico.getSelectedItem()+"%";
+            String fecha_2 = comboBetween.getSelectedItem()+"%";
+            GetTrazaSegunFecha trazaSegunFecha = new GetTrazaSegunFecha(1, fecha_1, fecha_2);
+        }
+       
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

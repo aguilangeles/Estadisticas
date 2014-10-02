@@ -44,7 +44,7 @@ public class Control extends javax.swing.JFrame {
         TOne.setLayout(TOneLayout);
         TOneLayout.setHorizontalGroup(
             TOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 859, Short.MAX_VALUE)
+            .addGap(0, 584, Short.MAX_VALUE)
         );
         TOneLayout.setVerticalGroup(
             TOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -59,7 +59,7 @@ public class Control extends javax.swing.JFrame {
         TTwo.setLayout(TTwoLayout);
         TTwoLayout.setHorizontalGroup(
             TTwoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 859, Short.MAX_VALUE)
+            .addGap(0, 584, Short.MAX_VALUE)
         );
         TTwoLayout.setVerticalGroup(
             TTwoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,7 +72,7 @@ public class Control extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
