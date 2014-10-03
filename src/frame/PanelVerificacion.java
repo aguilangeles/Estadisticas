@@ -5,7 +5,9 @@
  */
 package frame;
 
+import java.awt.BorderLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
 
 /**
  *
@@ -13,12 +15,17 @@ import javax.swing.ButtonGroup;
  */
 public class PanelVerificacion extends javax.swing.JPanel {
     private ButtonGroup group;
+    private JPanel p;
     /**
      * Creates new form PanelVerificacion
+     * @param p
      */
-    public PanelVerificacion() {
+    public PanelVerificacion(JPanel p) {
         initComponents();
+        this.p = p;
+        this.add(this.p, BorderLayout.SOUTH);
         actionRadioGroup();
+        
     }
 
     private void actionRadioGroup(){
@@ -89,9 +96,7 @@ public class PanelVerificacion extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
