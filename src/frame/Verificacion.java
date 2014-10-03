@@ -24,16 +24,18 @@ public class Verificacion extends JFrame {
     private final JLabel numTrazas;
     private final JLabel numAcept;
     private final JLabel numRech;
+    private final JLabel numNull;
     private final JRadioButton calidad;
     private final JRadioButton documento;
     private ButtonGroup group;
     private int idTraza;
 
-    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JRadioButton calidad, JRadioButton documento) throws HeadlessException {
+    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JRadioButton calidad, JRadioButton documento) throws HeadlessException {
         this.numTrazas = numTrazas;
         this.numAcept = numAcept;
         this.numRech = numRech;
         this.calidad = calidad;
+        this.numNull=numNull;
         this.documento = documento;
         actionButtonGroup();
         calidadActionPerformed();
@@ -46,7 +48,7 @@ public class Verificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 idTraza=1;
-                GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, idTraza);
+                GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza);
 
             }
         });
@@ -58,7 +60,7 @@ public class Verificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 idTraza=2;
-                GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, idTraza);
+                GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza);
 
             }
         });
