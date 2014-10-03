@@ -16,10 +16,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
      */
     public PanelSeleccion() {
         initComponents();
+        jcCompuesto.setVisible(false);
+        jlEntre.setVisible(false);
         Verificacion verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jrbCalidad, jrbDocumento);
         GetDates dates = new GetDates(jrbEspecifica, jrbCompuesta, jcEspecifico, jcCompuesto, jlSimple, jlEntre, verificacion);
         
-       
     }
 
     /**

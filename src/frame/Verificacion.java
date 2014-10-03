@@ -12,8 +12,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
-import javax.swing.plaf.basic.BasicBorders;
-import javax.swing.plaf.basic.BasicSliderUI;
 
 /**
  *
@@ -35,19 +33,18 @@ public class Verificacion extends JFrame {
         this.numAcept = numAcept;
         this.numRech = numRech;
         this.calidad = calidad;
-        this.numNull=numNull;
+        this.numNull = numNull;
         this.documento = documento;
         actionButtonGroup();
         calidadActionPerformed();
         documentoActionPerformed();
     }
 
-    
     private void calidadActionPerformed() {
         this.calidad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                idTraza=1;
+                idTraza = 1;
                 GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza);
 
             }
@@ -56,10 +53,10 @@ public class Verificacion extends JFrame {
 
     private void documentoActionPerformed() {
         this.documento.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                idTraza=2;
+                idTraza = 2;
                 GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza);
 
             }
@@ -71,5 +68,15 @@ public class Verificacion extends JFrame {
         group.add(calidad);
         group.add(documento);
     }
- 
+
+    public int getIdTraza() {
+        if (calidad.isSelected()) {
+            idTraza = 1;
+        }
+        if (documento.isSelected()) {
+            idTraza = 2;
+        }
+        return idTraza;
+    }
+
 }

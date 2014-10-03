@@ -31,23 +31,7 @@ public class Estadisticas {
                 }} catch (SQLException ex) {
                 Logger.getLogger(Estadisticas.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
        }
-        
-        
-        
-        
-        
-        
-        
-        
-      
-        
-      
-        
-        
-        
-     
     }
     
 }

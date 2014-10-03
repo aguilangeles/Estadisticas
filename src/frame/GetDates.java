@@ -42,6 +42,9 @@ public class GetDates extends JFrame {
         actionRadioButton();
         especificaActionPerformed();
         compuestaActionPerformed();
+        int id = verificacion.getIdTraza();
+        datesFromTraza = new GetDatesFromTraza(id, "asc");
+        jcEspecifico.setModel(datesFromTraza.getDateFrom());
     }
 
     private void especificaActionPerformed() {
@@ -49,19 +52,11 @@ public class GetDates extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                System.out.println("id " + verificacion.getIdTraza());
-//                System.out.println("selecciono simple");
-                if (especifica.isSelected()) {
-                    jcCompuesto.setVisible(false);
-                    int id = verificacion.getIdTraza();
-                    datesFromTraza = new GetDatesFromTraza(id, "asc");
-                    jcEspecifico.setModel(datesFromTraza.getDateFrom());
-                } else if (compuesta.isSelected()) {
-
-                } else {
-                    System.out.println("nada");
-                }
-
+                jcCompuesto.setVisible(false);
+                entre.setVisible(false);
+                int id = verificacion.getIdTraza();
+                datesFromTraza = new GetDatesFromTraza(id, "asc");
+                jcEspecifico.setModel(datesFromTraza.getDateFrom());
             }
         });
     }
@@ -71,8 +66,11 @@ public class GetDates extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("id " + verificacion.getIdTraza());
-                System.out.println("selecciono compuesta");
+                int id = verificacion.getIdTraza();
+                jcCompuesto.setVisible(true);
+                entre.setVisible(true);
+                datesFromTraza = new GetDatesFromTraza(id, "desc");
+                jcCompuesto.setModel(datesFromTraza.getDateFrom());
             }
         });
     }
