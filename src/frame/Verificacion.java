@@ -46,7 +46,7 @@ public class Verificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 idTraza=1;
-                System.out.println("control de calidad basico");
+                GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, idTraza);
 
             }
         });
@@ -58,7 +58,7 @@ public class Verificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 idTraza=2;
-                System.out.println("control  básico de documento");
+                GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, idTraza);
 
             }
         });
