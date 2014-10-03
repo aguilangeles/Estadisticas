@@ -32,13 +32,11 @@ public class GetDatesFromTraza {
 
     private void getDates(int idverificacion, String order) {
         Conexion conexion = new Conexion();
-        System.out.println("abrió conexion");
         if (conexion.isConexion()) {
             String query = " SELECT distinct date(fecha_control) "
                     + " FROM qualitys.traza "
                     + " where idVerificacion = " + idverificacion
                     + " order by fecha_control " + order + ";";
-            System.out.println(query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
@@ -49,7 +47,6 @@ public class GetDatesFromTraza {
             }
         }
         conexion.isConexionClose();
-        System.out.println("cerró conexion");
     }
 
     
