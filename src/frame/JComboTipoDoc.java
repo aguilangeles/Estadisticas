@@ -10,22 +10,23 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 
 /**
  *
  * @author aguilangeles@gmail.com
  */
 public class JComboTipoDoc {
-    
+
     private DefaultComboBoxModel model = new DefaultComboBoxModel();
+    private final String condition;
     private final int id;
-    
-    public JComboTipoDoc(int id) {
+
+    public JComboTipoDoc(int id, String condition) {
         this.id = id;
+        this.condition = condition;
         getdocumentos();
     }
-    
+
     private void getdocumentos() {
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
@@ -34,8 +35,8 @@ public class JComboTipoDoc {
                     + "FROM qualitys.traza t "
                     + "join qualitys.tipos_documentos td "
                     + "on t.idTipoDocumento = td.id "
-                    + "where t.idVerificacion = " + id + ";";
-            
+                    + "where t.idVerificacion = " + id + condition;
+            System.out.println(query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
@@ -44,30 +45,12 @@ public class JComboTipoDoc {
             } catch (SQLException ex) {
                 Logger.getLogger(JComboTipoDoc.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
         conexion.isConexionClose();
     }
 
-    /*  private void getDates(int idverificacion, String order) {
-     Conexion conexion = new Conexion();
-     if (conexion.isConexion()) {
-     String query = " SELECT distinct date(fecha_control) "
-     + " FROM qualitys.traza "
-     + " where idVerificacion = " + idverificacion
-     + " order by fecha_control " + order + ";";
-     conexion.executeQuery(query);
-     try {
-     while (conexion.resulset.next()) {
-     dates.addElement(conexion.resulset.getDate(1));
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(GetDatesFromTraza.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     }
-     conexion.isConexionClose();
-     }*/
     public DefaultComboBoxModel getModel() {
         return model;
     }
+
 }

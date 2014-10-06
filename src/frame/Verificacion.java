@@ -52,7 +52,7 @@ public class Verificacion extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 idTraza = 1;
                 GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza, ";");
-                jComboTipoDoc = new JComboTipoDoc(idTraza);
+                jComboTipoDoc = new JComboTipoDoc(idTraza, ";");
                 jcTipoDoc.setModel(jComboTipoDoc.getModel());
             }
         });
@@ -65,7 +65,7 @@ public class Verificacion extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 idTraza = 2;
                 GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza, ";");
-                jComboTipoDoc = new JComboTipoDoc(idTraza);
+                jComboTipoDoc = new JComboTipoDoc(idTraza, ";");
                 jcTipoDoc.setModel(jComboTipoDoc.getModel());
             }
         });
