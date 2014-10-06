@@ -9,6 +9,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -25,17 +26,21 @@ public class Verificacion extends JFrame {
     private final JLabel numNull;
     private final JRadioButton calidad;
     private final JRadioButton documento;
+    private final JComboBox jcTipoDoc;
+    private final JLabel jcNameTipoDoc;
     private ButtonGroup group;
     private int idTraza;
+    private JComboTipoDoc jComboTipoDoc;
 
-    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, 
-            JLabel numNull, JRadioButton calidad, JRadioButton documento) throws HeadlessException {
+    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JRadioButton calidad, JRadioButton documento, JComboBox jcTipodoc, JLabel jlNameTipodoc) throws HeadlessException {
         this.numTrazas = numTrazas;
         this.numAcept = numAcept;
         this.numRech = numRech;
         this.calidad = calidad;
         this.numNull = numNull;
         this.documento = documento;
+        this.jcTipoDoc = jcTipodoc;
+        this.jcNameTipoDoc = jlNameTipodoc;
         actionButtonGroup();
         calidadActionPerformed();
         documentoActionPerformed();
@@ -47,7 +52,8 @@ public class Verificacion extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 idTraza = 1;
                 GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza, ";");
-
+                jComboTipoDoc = new JComboTipoDoc(idTraza);
+                jcTipoDoc.setModel(jComboTipoDoc.getModel());
             }
         });
     }
@@ -59,7 +65,8 @@ public class Verificacion extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 idTraza = 2;
                 GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza, ";");
-
+                jComboTipoDoc = new JComboTipoDoc(idTraza);
+                jcTipoDoc.setModel(jComboTipoDoc.getModel());
             }
         });
     }
