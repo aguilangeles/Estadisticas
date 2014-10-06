@@ -57,17 +57,12 @@ public class GetDates extends JFrame {
         nextActionPerformed();
     }
 
-    private void nextActionPerformed() {
-        this.next.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                id = verificacion.getIdTraza();
-                changeValuesOFtraza(id);
-            }
-        });
+    private void llenarJCEspecifico() {
+        id = verificacion.getIdTraza();
+        datesFromTraza = new GetDatesFromTraza(id, "asc");
+        jcEspecifico.setModel(datesFromTraza.getDateFrom());
     }
-
     private void especificaActionPerformed() {
         this.especifica.addActionListener(new ActionListener() {
             @Override
@@ -81,11 +76,6 @@ public class GetDates extends JFrame {
         });
     }
 
-    private void llenarJCEspecifico() {
-        id = verificacion.getIdTraza();
-        datesFromTraza = new GetDatesFromTraza(id, "asc");
-        jcEspecifico.setModel(datesFromTraza.getDateFrom());
-    }
 
     private void compuestaActionPerformed() {
         this.compuesta.addActionListener(new ActionListener() {
@@ -122,7 +112,16 @@ public class GetDates extends JFrame {
         cantidadVerificacion
                 = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, id1, condition);
         return cantidadVerificacion;
+    }
+    private void nextActionPerformed() {
+        this.next.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                id = verificacion.getIdTraza();
+                changeValuesOFtraza(id);
+            }
+        });
     }
 
     private void actionRadioButton() {

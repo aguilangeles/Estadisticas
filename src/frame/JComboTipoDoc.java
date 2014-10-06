@@ -17,7 +17,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class JComboTipoDoc {
 
-    private DefaultComboBoxModel model = new DefaultComboBoxModel();
+    private final DefaultComboBoxModel model = new DefaultComboBoxModel();
     private final String condition;
     private final int id;
 
