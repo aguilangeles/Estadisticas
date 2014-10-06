@@ -18,8 +18,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
         initComponents();
         jcCompuesto.setVisible(false);
         jlEntre.setVisible(false);
-        Verificacion verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jrbCalidad, jrbDocumento, jcTipodoc, jlNameTipodoc);
-        GetDates dates = new GetDates(jrbEspecifica, jrbCompuesta, jcEspecifico, jcCompuesto, jlSimple, jlEntre, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, verificacion, jbNext);
+        Verificacion verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jrbCalidad, jrbDocumento, jcTipodoc, jlNameTipodoc, jcTipoUsuario);
+        GetDates dates = new GetDates(jrbEspecifica, jrbCompuesta, jcEspecifico, 
+                jcCompuesto, jlSimple, jlEntre, jlnumTrazas, jlnumAcep, jlnumRech,
+                jlnumNull, verificacion, jbNext);
     }
 
     /**
@@ -62,7 +64,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox();
+        jcTipoUsuario = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -278,7 +280,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         jLabel10.setText("Seleccione el usuario");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel11.setText("Usuario");
 
@@ -294,7 +296,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jcTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -313,7 +315,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
@@ -407,7 +409,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -425,6 +426,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JButton jbnext1;
     private javax.swing.JComboBox jcCompuesto;
     private javax.swing.JComboBox jcEspecifico;
+    private javax.swing.JComboBox jcTipoUsuario;
     private javax.swing.JComboBox jcTipodoc;
     private javax.swing.JLabel jlEntre;
     private javax.swing.JLabel jlNameTipodoc;

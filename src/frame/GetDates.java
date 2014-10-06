@@ -113,6 +113,7 @@ public class GetDates extends JFrame {
                 = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, id1, condition);
         return cantidadVerificacion;
     }
+    
     private void nextActionPerformed() {
         this.next.addActionListener(new ActionListener() {
 

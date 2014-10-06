@@ -26,13 +26,14 @@ public class Verificacion extends JFrame {
     private final JLabel numNull;
     private final JRadioButton calidad;
     private final JRadioButton documento;
-    private final JComboBox jcTipoDoc;
+    private final JComboBox jcTipoDoc, jcTipoUsuario;
     private final JLabel jcNameTipoDoc;
     private ButtonGroup group;
     private int idTraza;
     private JComboTipoDoc jComboTipoDoc;
+    private JCTipoUsuario tipoUsuario;
 
-    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JRadioButton calidad, JRadioButton documento, JComboBox jcTipodoc, JLabel jlNameTipodoc) throws HeadlessException {
+    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JRadioButton calidad, JRadioButton documento, JComboBox jcTipodoc, JLabel jlNameTipodoc, JComboBox jcTipoUsuario) throws HeadlessException {
         this.numTrazas = numTrazas;
         this.numAcept = numAcept;
         this.numRech = numRech;
@@ -41,6 +42,7 @@ public class Verificacion extends JFrame {
         this.documento = documento;
         this.jcTipoDoc = jcTipodoc;
         this.jcNameTipoDoc = jlNameTipodoc;
+        this.jcTipoUsuario = jcTipoUsuario;
         actionButtonGroup();
         calidadActionPerformed();
         documentoActionPerformed();
@@ -51,9 +53,10 @@ public class Verificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 idTraza = 1;
-                GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza, ";");
-                jComboTipoDoc = new JComboTipoDoc(idTraza, ";");
-                jcTipoDoc.setModel(jComboTipoDoc.getModel());
+                setValuesOfVerificacion();
+                llenarTipoDoc();
+                llenarTipoUsuario();
+
             }
         });
     }
@@ -64,11 +67,27 @@ public class Verificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 idTraza = 2;
-                GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza, ";");
-                jComboTipoDoc = new JComboTipoDoc(idTraza, ";");
-                jcTipoDoc.setModel(jComboTipoDoc.getModel());
+                setValuesOfVerificacion();
+                llenarTipoDoc();
+                llenarTipoUsuario();
             }
         });
+    }
+
+    private void setValuesOfVerificacion() {
+        GetCantidadVerificacion cantidadVerificacion
+                = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza, ";");
+    }
+
+    private void llenarTipoDoc() {
+        jComboTipoDoc = new JComboTipoDoc(idTraza, ";");
+        jcTipoDoc.setModel(jComboTipoDoc.getModel());
+    }
+
+    private void llenarTipoUsuario() {
+        tipoUsuario = new JCTipoUsuario(idTraza, ";");
+        jcTipoUsuario.setModel(tipoUsuario.getModel());
+
     }
 
     private void actionButtonGroup() {

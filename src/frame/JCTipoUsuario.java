@@ -10,40 +10,40 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 
 /**
  *
  * @author aguilangeles@gmail.com
  */
-public class JComboTipoDoc {
+public class JCTipoUsuario {
 
-    private final DefaultComboBoxModel model = new DefaultComboBoxModel();
+    private DefaultComboBoxModel model = new DefaultComboBoxModel();
     private final String condition;
     private final int id;
 
-    public JComboTipoDoc(int id, String condition) {
+    public JCTipoUsuario( int id,String condition) {
         this.id = id;
         this.condition = condition;
-        getdocumentos();
+        getUsuarios();
     }
 
-    private void getdocumentos() {
+    private void getUsuarios() {
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT    "
-                    + "distinct td.descripcion "
+            String query = "SELECT distinct t.idUsuarios "
+                    + ", tu.nombre  "
                     + "FROM qualitys.traza t "
-                    + "join qualitys.tipos_documentos td "
-                    + "on t.idTipoDocumento = td.id "
-                    + "where t.idVerificacion = " + id + condition;
+                    + "join qualitys.usuarios tu "
+                    + "on t.idUsuarios = tu.id "
+                    + "where t.idVerificacion = "
+                     + id + condition;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
-                    model.addElement(conexion.resulset.getString(1));
+                    model.addElement(conexion.resulset.getString(2));
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(JComboTipoDoc.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JComboUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         conexion.isConexionClose();
@@ -51,6 +51,10 @@ public class JComboTipoDoc {
 
     public DefaultComboBoxModel getModel() {
         return model;
+    }
+
+    public void setModel(DefaultComboBoxModel model) {
+        this.model = model;
     }
 
 }
