@@ -9,6 +9,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,56 +28,113 @@ public class GetDates extends JFrame {
     private final JComboBox jcCompuesto;
     private final JLabel simple;
     private final JLabel entre;
+    private final JLabel jlnumTrazas;
+    private final JLabel jlnumAcep;
+    private final JLabel jlnumRech;
+    private final JLabel jlnumNull;
     private final Verificacion verificacion;
     private GetDatesFromTraza datesFromTraza;
     private int id;
+    private JButton next;
 
-    public GetDates(JRadioButton especifica, JRadioButton compuesta,
-            JComboBox jcEspecifico, JComboBox jcCompuesto,
-            JLabel simple, JLabel entre, Verificacion verificacion) throws HeadlessException {
+    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, Verificacion verificacion, JButton jbnext) throws HeadlessException {
         this.especifica = especifica;
         this.compuesta = compuesta;
         this.jcEspecifico = jcEspecifico;
         this.jcCompuesto = jcCompuesto;
         this.simple = simple;
         this.entre = entre;
+        this.jlnumTrazas = jlnumTrazas;
+        this.jlnumAcep = jlnumAcep;
+        this.jlnumRech = jlnumRech;
+        this.jlnumNull = jlnumNull;
         this.verificacion = verificacion;
+        this.next = jbnext;
 
         actionRadioButton();
         especificaActionPerformed();
         compuestaActionPerformed();
+        nextActionPerformed();
+    }
 
+    private void nextActionPerformed() {
+        this.next.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                id = verificacion.getIdTraza();
+                changeValuesOFtraza(id);
+
+            }
+        });
     }
 
     private void especificaActionPerformed() {
         this.especifica.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 jcCompuesto.setVisible(false);
                 entre.setVisible(false);
                 simple.setText("Fecha: ");
-                id = verificacion.getIdTraza();
-                datesFromTraza = new GetDatesFromTraza(id, "asc");
-                jcEspecifico.setModel(datesFromTraza.getDateFrom());
+                llenarJCEspecifico();
+
             }
         });
     }
 
+    private void llenarJCEspecifico() {
+        id = verificacion.getIdTraza();
+        datesFromTraza = new GetDatesFromTraza(id, "asc");
+        jcEspecifico.setModel(datesFromTraza.getDateFrom());
+    }
+
     private void compuestaActionPerformed() {
         this.compuesta.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = verificacion.getIdTraza();
+                llenarJCEspecifico();
                 jcCompuesto.setVisible(true);
                 simple.setText("Fecha ENTRE");
                 entre.setVisible(true);
                 entre.setText("Y");
                 datesFromTraza = new GetDatesFromTraza(id, "desc");
                 jcCompuesto.setModel(datesFromTraza.getDateFrom());
+
             }
+
         });
+    }
+
+    private void changeNumbersOfTrazas(int id1) {
+
+        String firstDate = jcEspecifico.getSelectedItem() + "%";
+        String lastDate = jcCompuesto.getSelectedItem() + "%";
+        String condition = " and fecha_control "
+                + " between '" + firstDate + "'"
+                + " and '" + lastDate + "';";
+        GetCantidadVerificacion cantidadVerificacion
+                = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, id1, condition);
+    }
+
+    private GetCantidadVerificacion changeValuesOFtraza(int id1) {
+        GetCantidadVerificacion cantidadVerificacion;
+        String condition;
+        String firstDate = jcEspecifico.getSelectedItem() + "%";
+        if (!jcCompuesto.isVisible()) {
+            condition = " and fecha_control like '" + firstDate + "';";
+
+        } else {
+            String lastDate = jcCompuesto.getSelectedItem() + "%";
+            condition = " and fecha_control "
+                    + " between '" + firstDate + "'"
+                    + " and '" + lastDate + "';";
+        }
+        cantidadVerificacion
+                = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, id1, condition);
+        return cantidadVerificacion;
+
     }
 
     private void actionRadioButton() {

@@ -19,7 +19,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jcCompuesto.setVisible(false);
         jlEntre.setVisible(false);
         Verificacion verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jrbCalidad, jrbDocumento);
-        GetDates dates = new GetDates(jrbEspecifica, jrbCompuesta, jcEspecifico, jcCompuesto, jlSimple, jlEntre, verificacion);
+        GetDates dates = new GetDates(jrbEspecifica, jrbCompuesta, jcEspecifico, jcCompuesto, jlSimple, jlEntre, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, verificacion, jbNext);
         
     }
 
@@ -49,7 +49,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jrbCompuesta = new javax.swing.JRadioButton();
         jcEspecifico = new javax.swing.JComboBox();
         jcCompuesto = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        jbNext = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jlEntre = new javax.swing.JLabel();
         jlSimple = new javax.swing.JLabel();
@@ -155,7 +155,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         jcCompuesto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("next");
+        jbNext.setText("next");
 
         jButton2.setText("add");
 
@@ -183,7 +183,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                     .addComponent(jlSimple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbNext, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -207,7 +207,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jcEspecifico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jbNext))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlEntre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -404,7 +404,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -426,6 +425,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JButton jbNext;
     private javax.swing.JComboBox jcCompuesto;
     private javax.swing.JComboBox jcEspecifico;
     private javax.swing.JLabel jlEntre;

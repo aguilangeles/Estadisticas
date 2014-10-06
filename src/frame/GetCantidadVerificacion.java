@@ -22,23 +22,26 @@ public class GetCantidadVerificacion {
     private final JLabel numRech;
     private final JLabel numNull;
     private final int idTraza;
+    private final String condition;
 
-    public GetCantidadVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, int idTraza) {
+    public GetCantidadVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, int idTraza, String condition) {
         this.numTrazas = numTrazas;
         this.numAcept = numAcept;
         this.numRech = numRech;
         this.numNull = numNull;
         this.idTraza = idTraza;
-        getQuantityofTrazas();
-        getQuantityof(numAcept, idTraza, "= '1'", "Total Aceptados: ");// llena label de aceptados
-        getQuantityof(numRech, idTraza, "= '0'", "Total Rechazados: ");//llena label de rechazados
-        getQuantityof(numNull, idTraza, "IS NULL", "Total Nulos: ");// llena label null
+        this.condition = condition;
+        getQuantityofTrazas(condition);
+        getQuantityof(numAcept, idTraza, "= '1'", "Total Aceptados: ", condition);// llena label de aceptados
+        getQuantityof(numRech, idTraza, "= '0'", "Total Rechazados: ", condition);//llena label de rechazados
+        getQuantityof(numNull, idTraza, "IS NULL", "Total Nulos: ", condition);// llena label null
     }
 
-    private void getQuantityofTrazas() {
+    private void getQuantityofTrazas(String condition) {
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT count(*) FROM qualitys.traza  where idVerificacion =" + idTraza + ";";
+            String query = "SELECT count(*) FROM qualitys.traza  where idVerificacion = " + idTraza + condition;
+            System.out.println(query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
@@ -53,12 +56,12 @@ public class GetCantidadVerificacion {
         }
     }
 
-    private void getQuantityof(JLabel aLabel, int idTraza, String value, String cantidadde) {
+    private void getQuantityof(JLabel aLabel, int idTraza, String value, String cantidadde, String condition) {
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
             String query = "SELECT count(*) FROM qualitys.traza "
                     + " where idverificacion = " + idTraza
-                    + " and estadoLote " + value + ";";
+                    + " and estadoLote " + value + condition;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
