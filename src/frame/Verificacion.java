@@ -34,6 +34,7 @@ public class Verificacion extends JFrame {
     private JComboTipoDoc jComboTipoDoc;
     private JCTipoUsuario tipoUsuario;
     private TrazaporVerificacion traza;
+    private String condition = ";";
 
     public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JRadioButton calidad, JRadioButton documento, JComboBox jcTipodoc, JLabel jlNameTipodoc, JComboBox jcTipoUsuario, TrazaporVerificacion atraza) throws HeadlessException {
         this.numTrazas = numTrazas;
@@ -51,23 +52,30 @@ public class Verificacion extends JFrame {
         documentoActionPerformed();
     }
 
-    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, TrazaporVerificacion traza) throws HeadlessException {
+    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JComboBox jcTipoDoc, JComboBox jcTipoUsuario, TrazaporVerificacion traza) throws HeadlessException {
         this.numTrazas = numTrazas;
         this.numAcept = numAcept;
         this.numRech = numRech;
         this.numNull = numNull;
+        this.jcTipoDoc = jcTipoDoc;
+        this.jcTipoUsuario = jcTipoUsuario;
         this.traza = traza;
-
     }
+
+//    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, TrazaporVerificacion traza) throws HeadlessException {
+//        this.numTrazas = numTrazas;
+//        this.numAcept = numAcept;
+//        this.numRech = numRech;
+//        this.numNull = numNull;
+//        this.traza = traza;
+//    }
 
     private void calidadActionPerformed() {
         this.calidad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(1);
-                setValuesOfVerificacion(";");
-                llenarTipoDoc();
-                llenarTipoUsuario();
+                setValuesOfVerificacion(condition);
 
             }
         });
@@ -78,9 +86,7 @@ public class Verificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(2);
-                setValuesOfVerificacion(";");
-                llenarTipoDoc();
-                llenarTipoUsuario();
+                setValuesOfVerificacion(condition);
             }
         });
     }
@@ -91,15 +97,17 @@ public class Verificacion extends JFrame {
         numAcept.setText("total aceptadas: " + traza.getAceptadas());
         numRech.setText("total rechazadas: " + traza.getRechazadas());
         numNull.setText("total nulas: " + traza.getNulas());
+        llenarTipoDoc(condition);
+        llenarTipoUsuario(condition);
     }
 
-    public void llenarTipoDoc() {
-        jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), ";");
+    public void llenarTipoDoc(String condition) {
+        jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), condition);
         jcTipoDoc.setModel(jComboTipoDoc.getModel());
     }
 
-    public void llenarTipoUsuario() {
-        tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), ";");
+    public void llenarTipoUsuario(String condition) {
+        tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), condition);
         jcTipoUsuario.setModel(tipoUsuario.getModel());
 
     }

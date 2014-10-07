@@ -26,6 +26,8 @@ public class GetDates extends JFrame {
     private final JRadioButton especifica;
     private final JRadioButton compuesta;
     private final JComboBox jcEspecifico;
+    private final JComboBox jctipodoc;
+    private final JComboBox jctipousuario;
     private final JComboBox jcCompuesto;
     private final JLabel simple;
     private final JLabel entre;
@@ -38,7 +40,7 @@ public class GetDates extends JFrame {
     private GetDatesFromTraza datesFromTraza;
     private TrazaporVerificacion trazav;
 
-    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, Verificacion verificacion, JButton jbnext, TrazaporVerificacion trazav) throws HeadlessException {
+    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, Verificacion verificacion, JButton jbnext, TrazaporVerificacion trazav, JComboBox tipodoc, JComboBox tipousuario) throws HeadlessException {
         this.especifica = especifica;
         this.compuesta = compuesta;
         this.jcEspecifico = jcEspecifico;
@@ -52,6 +54,8 @@ public class GetDates extends JFrame {
         this.verificacion = verificacion;
         this.next = jbnext;
         this.trazav = trazav;
+        this.jctipodoc = tipodoc;
+        this.jctipousuario = tipousuario;
         actionRadioButton();
         especificaActionPerformed();
         compuestaActionPerformed();
@@ -92,7 +96,7 @@ public class GetDates extends JFrame {
         });
     }
 
-    private Verificacion changeValuesOFtraza(int id1) {
+    private Verificacion changeValuesOFtraza() {
         Verificacion verificacion = null;
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
@@ -104,9 +108,10 @@ public class GetDates extends JFrame {
             condition = " and fecha_control "
                     + " between '" + firstDate + "'"
                     + " and '" + lastDate + "';";
+            trazav.setLastDate(lastDate);
         }
-        GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(trazav, condition);
-        verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, trazav);
+        trazav.setFirstDate(firstDate);
+        verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, trazav);
         verificacion.setValuesOfVerificacion(condition);
         return verificacion;
     }
@@ -117,7 +122,8 @@ public class GetDates extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Verificacion v = changeValuesOFtraza(0);
+                Verificacion v = changeValuesOFtraza();
+                System.out.println(v.getTraza());
             }
         });
     }

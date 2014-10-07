@@ -25,7 +25,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         Verificacion verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jrbCalidad, jrbDocumento, jcTipodoc, jlNameTipodoc, jcTipoUsuario, traza);
         GetDates dates = new GetDates(jrbEspecifica, jrbCompuesta, jcEspecifico,
                 jcCompuesto, jlSimple, jlEntre, jlnumTrazas, jlnumAcep, jlnumRech,
-                jlnumNull, verificacion, jbNext, verificacion.getTraza());
+                jlnumNull, verificacion, jbNext, verificacion.getTraza(), jcTipodoc, jcTipoUsuario);
     }
 
     /**
