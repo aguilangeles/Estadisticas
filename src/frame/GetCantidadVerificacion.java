@@ -9,53 +9,57 @@ import estadisticas.Conexion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
+import models.TrazaporVerificacion;
 
 /**
- *
+ *  TRAE LAS CANTIDADES DE TRAZAS, ACEPTADAS, RECHAZADAS Y NULAS SEGUN EL 
+ *  ID VERIFICAION.
  * @author aguilangeles@gmail.com
  */
 public class GetCantidadVerificacion {
 
-    private final JLabel numTrazas;
-    private final JLabel numAcept;
-    private final JLabel numRech;
-    private final JLabel numNull;
-    private final int idTraza;
     private final String condition;
+    private final TrazaporVerificacion traza;
 
-    public GetCantidadVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, int idTraza, String condition) {
-        this.numTrazas = numTrazas;
-        this.numAcept = numAcept;
-        this.numRech = numRech;
-        this.numNull = numNull;
-        this.idTraza = idTraza;
+    public GetCantidadVerificacion(TrazaporVerificacion traza, String condition) {
+
+        this.traza = traza;
+        int id = traza.getIdVerificacion();
         this.condition = condition;
-        getQuantityofTrazas(condition);
-        getQuantityof(numAcept, idTraza, "= '1'", "Total Aceptados: ", condition);// llena label de aceptados
-        getQuantityof(numRech, idTraza, "= '0'", "Total Rechazados: ", condition);//llena label de rechazados
-        getQuantityof(numNull, idTraza, "IS NULL", "Total Nulos: ", condition);// llena label null
+        //
+        int total = getQuantityofTrazas(id, condition);
+        int aceptadas = getQuantityof(id, "= '1'", condition);
+        int rechazados = getQuantityof(id, "= '0'", condition);
+        int nulas = getQuantityof(id, "IS NULL", condition);
+        //        
+        this.traza.setTrazas(total);
+        this.traza.setAceptadas(aceptadas);
+        this.traza.setRechazadas(rechazados);
+        this.traza.setNulas(nulas);
     }
 
-    private void getQuantityofTrazas(String condition) {
+    private int getQuantityofTrazas(int id, String condition) {
+        int result = 0;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT count(*) FROM qualitys.traza  where idVerificacion = " + idTraza + condition;
+            String query = "SELECT count(*) FROM qualitys.traza  where idVerificacion = " + id + condition;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
 
-                    int result = conexion.resulset.getInt(1);
-                    numTrazas.setText("Cantidad de trazas: " + result);
+                    result = conexion.resulset.getInt(1);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(GetCantidadVerificacion.class.getName()).log(Level.SEVERE, null, ex);
             }
             conexion.isConexionClose();
         }
+        return result;
     }
 
-    private void getQuantityof(JLabel aLabel, int idTraza, String value, String cantidadde, String condition) {
+    
+    private int getQuantityof(int idTraza, String value, String condition) {
+        int result = 0;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
             String query = "SELECT count(*) FROM qualitys.traza "
@@ -65,14 +69,18 @@ public class GetCantidadVerificacion {
             try {
                 while (conexion.resulset.next()) {
 
-                    int result = conexion.resulset.getInt(1);
-                    aLabel.setText(cantidadde + result);
+                    result = conexion.resulset.getInt(1);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(GetCantidadVerificacion.class.getName()).log(Level.SEVERE, null, ex);
             }
             conexion.isConexionClose();
         }
+        return result;
+    }
+
+    public TrazaporVerificacion getTraza() {
+        return traza;
     }
 
 }
