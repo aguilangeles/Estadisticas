@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import models.TrazaporVerificacion;
 
 /**
  *
@@ -32,8 +33,12 @@ public class Verificacion extends JFrame {
     private int idTraza;
     private JComboTipoDoc jComboTipoDoc;
     private JCTipoUsuario tipoUsuario;
+    private TrazaporVerificacion traza;
 
-    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JRadioButton calidad, JRadioButton documento, JComboBox jcTipodoc, JLabel jlNameTipodoc, JComboBox jcTipoUsuario) throws HeadlessException {
+    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech,
+            JLabel numNull, JRadioButton calidad, JRadioButton documento,
+            JComboBox jcTipodoc, JLabel jlNameTipodoc, JComboBox jcTipoUsuario,
+            Object par9, TrazaporVerificacion traza) throws HeadlessException {
         this.numTrazas = numTrazas;
         this.numAcept = numAcept;
         this.numRech = numRech;
@@ -43,6 +48,7 @@ public class Verificacion extends JFrame {
         this.jcTipoDoc = jcTipodoc;
         this.jcNameTipoDoc = jlNameTipodoc;
         this.jcTipoUsuario = jcTipoUsuario;
+        this.traza = traza;
         actionButtonGroup();
         calidadActionPerformed();
         documentoActionPerformed();
