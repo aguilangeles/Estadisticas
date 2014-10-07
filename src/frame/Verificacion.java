@@ -21,24 +21,21 @@ import models.TrazaporVerificacion;
  */
 public class Verificacion extends JFrame {
 
-    private final JLabel numTrazas;
-    private final JLabel numAcept;
-    private final JLabel numRech;
-    private final JLabel numNull;
-    private final JRadioButton calidad;
-    private final JRadioButton documento;
-    private final JComboBox jcTipoDoc, jcTipoUsuario;
-    private final JLabel jcNameTipoDoc;
+    private JLabel numTrazas;
+    private JLabel numAcept;
+    private JLabel numRech;
+    private JLabel numNull;
+    private JRadioButton calidad;
+    private JRadioButton documento;
+    private JComboBox jcTipoDoc, jcTipoUsuario;
+    private JLabel jcNameTipoDoc;
     private ButtonGroup group;
     private int idTraza;
     private JComboTipoDoc jComboTipoDoc;
     private JCTipoUsuario tipoUsuario;
     private TrazaporVerificacion traza;
 
-    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech,
-            JLabel numNull, JRadioButton calidad, JRadioButton documento,
-            JComboBox jcTipodoc, JLabel jlNameTipodoc, JComboBox jcTipoUsuario,
-            Object par9, TrazaporVerificacion traza) throws HeadlessException {
+    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JRadioButton calidad, JRadioButton documento, JComboBox jcTipodoc, JLabel jlNameTipodoc, JComboBox jcTipoUsuario, TrazaporVerificacion atraza) throws HeadlessException {
         this.numTrazas = numTrazas;
         this.numAcept = numAcept;
         this.numRech = numRech;
@@ -48,18 +45,27 @@ public class Verificacion extends JFrame {
         this.jcTipoDoc = jcTipodoc;
         this.jcNameTipoDoc = jlNameTipodoc;
         this.jcTipoUsuario = jcTipoUsuario;
-        this.traza = traza;
+        this.traza = atraza;
         actionButtonGroup();
         calidadActionPerformed();
         documentoActionPerformed();
+    }
+
+    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, TrazaporVerificacion traza) throws HeadlessException {
+        this.numTrazas = numTrazas;
+        this.numAcept = numAcept;
+        this.numRech = numRech;
+        this.numNull = numNull;
+        this.traza = traza;
+
     }
 
     private void calidadActionPerformed() {
         this.calidad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                idTraza = 1;
-                setValuesOfVerificacion();
+                traza.setIdVerificacion(1);
+                setValuesOfVerificacion(";");
                 llenarTipoDoc();
                 llenarTipoUsuario();
 
@@ -69,29 +75,31 @@ public class Verificacion extends JFrame {
 
     private void documentoActionPerformed() {
         this.documento.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
-                idTraza = 2;
-                setValuesOfVerificacion();
+                traza.setIdVerificacion(2);
+                setValuesOfVerificacion(";");
                 llenarTipoDoc();
                 llenarTipoUsuario();
             }
         });
     }
 
-    private void setValuesOfVerificacion() {
-        GetCantidadVerificacion cantidadVerificacion
-                = new GetCantidadVerificacion(numTrazas, numAcept, numRech, numNull, idTraza, ";");
+    public void setValuesOfVerificacion(String condition) {
+        traza = new GetCantidadVerificacion(traza, condition).getTraza();
+        numTrazas.setText("total trazas: " + traza.getTrazas());
+        numAcept.setText("total aceptadas: " + traza.getAceptadas());
+        numRech.setText("total rechazadas: " + traza.getRechazadas());
+        numNull.setText("total nulas: " + traza.getNulas());
     }
 
-    private void llenarTipoDoc() {
-        jComboTipoDoc = new JComboTipoDoc(idTraza, ";");
+    public void llenarTipoDoc() {
+        jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), ";");
         jcTipoDoc.setModel(jComboTipoDoc.getModel());
     }
 
-    private void llenarTipoUsuario() {
-        tipoUsuario = new JCTipoUsuario(idTraza, ";");
+    public void llenarTipoUsuario() {
+        tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), ";");
         jcTipoUsuario.setModel(tipoUsuario.getModel());
 
     }
@@ -103,13 +111,16 @@ public class Verificacion extends JFrame {
     }
 
     public int getIdTraza() {
-        if (calidad.isSelected()) {
-            idTraza = 1;
-        }
-        if (documento.isSelected()) {
-            idTraza = 2;
-        }
-        return idTraza;
+
+        return traza.getIdVerificacion();
+    }
+
+    public TrazaporVerificacion getTraza() {
+        return traza;
+    }
+
+    public void setTraza(TrazaporVerificacion traza) {
+        this.traza = traza;
     }
 
 }

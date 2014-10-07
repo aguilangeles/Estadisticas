@@ -10,8 +10,10 @@ package models;
  * @author aguilangeles@gmail.com
  */
 public class TrazaporVerificacion {
+
     private int id;
     private int idVerificacion;
+    private int trazas;
     private int aceptadas;
     private int rechazadas;
     private int nulas;
@@ -20,9 +22,10 @@ public class TrazaporVerificacion {
     private String doctype;
     private String username;
 
-    public TrazaporVerificacion(int id, int idVerificacion, int aceptadas, int rechazadas, int nulas, String firstDate, String lastDate, String doctype, String username) {
+    public TrazaporVerificacion(int id, int idVerificacion, int trazas, int aceptadas, int rechazadas, int nulas, String firstDate, String lastDate, String doctype, String username) {
         this.id = id;
         this.idVerificacion = idVerificacion;
+        this.trazas = trazas;
         this.aceptadas = aceptadas;
         this.rechazadas = rechazadas;
         this.nulas = nulas;
@@ -107,14 +110,22 @@ public class TrazaporVerificacion {
         this.username = username;
     }
 
+    public int getTrazas() {
+        return trazas;
+    }
+
+    public void setTrazas(int trazas) {
+        this.trazas = trazas;
+    }
+
     @Override
     public String toString() {
-        return "TrazaporVerificacion{" + "id=" + id + "\n idVerificacion=" + idVerificacion + "\n aceptadas=" + aceptadas 
-                + "\n rechazadas=" + rechazadas + "\n nulas=" + nulas 
-                + "\n firstDate=" + firstDate + "\n lastDate=" + lastDate 
+        return "TrazaporVerificacion{" + "id=" + id + "\n idVerificacion=" + idVerificacion
+                + "\n trazas=" + trazas
+                + "\n aceptadas=" + aceptadas
+                + "\n rechazadas=" + rechazadas + "\n nulas=" + nulas
+                + "\n firstDate=" + firstDate + "\n lastDate=" + lastDate
                 + "\n doctype=" + doctype + "\n username=" + username + '}';
     }
-    
-    
-    
+
 }

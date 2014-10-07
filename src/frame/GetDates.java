@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import models.TrazaporVerificacion;
 
 /**
  *
@@ -35,9 +36,9 @@ public class GetDates extends JFrame {
     private final Verificacion verificacion;
     private final JButton next;
     private GetDatesFromTraza datesFromTraza;
-    private int id;
+    private TrazaporVerificacion trazav;
 
-    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, Verificacion verificacion, JButton jbnext) throws HeadlessException {
+    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, Verificacion verificacion, JButton jbnext, TrazaporVerificacion trazav) throws HeadlessException {
         this.especifica = especifica;
         this.compuesta = compuesta;
         this.jcEspecifico = jcEspecifico;
@@ -50,19 +51,13 @@ public class GetDates extends JFrame {
         this.jlnumNull = jlnumNull;
         this.verificacion = verificacion;
         this.next = jbnext;
-
+        this.trazav = trazav;
         actionRadioButton();
         especificaActionPerformed();
         compuestaActionPerformed();
         nextActionPerformed();
     }
 
-
-    private void llenarJCEspecifico() {
-        id = verificacion.getIdTraza();
-        datesFromTraza = new GetDatesFromTraza(id, "asc");
-        jcEspecifico.setModel(datesFromTraza.getDateFrom());
-    }
     private void especificaActionPerformed() {
         this.especifica.addActionListener(new ActionListener() {
             @Override
@@ -76,28 +71,29 @@ public class GetDates extends JFrame {
         });
     }
 
+    private void llenarJCEspecifico() {
+        datesFromTraza = new GetDatesFromTraza(trazav, "asc");
+        jcEspecifico.setModel(datesFromTraza.getDateFrom());
+    }
 
     private void compuestaActionPerformed() {
         this.compuesta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int id = verificacion.getIdTraza();
                 llenarJCEspecifico();
                 jcCompuesto.setVisible(true);
                 simple.setText("Fecha ENTRE");
                 entre.setVisible(true);
                 entre.setText("Y");
-                datesFromTraza = new GetDatesFromTraza(id, "desc");
+                datesFromTraza = new GetDatesFromTraza(trazav, "desc");
                 jcCompuesto.setModel(datesFromTraza.getDateFrom());
-
             }
 
         });
     }
 
-
-    private GetCantidadVerificacion changeValuesOFtraza(int id1) {
-        GetCantidadVerificacion cantidadVerificacion;
+    private Verificacion changeValuesOFtraza(int id1) {
+        Verificacion verificacion = null;
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
         if (!jcCompuesto.isVisible()) {
@@ -109,18 +105,19 @@ public class GetDates extends JFrame {
                     + " between '" + firstDate + "'"
                     + " and '" + lastDate + "';";
         }
-        cantidadVerificacion
-                = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, id1, condition);
-        return cantidadVerificacion;
+        GetCantidadVerificacion cantidadVerificacion = new GetCantidadVerificacion(trazav, condition);
+        verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, trazav);
+        verificacion.setValuesOfVerificacion(condition);
+        return verificacion;
     }
-    
+
     private void nextActionPerformed() {
         this.next.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                id = verificacion.getIdTraza();
-                changeValuesOFtraza(id);
+
+                Verificacion v = changeValuesOFtraza(0);
             }
         });
     }

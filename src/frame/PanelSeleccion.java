@@ -22,11 +22,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
         initComponents();
         jcCompuesto.setVisible(false);
         jlEntre.setVisible(false);
-        Verificacion verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jrbCalidad, jrbDocumento, jcTipodoc, jlNameTipodoc, jcTipoUsuario, null, traza);
+        Verificacion verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jrbCalidad, jrbDocumento, jcTipodoc, jlNameTipodoc, jcTipoUsuario, traza);
         GetDates dates = new GetDates(jrbEspecifica, jrbCompuesta, jcEspecifico,
                 jcCompuesto, jlSimple, jlEntre, jlnumTrazas, jlnumAcep, jlnumRech,
-                jlnumNull, verificacion, jbNext);
-        System.out.println(traza.toString());
+                jlnumNull, verificacion, jbNext, verificacion.getTraza());
     }
 
     /**
