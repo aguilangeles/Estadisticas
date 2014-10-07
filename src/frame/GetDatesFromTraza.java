@@ -10,25 +10,26 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import models.TrazaporVerificacion;
 
 /**
- *  cargará combos de selección con las fechas registradas en la database
+ * cargará combos de selección con las fechas registradas en la database
+ *
  * @author aguilangeles@gmail.com
  */
 public class GetDatesFromTraza {
-    private int idverificacion;
-    private String order;
-    private DefaultComboBoxModel dates = new DefaultComboBoxModel();
 
-    
+//   private int idverificacion;
+    private final String order;
+    private final TrazaporVerificacion traza;
+    private final DefaultComboBoxModel dates = new DefaultComboBoxModel();
 
-    public GetDatesFromTraza(int idverificacion, String order) {
-        this.idverificacion = idverificacion;
+    public GetDatesFromTraza(TrazaporVerificacion trazav, String order) {
+        this.traza = trazav;
         this.order = order;
+        int idverificacion = traza.getIdVerificacion();
         getDates(idverificacion, order);
     }
-    
-    
 
     private void getDates(int idverificacion, String order) {
         Conexion conexion = new Conexion();
@@ -49,13 +50,8 @@ public class GetDatesFromTraza {
         conexion.isConexionClose();
     }
 
-    
     public DefaultComboBoxModel getDateFrom() {
         return dates;
-    }
-
-    public void setDateAsc(DefaultComboBoxModel dateAsc) {
-        this.dates = dateAsc;
     }
 
 }
