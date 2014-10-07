@@ -121,7 +121,6 @@ public class GetDates extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 Verificacion v = changeValuesOFtraza();
                 System.out.println(v.getTraza());
             }

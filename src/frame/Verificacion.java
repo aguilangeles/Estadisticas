@@ -62,13 +62,6 @@ public class Verificacion extends JFrame {
         this.traza = traza;
     }
 
-//    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, TrazaporVerificacion traza) throws HeadlessException {
-//        this.numTrazas = numTrazas;
-//        this.numAcept = numAcept;
-//        this.numRech = numRech;
-//        this.numNull = numNull;
-//        this.traza = traza;
-//    }
 
     private void calidadActionPerformed() {
         this.calidad.addActionListener(new ActionListener() {
