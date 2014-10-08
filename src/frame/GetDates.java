@@ -8,7 +8,7 @@ package frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ButtonGroup;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,7 +22,7 @@ import models.TrazaporVerificacion;
  */
 public class GetDates extends JFrame {
 
-    private ButtonGroup group;
+    private final JRadioButton jrbAnyDate;
     private final JRadioButton especifica;
     private final JRadioButton compuesta;
     private final JComboBox jcEspecifico;
@@ -40,7 +40,7 @@ public class GetDates extends JFrame {
     private GetDatesFromTraza datesFromTraza;
     private TrazaporVerificacion trazav;
 
-    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, Verificacion verificacion, JButton jbnext, TrazaporVerificacion trazav, JComboBox tipodoc, JComboBox tipousuario) throws HeadlessException {
+    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, Verificacion verificacion, JButton jbnext, TrazaporVerificacion trazav, JComboBox tipodoc, JComboBox tipousuario, JRadioButton jrbAnyDate) throws HeadlessException {
         this.especifica = especifica;
         this.compuesta = compuesta;
         this.jcEspecifico = jcEspecifico;
@@ -56,16 +56,32 @@ public class GetDates extends JFrame {
         this.trazav = trazav;
         this.jctipodoc = tipodoc;
         this.jctipousuario = tipousuario;
-//        actionRadioButton();
+        this.jrbAnyDate = jrbAnyDate;
+        anydateActionPerformed();
         especificaActionPerformed();
         compuestaActionPerformed();
         nextActionPerformed();
+    }
+
+    private void anydateActionPerformed() {
+        this.jrbAnyDate.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                jcEspecifico.setEnabled(false);
+                jcCompuesto.setVisible(false);
+                entre.setVisible(false);
+                simple.setText("");
+            }
+        });
     }
 
     private void especificaActionPerformed() {
         this.especifica.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jcEspecifico.setEnabled(true);
                 jcCompuesto.setVisible(false);
                 entre.setVisible(false);
                 simple.setText("Fecha: ");
@@ -111,8 +127,7 @@ public class GetDates extends JFrame {
             trazav.setLastDate(lastDate);
         }
         trazav.setFirstDate(firstDate);
-        verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, trazav);
-        verificacion.setValuesOfVerificacion(condition);
+        verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, trazav, condition);
         return verificacion;
     }
 
@@ -122,12 +137,9 @@ public class GetDates extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Verificacion v = changeValuesOFtraza();
-                System.out.println(v.getTraza());
             }
         });
     }
-
-   
 
 //    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 //        if(rButtonEspecifico.isSelected()){

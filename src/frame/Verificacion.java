@@ -8,7 +8,6 @@ package frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,7 +21,6 @@ import models.TrazaporVerificacion;
  */
 public class Verificacion extends JFrame {
 
-    private ButtonGroup group;
     private int idTraza;
     private String condition = ";";
     TrazaporVerificacion traza = new TrazaporVerificacion();
@@ -49,11 +47,12 @@ public class Verificacion extends JFrame {
     private javax.swing.JRadioButton jrbCompuesta;
     private javax.swing.JRadioButton jrbDocumento;
     private javax.swing.JRadioButton jrbEspecifica;
+    private javax.swing.JRadioButton jrbAnyDate;
     private JComboTipoDoc jComboTipoDoc;
     private JCTipoUsuario tipoUsuario;
     private GetDates dates;
 
-    public Verificacion(JComboBox jComboCompuesto, JComboBox jComboExpecifico, JButton jbAddDate, JButton jbAddDoctype, JButton jbAddUsername, JButton jbNextDate, JButton jbNextUsername, JButton jbnextDoctype, JComboBox jcTipoUsuario, JComboBox jcTipodoc, JLabel jlFirstDate, JLabel jlLastDate, JLabel jlNameTipodoc, JLabel jlUsername, JLabel jlnumAcep, JLabel jlnumNull, JLabel jlnumRech, JLabel jlnumTrazas, JRadioButton jrbCalidad, JRadioButton jrbCompuesta, JRadioButton jrbDocumento, JRadioButton jrbEspecifica) {
+    public Verificacion(JComboBox jComboCompuesto, JComboBox jComboExpecifico, JButton jbAddDate, JButton jbAddDoctype, JButton jbAddUsername, JButton jbNextDate, JButton jbNextUsername, JButton jbnextDoctype, JComboBox jcTipoUsuario, JComboBox jcTipodoc, JLabel jlFirstDate, JLabel jlLastDate, JLabel jlNameTipodoc, JLabel jlUsername, JLabel jlnumAcep, JLabel jlnumNull, JLabel jlnumRech, JLabel jlnumTrazas, JRadioButton jrbCalidad, JRadioButton jrbCompuesta, JRadioButton jrbDocumento, JRadioButton jrbEspecifica, JRadioButton jrbAnyDate) {
         this.jComboCompuesto = jComboCompuesto;
         this.jComboExpecifico = jComboExpecifico;
         this.jbAddDate = jbAddDate;
@@ -76,27 +75,36 @@ public class Verificacion extends JFrame {
         this.jrbCompuesta = jrbCompuesta;
         this.jrbDocumento = jrbDocumento;
         this.jrbEspecifica = jrbEspecifica;
+        this.jrbAnyDate = jrbAnyDate;
         calidadActionPerformed();
         documentoActionPerformed();
     }
 
+    public Verificacion() {
+    }
+
     private void habilitarFiltros() {
+        jrbAnyDate.setEnabled(true);
+        jrbAnyDate.setSelected(true);
+        
         jrbEspecifica.setEnabled(true);
         jrbCompuesta.setEnabled(true);
         jcTipodoc.setEnabled(true);
         jcTipoUsuario.setEnabled(true);
         dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico,
                 jComboCompuesto, jlFirstDate, jlLastDate, jlnumTrazas, jlnumAcep, jlnumRech,
-                jlnumNull, this, jbNextDate, getTraza(), jcTipodoc, jcTipoUsuario);
+                jlnumNull, this, jbNextDate, getTraza(), jcTipodoc, jcTipoUsuario, jrbAnyDate);
     }
 
-    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JComboBox jcTipoDoc, JComboBox jcTipoUsuario, TrazaporVerificacion traza) throws HeadlessException {
+    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JComboBox jcTipoDoc, JComboBox jcTipoUsuario, TrazaporVerificacion traza, String condition) throws HeadlessException {
         this.jlnumTrazas = numTrazas;
         this.jlnumAcep = numAcept;
         this.jlnumRech = numRech;
         this.jlnumNull = numNull;
         this.jcTipodoc = jcTipoDoc;
         this.jcTipoUsuario = jcTipoUsuario;
+        this.traza = traza;
+        setValuesOfVerificacion(condition);
     }
 
     private void calidadActionPerformed() {
@@ -122,12 +130,12 @@ public class Verificacion extends JFrame {
         });
     }
 
-    public void setValuesOfVerificacion(String condition) {
+    private void setValuesOfVerificacion(String condition) {
         traza = new GetCantidadVerificacion(traza, condition).getTraza();
-        jlnumTrazas.setText("total trazas: " + traza.getTrazas());
-        jlnumAcep.setText("total aceptadas: " + traza.getAceptadas());
-        jlnumRech.setText("total rechazadas: " + traza.getRechazadas());
-        jlnumNull.setText("total nulas: " + traza.getNulas());
+        jlnumTrazas.setText("Total Trazas: " + traza.getTrazas());
+        jlnumAcep.setText("Total Aceptadas: " + traza.getAceptadas());
+        jlnumRech.setText("Total Rechazadas: " + traza.getRechazadas());
+        jlnumNull.setText("Total Nulas: " + traza.getNulas());
         llenarTipoDoc(condition);
         llenarTipoUsuario(condition);
     }

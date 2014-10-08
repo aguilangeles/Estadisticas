@@ -24,6 +24,7 @@ public class JCTipoUsuario {
     public JCTipoUsuario( int id,String condition) {
         this.id = id;
         this.condition = condition;
+        model.addElement("Todos");
         getUsuarios();
     }
 

@@ -26,8 +26,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
         actionVerificacionButtonGroup();
         actionDatesRadioButton();
         this.setResizable(false);
+        jComboExpecifico.setEnabled(false);
         jComboCompuesto.setVisible(false);
         jlLastDate.setVisible(false);
+        jrbAnyDate.setEnabled(false);
         jrbEspecifica.setEnabled(false);
         jrbCompuesta.setEnabled(false);
         jcTipodoc.setEnabled(false);
@@ -37,7 +39,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 jbNextDate, jbNextUsername, jbnextDoctype, jcTipoUsuario,
                 jcTipodoc, jlFirstDate, jlLastDate, jlNameTipodoc, jlUsername,
                 jlnumAcep, jlnumNull, jlnumRech, jlnumTrazas, jrbCalidad,
-                jrbCompuesta, jrbDocumento, jrbEspecifica);
+                jrbCompuesta, jrbDocumento, jrbEspecifica, jrbAnyDate);
 
         this.traza = verificacion.getTraza();
 
@@ -51,6 +53,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private void actionDatesRadioButton() {
         group = new ButtonGroup();
+        group.add(jrbAnyDate);
         group.add(jrbEspecifica);
         group.add(jrbCompuesta);
     }
@@ -95,10 +98,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jbAddDate = new javax.swing.JButton();
         jComboExpecifico = new javax.swing.JComboBox();
         jComboCompuesto = new javax.swing.JComboBox();
+        jrbAnyDate = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(221, 255, 216));
 
         jpVerificacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione Tipo de Verificación", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arimo", 2, 18), new java.awt.Color(255, 153, 153))); // NOI18N
         jpVerificacion.setOpaque(false);
@@ -310,9 +314,15 @@ public class PanelSeleccion extends javax.swing.JFrame {
             }
         });
 
-        jComboExpecifico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fecha 1" }));
+        jComboExpecifico.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboExpecifico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aaaa-mm-dd" }));
+        jComboExpecifico.setToolTipText("");
 
-        jComboCompuesto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fecha 2" }));
+        jComboCompuesto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboCompuesto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aaaa-mm-dd" }));
+
+        jrbAnyDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbAnyDate.setText("Fecha Indistinta");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -322,7 +332,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jrbEspecifica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jrbCompuesta, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
+                    .addComponent(jrbCompuesta, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                    .addComponent(jrbAnyDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -340,9 +351,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(16, 16, 16)
+                .addComponent(jrbAnyDate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jrbEspecifica, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jrbCompuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -494,6 +507,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JLabel jlnumRech;
     private javax.swing.JLabel jlnumTrazas;
     private javax.swing.JPanel jpVerificacion;
+    private javax.swing.JRadioButton jrbAnyDate;
     private javax.swing.JRadioButton jrbCalidad;
     private javax.swing.JRadioButton jrbCompuesta;
     private javax.swing.JRadioButton jrbDocumento;

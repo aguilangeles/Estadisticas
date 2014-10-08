@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -25,6 +24,7 @@ public class JComboTipoDoc {
     public JComboTipoDoc(int id, String condition) {
         this.id = id;
         this.condition = condition;
+        model.addElement("Todos");
         getdocumentos();
     }
 
@@ -40,6 +40,7 @@ public class JComboTipoDoc {
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
+                    
                     model.addElement(conexion.resulset.getString(1));
                 }
             } catch (SQLException ex) {
