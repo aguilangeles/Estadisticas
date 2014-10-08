@@ -5,6 +5,7 @@
  */
 package frame;
 
+import javax.swing.ButtonGroup;
 import models.TrazaporVerificacion;
 
 /**
@@ -14,20 +15,44 @@ import models.TrazaporVerificacion;
 public class PanelSeleccion extends javax.swing.JFrame {
 
     TrazaporVerificacion traza = new TrazaporVerificacion();
+    private boolean selected;
+    private ButtonGroup group;
 
     /**
      * Creates new form PanelSeleccion
      */
     public PanelSeleccion() {
         initComponents();
+        actionVerificacionButtonGroup();
+        actionDatesRadioButton();
+        this.setResizable(false);
         jComboCompuesto.setVisible(false);
         jlLastDate.setVisible(false);
-        Verificacion verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jrbCalidad, jrbDocumento, jcTipodoc, jlNameTipodoc, jcTipoUsuario, traza);
-        GetDates dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico,
-                jComboCompuesto, jlFirstDate, jlLastDate, jlnumTrazas, jlnumAcep, jlnumRech,
-                jlnumNull, verificacion, jbNext, verificacion.getTraza(), jcTipodoc, jcTipoUsuario);
+        jrbEspecifica.setEnabled(false);
+        jrbCompuesta.setEnabled(false);
+        jcTipodoc.setEnabled(false);
+        jcTipoUsuario.setEnabled(false);
+        Verificacion verificacion = new Verificacion(jComboCompuesto,
+                jComboExpecifico, jbAddDate, jbAddDoctype, jbAddUsername,
+                jbNextDate, jbNextUsername, jbnextDoctype, jcTipoUsuario,
+                jcTipodoc, jlFirstDate, jlLastDate, jlNameTipodoc, jlUsername,
+                jlnumAcep, jlnumNull, jlnumRech, jlnumTrazas, jrbCalidad,
+                jrbCompuesta, jrbDocumento, jrbEspecifica);
 
         this.traza = verificacion.getTraza();
+
+    }
+
+    private void actionVerificacionButtonGroup() {
+        group = new ButtonGroup();
+        group.add(jrbCalidad);
+        group.add(jrbDocumento);
+    }
+
+    private void actionDatesRadioButton() {
+        group = new ButtonGroup();
+        group.add(jrbEspecifica);
+        group.add(jrbCompuesta);
     }
 
     /**
@@ -52,22 +77,22 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jcTipodoc = new javax.swing.JComboBox();
         jlNameTipodoc = new javax.swing.JLabel();
-        jbnext1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbnextDoctype = new javax.swing.JButton();
+        jbAddDoctype = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jSeparator4 = new javax.swing.JSeparator();
         jcTipoUsuario = new javax.swing.JComboBox();
         jlUsername = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jbNextUsername = new javax.swing.JButton();
+        jbAddUsername = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jrbEspecifica = new javax.swing.JRadioButton();
         jrbCompuesta = new javax.swing.JRadioButton();
         jlFirstDate = new javax.swing.JLabel();
         jlLastDate = new javax.swing.JLabel();
-        jbNext = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbNextDate = new javax.swing.JButton();
+        jbAddDate = new javax.swing.JButton();
         jComboExpecifico = new javax.swing.JComboBox();
         jComboCompuesto = new javax.swing.JComboBox();
 
@@ -159,9 +184,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jlNameTipodoc.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jlNameTipodoc.setText("Tipo de Documento");
 
-        jbnext1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
+        jbnextDoctype.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-20.png"))); // NOI18N
+        jbAddDoctype.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-20.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -176,8 +201,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addComponent(jlNameTipodoc, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbnext1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbnextDoctype, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbAddDoctype, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
         jPanel4Layout.setVerticalGroup(
@@ -187,9 +212,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jbnext1)
+                        .addComponent(jbnextDoctype)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
+                        .addComponent(jbAddDoctype))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jcTipodoc, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -216,25 +241,25 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jlUsername.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jlUsername.setText("Usuario");
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
+        jbNextUsername.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-20.png"))); // NOI18N
+        jbAddUsername.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-20.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jcTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
+                .addComponent(jcTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbNextUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbAddUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -250,9 +275,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
                     .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5)
+                        .addComponent(jbNextUsername)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)))
+                        .addComponent(jbAddUsername)))
                 .addGap(41, 41, 41))
         );
 
@@ -276,12 +301,12 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jlLastDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlLastDate.setText("Segunda Fecha");
 
-        jbNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
+        jbNextDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-20.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbAddDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-20.png"))); // NOI18N
+        jbAddDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbAddDateActionPerformed(evt);
             }
         });
 
@@ -308,8 +333,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
                     .addComponent(jComboCompuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbNextDate, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbAddDate, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
@@ -330,14 +355,14 @@ public class PanelSeleccion extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboExpecifico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8))
-                            .addComponent(jbNext))
+                            .addComponent(jbNextDate))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jlLastDate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboCompuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton2))
+                            .addComponent(jbAddDate))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
@@ -402,9 +427,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jcTipoUsuarioActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbAddDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbAddDateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -442,10 +467,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboCompuesto;
     private javax.swing.JComboBox jComboExpecifico;
     private javax.swing.JPanel jPanel1;
@@ -456,8 +477,12 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JButton jbNext;
-    private javax.swing.JButton jbnext1;
+    private javax.swing.JButton jbAddDate;
+    private javax.swing.JButton jbAddDoctype;
+    private javax.swing.JButton jbAddUsername;
+    private javax.swing.JButton jbNextDate;
+    private javax.swing.JButton jbNextUsername;
+    private javax.swing.JButton jbnextDoctype;
     private javax.swing.JComboBox jcTipoUsuario;
     private javax.swing.JComboBox jcTipodoc;
     private javax.swing.JLabel jlFirstDate;

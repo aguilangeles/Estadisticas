@@ -56,7 +56,7 @@ public class GetDates extends JFrame {
         this.trazav = trazav;
         this.jctipodoc = tipodoc;
         this.jctipousuario = tipousuario;
-        actionRadioButton();
+//        actionRadioButton();
         especificaActionPerformed();
         compuestaActionPerformed();
         nextActionPerformed();
@@ -127,11 +127,7 @@ public class GetDates extends JFrame {
         });
     }
 
-    private void actionRadioButton() {
-        group = new ButtonGroup();
-        group.add(especifica);
-        group.add(compuesta);
-    }
+   
 
 //    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 //        if(rButtonEspecifico.isSelected()){
