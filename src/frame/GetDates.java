@@ -101,6 +101,7 @@ public class GetDates extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 llenarJCEspecifico();
+                jcEspecifico.setEnabled(true);
                 jcCompuesto.setVisible(true);
                 simple.setText("Fecha ENTRE");
                 entre.setVisible(true);
@@ -116,7 +117,10 @@ public class GetDates extends JFrame {
         Verificacion verificacion = null;
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
-        if (!jcCompuesto.isVisible()) {
+        if(jrbAnyDate.isSelected()){
+            condition=";";
+            
+        } else if (!jcCompuesto.isVisible()) {
             condition = " and fecha_control like '" + firstDate + "';";
 
         } else {
