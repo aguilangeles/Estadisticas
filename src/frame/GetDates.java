@@ -113,13 +113,13 @@ public class GetDates extends JFrame {
         });
     }
 
-    private Verificacion changeValuesOFtraza() {
+    private TrazaporVerificacion changeValuesOFtraza() {
         Verificacion verificacion = null;
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
-        if(jrbAnyDate.isSelected()){
-            condition=";";
-            
+        if (jrbAnyDate.isSelected()) {
+            condition = ";";
+
         } else if (!jcCompuesto.isVisible()) {
             condition = " and fecha_control like '" + firstDate + "';";
 
@@ -132,7 +132,7 @@ public class GetDates extends JFrame {
         }
         trazav.setFirstDate(firstDate);
         verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, trazav, condition);
-        return verificacion;
+        return verificacion.getTraza();
     }
 
     private void nextActionPerformed() {
@@ -140,7 +140,8 @@ public class GetDates extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Verificacion v = changeValuesOFtraza();
+                trazav = changeValuesOFtraza();
+                System.out.println(trazav);
             }
         });
     }

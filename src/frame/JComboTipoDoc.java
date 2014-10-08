@@ -37,6 +37,7 @@ public class JComboTipoDoc {
                     + "join qualitys.tipos_documentos td "
                     + "on t.idTipoDocumento = td.id "
                     + "where t.idVerificacion = " + id + condition;
+            System.out.println(query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {

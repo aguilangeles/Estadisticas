@@ -309,8 +309,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         jbNextDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
 
-        jbAddDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-20.png"))); // NOI18N
-        jbAddDate.setEnabled(false);
+        jbAddDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eye-20.png"))); // NOI18N
+        jbAddDate.setToolTipText("");
         jbAddDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAddDateActionPerformed(evt);
@@ -320,9 +320,19 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jComboExpecifico.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboExpecifico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aaaa-mm-dd" }));
         jComboExpecifico.setToolTipText("");
+        jComboExpecifico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboExpecificoActionPerformed(evt);
+            }
+        });
 
         jComboCompuesto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboCompuesto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aaaa-mm-dd" }));
+        jComboCompuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboCompuestoActionPerformed(evt);
+            }
+        });
 
         jrbAnyDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jrbAnyDate.setText("Fecha Indistinta");
@@ -445,6 +455,38 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private void jbAddDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAddDateActionPerformed
+
+    private void jComboExpecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboExpecificoActionPerformed
+        // TODO add your handling code here:
+        changeValuesOFtraza();
+
+    }//GEN-LAST:event_jComboExpecificoActionPerformed
+
+    private void jComboCompuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCompuestoActionPerformed
+        // TODO add your handling code here:
+        changeValuesOFtraza();
+    }//GEN-LAST:event_jComboCompuestoActionPerformed
+    private TrazaporVerificacion changeValuesOFtraza() {
+        Verificacion verificacion = null;
+        String condition;
+        String firstDate = jComboExpecifico.getSelectedItem() + "%";
+        if (jrbAnyDate.isSelected()) {
+            condition = ";";
+
+        } else if (!jComboCompuesto.isVisible()) {
+            condition = " and fecha_control like '" + firstDate + "';";
+
+        } else {
+            String lastDate = jComboCompuesto.getSelectedItem() + "%";
+            condition = " and fecha_control "
+                    + " between '" + firstDate + "'"
+                    + " and '" + lastDate + "';";
+            traza.setLastDate(lastDate);
+        }
+        traza.setFirstDate(firstDate);
+        verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jcTipodoc, jcTipoUsuario, traza, condition);
+        return verificacion.getTraza();
+    }
 
     /**
      * @param args the command line arguments

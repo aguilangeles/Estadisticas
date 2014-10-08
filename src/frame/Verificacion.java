@@ -86,7 +86,7 @@ public class Verificacion extends JFrame {
     private void habilitarFiltros() {
         jrbAnyDate.setEnabled(true);
         jrbAnyDate.setSelected(true);
-        
+
         jrbEspecifica.setEnabled(true);
         jrbCompuesta.setEnabled(true);
         jcTipodoc.setEnabled(true);
@@ -105,6 +105,8 @@ public class Verificacion extends JFrame {
         this.jcTipoUsuario = jcTipoUsuario;
         this.traza = traza;
         setValuesOfVerificacion(condition);
+        llenarTipoDoc(condition);
+        llenarTipoUsuario(condition);
     }
 
     private void calidadActionPerformed() {
@@ -112,8 +114,10 @@ public class Verificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(1);
-                setValuesOfVerificacion(condition);
                 habilitarFiltros();
+                setValuesOfVerificacion(condition);
+                llenarTipoDoc(condition);
+                llenarTipoUsuario(condition);
 
             }
         });
@@ -124,8 +128,10 @@ public class Verificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(2);
-                setValuesOfVerificacion(condition);
                 habilitarFiltros();
+                setValuesOfVerificacion(condition);
+                llenarTipoDoc(condition);
+                llenarTipoUsuario(condition);
             }
         });
     }
@@ -136,13 +142,14 @@ public class Verificacion extends JFrame {
         jlnumAcep.setText("Total Aceptadas: " + traza.getAceptadas());
         jlnumRech.setText("Total Rechazadas: " + traza.getRechazadas());
         jlnumNull.setText("Total Nulas: " + traza.getNulas());
-        llenarTipoDoc(condition);
-        llenarTipoUsuario(condition);
+//        llenarTipoDoc(condition);
+//        llenarTipoUsuario(condition);
     }
 
     public void llenarTipoDoc(String condition) {
         jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), condition);
         jcTipodoc.setModel(jComboTipoDoc.getModel());
+        jcTipodoc.setSelectedItem(1);
     }
 
     public void llenarTipoUsuario(String condition) {
