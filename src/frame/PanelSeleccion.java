@@ -442,6 +442,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         String doctype = jcTipodoc.getSelectedItem() + "";
         traza.setDoctype(doctype);
         jlNameTipodoc.setText("Tipo de Doc : " + doctype);
+        changeDoctype();
 
     }//GEN-LAST:event_jcTipodocActionPerformed
 
@@ -450,6 +451,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
         String username = jcTipoUsuario.getSelectedItem() + "";
         jlUsername.setText("Usuario: " + username);
         traza.setUsername(username);
+        changeUser();
+
 
     }//GEN-LAST:event_jcTipoUsuarioActionPerformed
 
@@ -459,16 +462,32 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private void jComboExpecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboExpecificoActionPerformed
         // TODO add your handling code here:
-        changeValuesOFtraza();
+        changeDates();
 
     }//GEN-LAST:event_jComboExpecificoActionPerformed
 
     private void jComboCompuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCompuestoActionPerformed
         // TODO add your handling code here:
-        changeValuesOFtraza();
+        changeDates();
     }//GEN-LAST:event_jComboCompuestoActionPerformed
-    private TrazaporVerificacion changeValuesOFtraza() {
-        return new ChangeValuesOfTrazas(jrbAnyDate, jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza).getTrazav();
+    private TrazaporVerificacion changeDates() {
+        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jrbAnyDate, jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
+        change.valuesFromDate();
+        return change.getTrazav();
+
+    }
+
+    private TrazaporVerificacion changeDoctype() {
+        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jrbAnyDate, jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
+        change.valuesFromDoctype();
+        return change.getTrazav();
+
+    }
+
+    private TrazaporVerificacion changeUser() {
+        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jrbAnyDate, jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
+        change.valuesFromUser();
+        return change.getTrazav();
 
     }
 

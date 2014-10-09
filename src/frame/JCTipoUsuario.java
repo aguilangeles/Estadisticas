@@ -24,7 +24,6 @@ public class JCTipoUsuario {
     public JCTipoUsuario( int id,String condition) {
         this.id = id;
         this.condition = condition;
-        model.addElement("Todos");
         getUsuarios();
     }
 
@@ -47,6 +46,7 @@ public class JCTipoUsuario {
                 Logger.getLogger(JComboUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+//        model.addElement("Todos");
         conexion.isConexionClose();
     }
 

@@ -44,6 +44,7 @@ public class GetCantidadVerificacion {
         if (conexion.isConexion()) {
             String query = "SELECT count(*) FROM qualitys.traza  where idVerificacion = " + id + condition;
             conexion.executeQuery(query);
+            System.out.println(query);
             try {
                 while (conexion.resulset.next()) {
 
@@ -66,6 +67,7 @@ public class GetCantidadVerificacion {
                     + " where idverificacion = " + idTraza
                     + " and estadoLote " + value + condition;
             conexion.executeQuery(query);
+            System.out.println(query);
             try {
                 while (conexion.resulset.next()) {
 

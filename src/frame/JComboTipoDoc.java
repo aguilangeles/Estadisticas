@@ -24,7 +24,6 @@ public class JComboTipoDoc {
     public JComboTipoDoc(int id, String condition) {
         this.id = id;
         this.condition = condition;
-        model.addElement("Todos");
         getdocumentos();
     }
 
@@ -37,18 +36,36 @@ public class JComboTipoDoc {
                     + "join qualitys.tipos_documentos td "
                     + "on t.idTipoDocumento = td.id "
                     + "where t.idVerificacion = " + id + condition;
-            System.out.println(query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
-                    
+
                     model.addElement(conexion.resulset.getString(1));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(JComboTipoDoc.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+//        model.addElement("Todos");
         conexion.isConexionClose();
+    }
+
+    public int getiddocument(String description) {
+        int id = 0;
+        Conexion conexion = new Conexion();
+        if (conexion.isConexion()) {
+            String query = "SELECT id FROM qualitys.tipos_documentos where descripcion = '" + description + "';";
+            conexion.executeQuery(query);
+            try {
+                while (conexion.resulset.next()) {
+                    id = conexion.resulset.getInt(1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JComboTipoDoc.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        conexion.isConexionClose();
+        return id;
     }
 
     public DefaultComboBoxModel getModel() {

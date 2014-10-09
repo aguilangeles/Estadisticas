@@ -114,8 +114,9 @@ public class GetDates extends JFrame {
     }
 
     private TrazaporVerificacion changeValuesOFtraza() {
-
-        return new ChangeValuesOfTrazas(jrbAnyDate, jcEspecifico, jctipodoc, jctipousuario, jcCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, trazav).getTrazav();
+        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jrbAnyDate, jcEspecifico, jctipodoc, jctipousuario, jcCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, trazav);
+        change.valuesFromDate();
+        return change.getTrazav();
     }
 
     private void nextActionPerformed() {
