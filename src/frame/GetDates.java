@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import models.ChangeValuesOfTrazas;
 import models.TrazaporVerificacion;
 
 /**
@@ -114,25 +115,25 @@ public class GetDates extends JFrame {
     }
 
     private TrazaporVerificacion changeValuesOFtraza() {
-        Verificacion verificacion = null;
-        String condition;
-        String firstDate = jcEspecifico.getSelectedItem() + "%";
-        if (jrbAnyDate.isSelected()) {
-            condition = ";";
-
-        } else if (!jcCompuesto.isVisible()) {
-            condition = " and fecha_control like '" + firstDate + "';";
-
-        } else {
-            String lastDate = jcCompuesto.getSelectedItem() + "%";
-            condition = " and fecha_control "
-                    + " between '" + firstDate + "'"
-                    + " and '" + lastDate + "';";
-            trazav.setLastDate(lastDate);
-        }
-        trazav.setFirstDate(firstDate);
-        verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, trazav, condition);
-        return verificacion.getTraza();
+//        Verificacion verificacion = null;
+//        String condition;
+//        String firstDate = jcEspecifico.getSelectedItem() + "%";
+//        if (jrbAnyDate.isSelected()) {
+//            condition = ";";
+//
+//        } else if (!jcCompuesto.isVisible()) {
+//            condition = " and fecha_control like '" + firstDate + "';";
+//
+//        } else {
+//            String lastDate = jcCompuesto.getSelectedItem() + "%";
+//            condition = " and fecha_control "
+//                    + " between '" + firstDate + "'"
+//                    + " and '" + lastDate + "';";
+//            trazav.setLastDate(lastDate);
+//        }
+//        trazav.setFirstDate(firstDate);
+//        verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, trazav, condition);
+        return new ChangeValuesOfTrazas(jrbAnyDate, jcEspecifico, jctipodoc, jctipousuario, jcCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull).getTrazav();
     }
 
     private void nextActionPerformed() {
