@@ -43,6 +43,11 @@ public class ChangeValuesOfTrazas {
         this.traza = traza;
     }
 
+    public void valuesDefault() {
+        String condition = ";";
+        verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
+    }
+
     public void valuesFromDate() {
         String condition = conditionFromDate();
         verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
@@ -52,6 +57,7 @@ public class ChangeValuesOfTrazas {
         String condition = conditionFromTypedoc();
         verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
     }
+
     public void valuesFromUser() {
         String condition = conditionFromUser();
         verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
@@ -87,6 +93,7 @@ public class ChangeValuesOfTrazas {
         System.out.println("condition" + condition);
         return condition;
     }
+
     private String conditionFromUser() {
         String condition = null;
         if (jctipousuario.getSelectedItem().equals("Todos")) {

@@ -41,7 +41,19 @@ public class GetDates extends JFrame {
     private GetDatesFromTraza datesFromTraza;
     private TrazaporVerificacion trazav;
 
-    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, TipoVerificacion verificacion, JButton jbnext, TrazaporVerificacion trazav, JComboBox tipodoc, JComboBox tipousuario, JRadioButton jrbAnyDate) throws HeadlessException {
+    public GetDates(JRadioButton especifica, JRadioButton compuesta
+            , JComboBox jcEspecifico
+            , JComboBox jcCompuesto
+            , JLabel simple
+            , JLabel entre
+            , JLabel jlnumTrazas
+            , JLabel jlnumAcep
+            , JLabel jlnumRech
+            , JLabel jlnumNull
+            , TipoVerificacion verificacion
+            , JButton jbnext, TrazaporVerificacion trazav
+            , JComboBox tipodoc, JComboBox tipousuario
+            , JRadioButton jrbAnyDate) throws HeadlessException {
         this.especifica = especifica;
         this.compuesta = compuesta;
         this.jcEspecifico = jcEspecifico;
@@ -69,11 +81,12 @@ public class GetDates extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 jcEspecifico.setEnabled(false);
                 jcCompuesto.setVisible(false);
                 entre.setVisible(false);
                 simple.setText("");
+                ChangeValuesOfTrazas changeValuesOfTrazas = new ChangeValuesOfTrazas(jrbAnyDate, jcEspecifico, jctipodoc, jctipousuario, jcCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, trazav);
+                changeValuesOfTrazas.valuesDefault();
             }
         });
     }
