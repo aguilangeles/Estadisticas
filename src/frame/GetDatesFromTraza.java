@@ -19,7 +19,6 @@ import models.TrazaporVerificacion;
  */
 public class GetDatesFromTraza {
 
-//   private int idverificacion;
     private final String order;
     private final TrazaporVerificacion traza;
     private final DefaultComboBoxModel dates = new DefaultComboBoxModel();

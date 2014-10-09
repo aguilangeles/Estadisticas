@@ -6,6 +6,7 @@
 package frame;
 
 import javax.swing.ButtonGroup;
+import models.ChangeValuesOfTrazas;
 import models.TrazaporVerificacion;
 
 /**
@@ -34,7 +35,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jrbCompuesta.setEnabled(false);
         jcTipodoc.setEnabled(false);
         jcTipoUsuario.setEnabled(false);
-        Verificacion verificacion = new Verificacion(jComboCompuesto,
+        TipoVerificacion verificacion = new TipoVerificacion(jComboCompuesto,
                 jComboExpecifico, jbAddDate, jbAddDoctype, jbAddUsername,
                 jbNextDate, jbNextUsername, jbnextDoctype, jcTipoUsuario,
                 jcTipodoc, jlFirstDate, jlLastDate, jlNameTipodoc, jlUsername,
@@ -467,25 +468,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
         changeValuesOFtraza();
     }//GEN-LAST:event_jComboCompuestoActionPerformed
     private TrazaporVerificacion changeValuesOFtraza() {
-        Verificacion verificacion = null;
-        String condition;
-        String firstDate = jComboExpecifico.getSelectedItem() + "%";
-        if (jrbAnyDate.isSelected()) {
-            condition = ";";
+        return new ChangeValuesOfTrazas(jrbAnyDate, jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza).getTrazav();
 
-        } else if (!jComboCompuesto.isVisible()) {
-            condition = " and fecha_control like '" + firstDate + "';";
-
-        } else {
-            String lastDate = jComboCompuesto.getSelectedItem() + "%";
-            condition = " and fecha_control "
-                    + " between '" + firstDate + "'"
-                    + " and '" + lastDate + "';";
-            traza.setLastDate(lastDate);
-        }
-        traza.setFirstDate(firstDate);
-        verificacion = new Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jcTipodoc, jcTipoUsuario, traza, condition);
-        return verificacion.getTraza();
     }
 
     /**

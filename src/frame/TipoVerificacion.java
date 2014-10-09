@@ -19,7 +19,7 @@ import models.TrazaporVerificacion;
  *
  * @author aguilangeles@gmail.com
  */
-public class Verificacion extends JFrame {
+public class TipoVerificacion extends JFrame {
 
     private int idTraza;
     private String condition = ";";
@@ -52,7 +52,17 @@ public class Verificacion extends JFrame {
     private JCTipoUsuario tipoUsuario;
     private GetDates dates;
 
-    public Verificacion(JComboBox jComboCompuesto, JComboBox jComboExpecifico, JButton jbAddDate, JButton jbAddDoctype, JButton jbAddUsername, JButton jbNextDate, JButton jbNextUsername, JButton jbnextDoctype, JComboBox jcTipoUsuario, JComboBox jcTipodoc, JLabel jlFirstDate, JLabel jlLastDate, JLabel jlNameTipodoc, JLabel jlUsername, JLabel jlnumAcep, JLabel jlnumNull, JLabel jlnumRech, JLabel jlnumTrazas, JRadioButton jrbCalidad, JRadioButton jrbCompuesta, JRadioButton jrbDocumento, JRadioButton jrbEspecifica, JRadioButton jrbAnyDate) {
+    public TipoVerificacion() {
+
+    }
+
+    public TipoVerificacion(JComboBox jComboCompuesto, JComboBox jComboExpecifico,
+            JButton jbAddDate, JButton jbAddDoctype, JButton jbAddUsername,
+            JButton jbNextDate, JButton jbNextUsername, JButton jbnextDoctype,
+            JComboBox jcTipoUsuario, JComboBox jcTipodoc, JLabel jlFirstDate,
+            JLabel jlLastDate, JLabel jlNameTipodoc, JLabel jlUsername, JLabel jlnumAcep, JLabel jlnumNull, JLabel jlnumRech, JLabel jlnumTrazas,
+            JRadioButton jrbCalidad, JRadioButton jrbCompuesta, JRadioButton jrbDocumento,
+            JRadioButton jrbEspecifica, JRadioButton jrbAnyDate) {
         this.jComboCompuesto = jComboCompuesto;
         this.jComboExpecifico = jComboExpecifico;
         this.jbAddDate = jbAddDate;
@@ -80,23 +90,12 @@ public class Verificacion extends JFrame {
         documentoActionPerformed();
     }
 
-    public Verificacion() {
-    }
-
-    private void habilitarFiltros() {
-        jrbAnyDate.setEnabled(true);
-        jrbAnyDate.setSelected(true);
-
-        jrbEspecifica.setEnabled(true);
-        jrbCompuesta.setEnabled(true);
-        jcTipodoc.setEnabled(true);
-        jcTipoUsuario.setEnabled(true);
-        dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico,
-                jComboCompuesto, jlFirstDate, jlLastDate, jlnumTrazas, jlnumAcep, jlnumRech,
-                jlnumNull, this, jbNextDate, getTraza(), jcTipodoc, jcTipoUsuario, jrbAnyDate);
-    }
-
-    public Verificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JComboBox jcTipoDoc, JComboBox jcTipoUsuario, TrazaporVerificacion traza, String condition) throws HeadlessException {
+    public TipoVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech
+            , JLabel numNull
+            , JComboBox jcTipoDoc
+            , JComboBox jcTipoUsuario
+            , TrazaporVerificacion traza
+            , String condition) throws HeadlessException {
         this.jlnumTrazas = numTrazas;
         this.jlnumAcep = numAcept;
         this.jlnumRech = numRech;
@@ -109,6 +108,19 @@ public class Verificacion extends JFrame {
         llenarTipoUsuario(condition);
     }
 
+    private void habilitarFiltros() {
+        jrbAnyDate.setEnabled(true);
+        jrbAnyDate.setSelected(true);
+        jrbEspecifica.setEnabled(true);
+        jrbCompuesta.setEnabled(true);
+        jcTipodoc.setEnabled(true);
+        jcTipoUsuario.setEnabled(true);
+        dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico,
+                jComboCompuesto, jlFirstDate, jlLastDate, jlnumTrazas, jlnumAcep, jlnumRech,
+                jlnumNull, this, jbNextDate, getTraza(), jcTipodoc, jcTipoUsuario, jrbAnyDate);
+
+    }
+
     private void calidadActionPerformed() {
         this.jrbCalidad.addActionListener(new ActionListener() {
             @Override
@@ -118,7 +130,6 @@ public class Verificacion extends JFrame {
                 setValuesOfVerificacion(condition);
                 llenarTipoDoc(condition);
                 llenarTipoUsuario(condition);
-
             }
         });
     }
@@ -142,8 +153,6 @@ public class Verificacion extends JFrame {
         jlnumAcep.setText("Total Aceptadas: " + traza.getAceptadas());
         jlnumRech.setText("Total Rechazadas: " + traza.getRechazadas());
         jlnumNull.setText("Total Nulas: " + traza.getNulas());
-//        llenarTipoDoc(condition);
-//        llenarTipoUsuario(condition);
     }
 
     public void llenarTipoDoc(String condition) {
@@ -155,11 +164,9 @@ public class Verificacion extends JFrame {
     public void llenarTipoUsuario(String condition) {
         tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), condition);
         jcTipoUsuario.setModel(tipoUsuario.getModel());
-
     }
 
     public int getIdTraza() {
-
         return traza.getIdVerificacion();
     }
 

@@ -5,12 +5,10 @@
  */
 package models;
 
-import frame.GetDatesFromTraza;
-import javax.swing.JButton;
+import frame.TipoVerificacion;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
-import javax.swing.plaf.basic.BasicBorders;
 
 /**
  *
@@ -27,9 +25,10 @@ public class ChangeValuesOfTrazas {
     private final JLabel jlnumAcep;
     private final JLabel jlnumRech;
     private final JLabel jlnumNull;
-    private TrazaporVerificacion trazav;
+    private final TrazaporVerificacion traza;
+    TipoVerificacion verificacion;
 
-    public ChangeValuesOfTrazas(JRadioButton jrbAnyDate, JComboBox jcEspecifico, JComboBox jctipodoc, JComboBox jctipousuario, JComboBox jcCompuesto, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull) {
+    public ChangeValuesOfTrazas(JRadioButton jrbAnyDate, JComboBox jcEspecifico, JComboBox jctipodoc, JComboBox jctipousuario, JComboBox jcCompuesto, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, TrazaporVerificacion traza) {
         this.jrbAnyDate = jrbAnyDate;
         this.jcEspecifico = jcEspecifico;
         this.jctipodoc = jctipodoc;
@@ -39,35 +38,31 @@ public class ChangeValuesOfTrazas {
         this.jlnumAcep = jlnumAcep;
         this.jlnumRech = jlnumRech;
         this.jlnumNull = jlnumNull;
+        this.traza = traza;
         changeValuesOFtraza();
     }
-    
-    
 
-    private TrazaporVerificacion changeValuesOFtraza() {
-        frame.Verificacion verificacion = null;
+    private void changeValuesOFtraza() {
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
+        String lastDate = null;
         if (jrbAnyDate.isSelected()) {
             condition = ";";
-
         } else if (!jcCompuesto.isVisible()) {
             condition = " and fecha_control like '" + firstDate + "';";
-
         } else {
-            String lastDate = jcCompuesto.getSelectedItem() + "%";
+            lastDate = jcCompuesto.getSelectedItem() + "%";
             condition = " and fecha_control "
                     + " between '" + firstDate + "'"
                     + " and '" + lastDate + "';";
-            trazav.setLastDate(lastDate);
         }
-        trazav.setFirstDate(firstDate);
-        trazav = new frame.Verificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, trazav, condition).getTraza();
-        return trazav;
+        verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
+        traza.setFirstDate(firstDate);
+        traza.setLastDate(lastDate);
     }
 
     public TrazaporVerificacion getTrazav() {
-        return trazav;
+        return verificacion.getTraza();
     }
-    
+
 }
