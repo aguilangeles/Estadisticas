@@ -14,6 +14,7 @@ import models.TrazaporVerificacion;
  * @author aguilangeles@gmail.com
  */
 public class PanelSeleccion extends javax.swing.JFrame {
+
     TrazaporVerificacion traza = new TrazaporVerificacion();
     private boolean selected;
     private ButtonGroup group;
@@ -26,21 +27,28 @@ public class PanelSeleccion extends javax.swing.JFrame {
         actionVerificacionButtonGroup();
         actionDatesRadioButton();
         this.setResizable(false);
+        jchTodos.setEnabled(false);
+        jchFecha.setEnabled(false);
+        jchDocumento.setEnabled(false);
+        jchUsuario.setEnabled(false);
         jComboExpecifico.setEnabled(false);
         jComboCompuesto.setVisible(false);
         jlLastDate.setVisible(false);
-        jrbAnyDate.setEnabled(false);
         jrbEspecifica.setEnabled(false);
         jrbCompuesta.setEnabled(false);
         jcTipodoc.setEnabled(false);
         jcTipoUsuario.setEnabled(false);
+        
+
         TipoVerificacion verificacion = new TipoVerificacion(jComboCompuesto,
                 jComboExpecifico, jcTipoUsuario,
                 jcTipodoc, jlFirstDate, jlLastDate, jlNameTipodoc, jlUsername,
                 jlnumAcep, jlnumNull, jlnumRech, jlnumTrazas, jrbCalidad,
-                jrbCompuesta, jrbDocumento, jrbEspecifica, jrbAnyDate);
-
+                jrbCompuesta, jrbDocumento, jrbEspecifica, jchTodos, jchFecha, jchDocumento, jchUsuario);
+////
         this.traza = verificacion.getTraza();
+
+        CheckBox checkBox = new CheckBox(jchTodos, jchFecha, jchDocumento, jchUsuario, verificacion, null);
 
     }
 
@@ -52,7 +60,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private void actionDatesRadioButton() {
         group = new ButtonGroup();
-        group.add(jrbAnyDate);
+//        group.add(jrbAnyDate);
         group.add(jrbEspecifica);
         group.add(jrbCompuesta);
     }
@@ -91,10 +99,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jlLastDate = new javax.swing.JLabel();
         jComboExpecifico = new javax.swing.JComboBox();
         jComboCompuesto = new javax.swing.JComboBox();
-        jrbAnyDate = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jchTodos = new javax.swing.JCheckBox();
-        jcFecha = new javax.swing.JCheckBox();
+        jchFecha = new javax.swing.JCheckBox();
         jchDocumento = new javax.swing.JCheckBox();
         jchUsuario = new javax.swing.JCheckBox();
 
@@ -296,9 +303,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
             }
         });
 
-        jrbAnyDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jrbAnyDate.setText("Fecha Indistinta");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -307,8 +311,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jrbEspecifica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jrbCompuesta, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                    .addComponent(jrbAnyDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jrbCompuesta, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -322,9 +325,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jrbAnyDate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(33, 33, 33)
                 .addComponent(jrbEspecifica, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jrbCompuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,7 +351,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         jchTodos.setText("Todos");
 
-        jcFecha.setText("Fecha");
+        jchFecha.setText("Fecha");
 
         jchDocumento.setText("Documento");
 
@@ -364,7 +365,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jchTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jchFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jchDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
@@ -377,7 +378,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jchTodos)
-                    .addComponent(jcFecha)
+                    .addComponent(jchFecha)
                     .addComponent(jchDocumento)
                     .addComponent(jchUsuario))
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -450,7 +451,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }//GEN-LAST:event_jcTipoUsuarioActionPerformed
 
     private void jComboExpecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboExpecificoActionPerformed
-        // TODO add your handling code here:
         changeDates();
 
     }//GEN-LAST:event_jComboExpecificoActionPerformed
@@ -460,21 +460,21 @@ public class PanelSeleccion extends javax.swing.JFrame {
         changeDates();
     }//GEN-LAST:event_jComboCompuestoActionPerformed
     private TrazaporVerificacion changeDates() {
-        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jrbAnyDate, jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
+        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
         change.valuesFromDate();
         return change.getTrazav();
 
     }
 
     private TrazaporVerificacion changeDoctype() {
-        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jrbAnyDate, jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
+        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
         change.valuesFromDoctype();
         return change.getTrazav();
 
     }
 
     private TrazaporVerificacion changeUser() {
-        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jrbAnyDate, jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
+        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
         change.valuesFromUser();
         return change.getTrazav();
 
@@ -527,10 +527,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JCheckBox jcFecha;
     private javax.swing.JComboBox jcTipoUsuario;
     private javax.swing.JComboBox jcTipodoc;
     private javax.swing.JCheckBox jchDocumento;
+    private javax.swing.JCheckBox jchFecha;
     private javax.swing.JCheckBox jchTodos;
     private javax.swing.JCheckBox jchUsuario;
     private javax.swing.JLabel jlFirstDate;
@@ -542,7 +542,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JLabel jlnumRech;
     private javax.swing.JLabel jlnumTrazas;
     private javax.swing.JPanel jpVerificacion;
-    private javax.swing.JRadioButton jrbAnyDate;
     private javax.swing.JRadioButton jrbCalidad;
     private javax.swing.JRadioButton jrbCompuesta;
     private javax.swing.JRadioButton jrbDocumento;

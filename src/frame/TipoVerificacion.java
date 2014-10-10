@@ -8,6 +8,7 @@ package frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -46,7 +47,10 @@ public class TipoVerificacion extends JFrame {
     private javax.swing.JRadioButton jrbCompuesta;
     private javax.swing.JRadioButton jrbDocumento;
     private javax.swing.JRadioButton jrbEspecifica;
-    private javax.swing.JRadioButton jrbAnyDate;
+    private javax.swing.JCheckBox jchDocumento;
+    private javax.swing.JCheckBox jchFecha;
+    private javax.swing.JCheckBox jchTodos;
+    private javax.swing.JCheckBox jchUsuario;
     private JComboTipoDoc jComboTipoDoc;
     private JCTipoUsuario tipoUsuario;
     private GetDates dates;
@@ -56,7 +60,7 @@ public class TipoVerificacion extends JFrame {
 
     }
 
-    public TipoVerificacion(JComboBox jComboCompuesto, JComboBox jComboExpecifico, JComboBox jcTipoUsuario, JComboBox jcTipodoc, JLabel jlFirstDate, JLabel jlLastDate, JLabel jlNameTipodoc, JLabel jlUsername, JLabel jlnumAcep, JLabel jlnumNull, JLabel jlnumRech, JLabel jlnumTrazas, JRadioButton jrbCalidad, JRadioButton jrbCompuesta, JRadioButton jrbDocumento, JRadioButton jrbEspecifica, JRadioButton jrbAnyDate) {
+    public TipoVerificacion(JComboBox jComboCompuesto, JComboBox jComboExpecifico, JComboBox jcTipoUsuario, JComboBox jcTipodoc, JLabel jlFirstDate, JLabel jlLastDate, JLabel jlNameTipodoc, JLabel jlUsername, JLabel jlnumAcep, JLabel jlnumNull, JLabel jlnumRech, JLabel jlnumTrazas, JRadioButton jrbCalidad, JRadioButton jrbCompuesta, JRadioButton jrbDocumento, JRadioButton jrbEspecifica, JCheckBox jchtodos, JCheckBox jchfecha, JCheckBox jchdocumento, JCheckBox jchusuario) {
         this.jComboCompuesto = jComboCompuesto;
         this.jComboExpecifico = jComboExpecifico;
         this.jcTipoUsuario = jcTipoUsuario;
@@ -73,9 +77,20 @@ public class TipoVerificacion extends JFrame {
         this.jrbCompuesta = jrbCompuesta;
         this.jrbDocumento = jrbDocumento;
         this.jrbEspecifica = jrbEspecifica;
-        this.jrbAnyDate = jrbAnyDate;
+        this.jchTodos = jchtodos;
+        this.jchFecha = jchfecha;
+        this.jchDocumento = jchdocumento;
+        this.jchUsuario = jchusuario;
         calidadActionPerformed();
         documentoActionPerformed();
+        habilitarSelecciondefiltros();
+    }
+
+    private void habilitarSelecciondefiltros() {
+        this.jchTodos.setEnabled(true);
+        this.jchFecha.setEnabled(true);
+        this.jchDocumento.setEnabled(true);
+        this.jchUsuario.setEnabled(true);
     }
 
     public TipoVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JComboBox jcTipoDoc, JComboBox jcTipoUsuario, TrazaporVerificacion traza, String condition) throws HeadlessException {
@@ -89,16 +104,18 @@ public class TipoVerificacion extends JFrame {
         setTrazaByVerification(condition);
     }
 
-    private void habilitarFiltros() {
-        jrbAnyDate.setEnabled(true);
-        jrbAnyDate.setSelected(true);
-        jrbEspecifica.setEnabled(true);
-        jrbCompuesta.setEnabled(true);
-        jcTipodoc.setEnabled(true);
-        jcTipoUsuario.setEnabled(true);
+    public void habilitarFiltros(boolean select) {
+        jrbEspecifica.setEnabled(select);
+        jrbCompuesta.setEnabled(select);
+        jcTipodoc.setEnabled(select);
+        jcTipoUsuario.setEnabled(select);
+
+    }
+
+    public void getDate() {
         dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico,
                 jComboCompuesto, jlFirstDate, jlLastDate, jlnumTrazas, jlnumAcep, jlnumRech,
-                jlnumNull, this, jbNextDate, getTraza(), jcTipodoc, jcTipoUsuario, jrbAnyDate);
+                jlnumNull, getTraza());
 
     }
 
@@ -107,10 +124,8 @@ public class TipoVerificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(1);
-                habilitarFiltros();
                 setTrazaByVerification(condition);
-                setdoctype();
-                setusername();
+                habilitarSelecciondefiltros();
             }
         });
     }
@@ -120,10 +135,8 @@ public class TipoVerificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(2);
-                habilitarFiltros();
                 setTrazaByVerification(condition);
-                setdoctype();
-                setusername();
+                habilitarSelecciondefiltros();
             }
         });
     }
@@ -131,8 +144,6 @@ public class TipoVerificacion extends JFrame {
     private void setTrazaByVerification(String condition) {
         cantidadverificacion = new GetCantidadVerificacion(condition, traza, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
         traza = cantidadverificacion.getTraza();
-//        setdoctype();
-//        setusername();
     }
 
     public void setusername() {

@@ -18,7 +18,6 @@ import javax.swing.JRadioButton;
  */
 public class ChangeValuesOfTrazas {
 
-    private final JRadioButton jrbAnyDate;
     private final JComboBox jcEspecifico;
     private final JComboBox jctipodoc;
     private final JComboBox jctipousuario;
@@ -30,8 +29,7 @@ public class ChangeValuesOfTrazas {
     private final TrazaporVerificacion traza;
     TipoVerificacion verificacion;
 
-    public ChangeValuesOfTrazas(JRadioButton jrbAnyDate, JComboBox jcEspecifico, JComboBox jctipodoc, JComboBox jctipousuario, JComboBox jcCompuesto, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, TrazaporVerificacion traza) {
-        this.jrbAnyDate = jrbAnyDate;
+    public ChangeValuesOfTrazas(JComboBox jcEspecifico, JComboBox jctipodoc, JComboBox jctipousuario, JComboBox jcCompuesto, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, TrazaporVerificacion traza) {
         this.jcEspecifico = jcEspecifico;
         this.jctipodoc = jctipodoc;
         this.jctipousuario = jctipousuario;
@@ -71,9 +69,8 @@ public class ChangeValuesOfTrazas {
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
         String lastDate = null;
-        if (jrbAnyDate.isSelected()) {
-            condition = ";";
-        } else if (!jcCompuesto.isVisible()) {
+      
+      if (!jcCompuesto.isVisible()) {
             condition = " and fecha_control like '" + firstDate + "';";
         } else {
             lastDate = jcCompuesto.getSelectedItem() + "%";
