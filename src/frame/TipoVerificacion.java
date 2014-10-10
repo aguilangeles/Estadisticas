@@ -83,7 +83,6 @@ public class TipoVerificacion extends JFrame {
         this.jchUsuario = jchusuario;
         calidadActionPerformed();
         documentoActionPerformed();
-        habilitarSelecciondefiltros();
     }
 
     private void habilitarSelecciondefiltros() {
@@ -126,6 +125,8 @@ public class TipoVerificacion extends JFrame {
                 traza.setIdVerificacion(1);
                 setTrazaByVerification(condition);
                 habilitarSelecciondefiltros();
+                setusername();
+                setdoctype();
             }
         });
     }
@@ -136,6 +137,8 @@ public class TipoVerificacion extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(2);
                 setTrazaByVerification(condition);
+                setusername();
+                setdoctype();
                 habilitarSelecciondefiltros();
             }
         });

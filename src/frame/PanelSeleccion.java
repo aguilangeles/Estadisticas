@@ -27,19 +27,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
         actionVerificacionButtonGroup();
         actionDatesRadioButton();
         this.setResizable(false);
-        jchTodos.setEnabled(false);
-        jchFecha.setEnabled(false);
-        jchDocumento.setEnabled(false);
-        jchUsuario.setEnabled(false);
-        jComboExpecifico.setEnabled(false);
         jComboCompuesto.setVisible(false);
         jlLastDate.setVisible(false);
-        jrbEspecifica.setEnabled(false);
-        jrbCompuesta.setEnabled(false);
-        jcTipodoc.setEnabled(false);
-        jcTipoUsuario.setEnabled(false);
-        
-
         TipoVerificacion verificacion = new TipoVerificacion(jComboCompuesto,
                 jComboExpecifico, jcTipoUsuario,
                 jcTipodoc, jlFirstDate, jlLastDate, jlNameTipodoc, jlUsername,
@@ -184,6 +173,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         jcTipodoc.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jcTipodoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcTipodoc.setEnabled(false);
         jcTipodoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcTipodocActionPerformed(evt);
@@ -229,6 +219,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         jcTipoUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jcTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcTipoUsuario.setEnabled(false);
         jcTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcTipoUsuarioActionPerformed(evt);
@@ -274,9 +265,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         jrbEspecifica.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jrbEspecifica.setText("Fecha Específica");
+        jrbEspecifica.setEnabled(false);
 
         jrbCompuesta.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jrbCompuesta.setText("Entre Dos Fechas");
+        jrbCompuesta.setEnabled(false);
 
         jlFirstDate.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jlFirstDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -289,6 +282,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jComboExpecifico.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboExpecifico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aaaa-mm-dd" }));
         jComboExpecifico.setToolTipText("");
+        jComboExpecifico.setEnabled(false);
         jComboExpecifico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboExpecificoActionPerformed(evt);
@@ -297,6 +291,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         jComboCompuesto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboCompuesto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aaaa-mm-dd" }));
+        jComboCompuesto.setEnabled(false);
         jComboCompuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboCompuestoActionPerformed(evt);
@@ -350,12 +345,16 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jPanel3.setOpaque(false);
 
         jchTodos.setText("Todos");
+        jchTodos.setEnabled(false);
 
         jchFecha.setText("Fecha");
+        jchFecha.setEnabled(false);
 
         jchDocumento.setText("Documento");
+        jchDocumento.setEnabled(false);
 
         jchUsuario.setText("Usuario");
+        jchUsuario.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

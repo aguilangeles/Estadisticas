@@ -90,6 +90,7 @@ public class GetDates extends JFrame {
                 llenarJCEspecifico();
                 jcEspecifico.setEnabled(true);
                 jcCompuesto.setVisible(true);
+                jcCompuesto.setEnabled(true);
                 simple.setText("Fecha ENTRE");
                 entre.setVisible(true);
                 entre.setText("Y");
