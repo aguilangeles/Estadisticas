@@ -46,11 +46,15 @@ public class ChangeValuesOfTrazas {
     public void valuesDefault() {
         String condition = ";";
         verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
+        verificacion.setdoctype();
+        verificacion.setusername();
     }
 
     public void valuesFromDate() {
         String condition = conditionFromDate();
         verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
+        verificacion.setdoctype();
+        verificacion.setusername();
     }
 
     public void valuesFromDoctype() {
@@ -90,7 +94,6 @@ public class ChangeValuesOfTrazas {
             int id = new SetTrazaFromDoctype(jctipodoc.getSelectedItem() + "").getIdDoctype();
             condition = " and idtipodocumento = '" + id + "';";
         }
-        System.out.println("condition" + condition);
         return condition;
     }
 
@@ -102,7 +105,6 @@ public class ChangeValuesOfTrazas {
             int id = new SetTrazaFromUser(jctipousuario.getSelectedItem() + "").getIdUsuario();
             condition = " and idusuarios = " + id + ";";
         }
-        System.out.println("condition" + condition);
         return condition;
     }
 

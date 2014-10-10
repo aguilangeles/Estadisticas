@@ -68,7 +68,6 @@ public class GetCantidadVerificacion {
                     + " where idVerificacion = "
                     + id + condition;
             conexion.executeQuery(query);
-            System.out.println(query);
             try {
                 while (conexion.resulset.next()) {
 
@@ -92,7 +91,6 @@ public class GetCantidadVerificacion {
                     + " and estadoLote "
                     + value + condition;
             conexion.executeQuery(query);
-            System.out.println(query);
             try {
                 while (conexion.resulset.next()) {
                     result = conexion.resulset.getInt(1);
