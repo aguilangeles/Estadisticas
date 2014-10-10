@@ -14,7 +14,6 @@ import models.TrazaporVerificacion;
  * @author aguilangeles@gmail.com
  */
 public class PanelSeleccion extends javax.swing.JFrame {
-
     TrazaporVerificacion traza = new TrazaporVerificacion();
     private boolean selected;
     private ButtonGroup group;

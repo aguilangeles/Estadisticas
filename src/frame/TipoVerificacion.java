@@ -20,11 +20,11 @@ import models.TrazaporVerificacion;
  * @author aguilangeles@gmail.com
  */
 public class TipoVerificacion extends JFrame {
-
+    
     private int idTraza;
     private String condition = ";";
     TrazaporVerificacion traza = new TrazaporVerificacion();
-
+    
     private javax.swing.JComboBox jComboCompuesto;
     private javax.swing.JComboBox jComboExpecifico;
     private javax.swing.JButton jbAddDate;
@@ -51,11 +51,11 @@ public class TipoVerificacion extends JFrame {
     private JComboTipoDoc jComboTipoDoc;
     private JCTipoUsuario tipoUsuario;
     private GetDates dates;
-
+    
     public TipoVerificacion() {
-
+        
     }
-
+    
     public TipoVerificacion(JComboBox jComboCompuesto, JComboBox jComboExpecifico,
             JButton jbAddDate, JButton jbAddDoctype, JButton jbAddUsername,
             JButton jbNextDate, JButton jbNextUsername, JButton jbnextDoctype,
@@ -89,13 +89,8 @@ public class TipoVerificacion extends JFrame {
         calidadActionPerformed();
         documentoActionPerformed();
     }
-
-    public TipoVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech
-            , JLabel numNull
-            , JComboBox jcTipoDoc
-            , JComboBox jcTipoUsuario
-            , TrazaporVerificacion traza
-            , String condition) throws HeadlessException {
+    
+    public TipoVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JComboBox jcTipoDoc, JComboBox jcTipoUsuario, TrazaporVerificacion traza, String condition) throws HeadlessException {
         this.jlnumTrazas = numTrazas;
         this.jlnumAcep = numAcept;
         this.jlnumRech = numRech;
@@ -103,11 +98,11 @@ public class TipoVerificacion extends JFrame {
         this.jcTipodoc = jcTipoDoc;
         this.jcTipoUsuario = jcTipoUsuario;
         this.traza = traza;
-        setValuesOfVerificacion(condition);
-        llenarTipoDoc(condition);
-        llenarTipoUsuario(condition);
+        setTrazaByVerification(condition);
+//        modelDoctype(condition);
+//        llenarTipoUsuario(condition);
     }
-
+    
     private void habilitarFiltros() {
         jrbAnyDate.setEnabled(true);
         jrbAnyDate.setSelected(true);
@@ -118,64 +113,62 @@ public class TipoVerificacion extends JFrame {
         dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico,
                 jComboCompuesto, jlFirstDate, jlLastDate, jlnumTrazas, jlnumAcep, jlnumRech,
                 jlnumNull, this, jbNextDate, getTraza(), jcTipodoc, jcTipoUsuario, jrbAnyDate);
-
+        
     }
-
+    
     private void calidadActionPerformed() {
         this.jrbCalidad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(1);
                 habilitarFiltros();
-                setValuesOfVerificacion(condition);
-                llenarTipoDoc(condition);
-                llenarTipoUsuario(condition);
+                setTrazaByVerification(condition);
+//                modelDoctype(condition);
+//                llenarTipoUsuario(condition);
             }
         });
     }
-
+    
     private void documentoActionPerformed() {
         this.jrbDocumento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(2);
                 habilitarFiltros();
-                setValuesOfVerificacion(condition);
-                llenarTipoDoc(condition);
-                llenarTipoUsuario(condition);
+                setTrazaByVerification(condition);
+//                modelDoctype(condition);
+//                llenarTipoUsuario(condition);
             }
         });
     }
-
-    private void setValuesOfVerificacion(String condition) {
-        traza = new GetCantidadVerificacion(traza, condition).getTraza();
-        jlnumTrazas.setText("Total Trazas: " + traza.getTrazas());
-        jlnumAcep.setText("Total Aceptadas: " + traza.getAceptadas());
-        jlnumRech.setText("Total Rechazadas: " + traza.getRechazadas());
-        jlnumNull.setText("Total Nulas: " + traza.getNulas());
+    
+    private void setTrazaByVerification(String condition) {
+        GetCantidadVerificacion g = new GetCantidadVerificacion(condition, traza, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
+        traza = g.getTraza();
+        jcTipodoc.setModel(g.getDoctypeCombo());
+        jcTipoUsuario.setModel(g.getUserCombo());
     }
-
-    public void llenarTipoDoc(String condition) {
-        jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), condition);
-        jcTipodoc.setModel(jComboTipoDoc.getModel());
-        jcTipodoc.setSelectedItem(1);
-    }
-
-    public void llenarTipoUsuario(String condition) {
-        tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), condition);
-        jcTipoUsuario.setModel(tipoUsuario.getModel());
-    }
-
+    
+//    public void llenarTipoDoc(String condition) {
+//        jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), condition);
+//        jcTipodoc.setModel(jComboTipoDoc.getModel());
+//    }
+//    
+//    public void llenarTipoUsuario(String condition) {
+//        tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), condition);
+//        jcTipoUsuario.setModel(tipoUsuario.getModel());
+//    }
+    
     public int getIdTraza() {
         return traza.getIdVerificacion();
     }
-
+    
     public TrazaporVerificacion getTraza() {
         return traza;
     }
-
+    
     public void setTraza(TrazaporVerificacion traza) {
         this.traza = traza;
     }
-
+    
 }
