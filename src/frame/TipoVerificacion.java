@@ -92,7 +92,7 @@ public class TipoVerificacion extends JFrame {
         this.jchUsuario.setEnabled(true);
     }
 
-    public TipoVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JComboBox jcTipoDoc, JComboBox jcTipoUsuario, TrazaporVerificacion traza, String condition) throws HeadlessException {
+    public TipoVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JComboBox jcTipoDoc, JComboBox jcTipoUsuario, TrazaporVerificacion traza) throws HeadlessException {
         this.jlnumTrazas = numTrazas;
         this.jlnumAcep = numAcept;
         this.jlnumRech = numRech;
@@ -100,7 +100,7 @@ public class TipoVerificacion extends JFrame {
         this.jcTipodoc = jcTipoDoc;
         this.jcTipoUsuario = jcTipoUsuario;
         this.traza = traza;
-        setTrazaByVerification(condition);
+//        setTrazaByVerification(condition);
     }
 
     public void habilitarFiltros(boolean select) {
@@ -113,8 +113,7 @@ public class TipoVerificacion extends JFrame {
 
     public void getDate() {
         dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico,
-                jComboCompuesto, jlFirstDate, jlLastDate, jlnumTrazas, jlnumAcep, jlnumRech,
-                jlnumNull, getTraza());
+                jComboCompuesto, jlFirstDate, jlLastDate, getTraza());
 
     }
 
@@ -144,7 +143,7 @@ public class TipoVerificacion extends JFrame {
         });
     }
 
-    private void setTrazaByVerification(String condition) {
+    public void setTrazaByVerification(String condition) {
         cantidadverificacion = new GetCantidadVerificacion(condition, traza, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
         traza = cantidadverificacion.getTraza();
     }

@@ -10,7 +10,6 @@ import frame.SetTrazaFromUser;
 import frame.TipoVerificacion;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 
 /**
  *
@@ -39,38 +38,41 @@ public class ChangeValuesOfTrazas {
         this.jlnumRech = jlnumRech;
         this.jlnumNull = jlnumNull;
         this.traza = traza;
+        this.verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza);
     }
 
     public void valuesDefault() {
         String condition = ";";
-        verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
+        verificacion.setTrazaByVerification(condition);
+
         verificacion.setdoctype();
         verificacion.setusername();
     }
 
     public void valuesFromDate() {
         String condition = conditionFromDate();
-        verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
+        verificacion.setTrazaByVerification(condition);
         verificacion.setdoctype();
         verificacion.setusername();
     }
 
     public void valuesFromDoctype() {
         String condition = conditionFromTypedoc();
-        verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
+        verificacion.setTrazaByVerification(condition);
+
     }
 
     public void valuesFromUser() {
         String condition = conditionFromUser();
-        verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza, condition);
+        verificacion.setTrazaByVerification(condition);
     }
 
     private String conditionFromDate() {
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
         String lastDate = null;
-      
-      if (!jcCompuesto.isVisible()) {
+
+        if (!jcCompuesto.isVisible()) {
             condition = " and fecha_control like '" + firstDate + "';";
         } else {
             lastDate = jcCompuesto.getSelectedItem() + "%";

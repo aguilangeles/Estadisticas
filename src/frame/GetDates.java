@@ -23,47 +23,23 @@ public class GetDates extends JFrame {
     private final JRadioButton especifica;
     private final JRadioButton compuesta;
     private final JComboBox jcEspecifico;
-//    private final JComboBox jctipodoc;
-//    private final JComboBox jctipousuario;
     private final JComboBox jcCompuesto;
     private final JLabel simple;
     private final JLabel entre;
-    private final JLabel jlnumTrazas;
-    private final JLabel jlnumAcep;
-    private final JLabel jlnumRech;
-    private final JLabel jlnumNull;
     private GetDatesFromTraza datesFromTraza;
     private TrazaporVerificacion trazav;
 
-    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, TrazaporVerificacion trazav) throws HeadlessException {
+    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, TrazaporVerificacion trazav) throws HeadlessException {
         this.especifica = especifica;
         this.compuesta = compuesta;
         this.jcEspecifico = jcEspecifico;
         this.jcCompuesto = jcCompuesto;
         this.simple = simple;
         this.entre = entre;
-        this.jlnumTrazas = jlnumTrazas;
-        this.jlnumAcep = jlnumAcep;
-        this.jlnumRech = jlnumRech;
-        this.jlnumNull = jlnumNull;
         this.trazav = trazav;
-//        this.jctipodoc = tipodoc;
-//        this.jctipousuario = tipousuario;
         especificaActionPerformed();
         compuestaActionPerformed();
     }
-
-//    private void anydateActionPerformed() {
-//        this.jrbAnyDate.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                jcEspecifico.setEnabled(false);
-//                jcCompuesto.setVisible(false);
-//                entre.setVisible(false);
-//                simple.setText("");
-//            }
-//        });
-//    }
 
     private void especificaActionPerformed() {
         this.especifica.addActionListener(new ActionListener() {
@@ -78,11 +54,6 @@ public class GetDates extends JFrame {
         });
     }
 
-    private void llenarJCEspecifico() {
-        datesFromTraza = new GetDatesFromTraza(trazav, "asc");
-        jcEspecifico.setModel(datesFromTraza.getDateFrom());
-    }
-
     private void compuestaActionPerformed() {
         this.compuesta.addActionListener(new ActionListener() {
             @Override
@@ -94,37 +65,18 @@ public class GetDates extends JFrame {
                 simple.setText("Fecha ENTRE");
                 entre.setVisible(true);
                 entre.setText("Y");
-                datesFromTraza = new GetDatesFromTraza(trazav, "desc");
-                jcCompuesto.setModel(datesFromTraza.getDateFrom());
+                llenarLastDate();
             }
         });
     }
 
-//    public TrazaporVerificacion changeValuesOFtraza() {
-//        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jrbAnyDate, jcEspecifico, jctipodoc, jctipousuario, jcCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, trazav);
-//        change.valuesFromDate();
-//        return change.getTrazav();
-//    }
+    private void llenarJCEspecifico() {
+        datesFromTraza = new GetDatesFromTraza(trazav, "asc");
+        jcEspecifico.setModel(datesFromTraza.getDateFrom());
+    }
 
-//    private void nextActionPerformed() {
-//        this.next.addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                trazav = changeValuesOFtraza();
-//                System.out.println(trazav);
-//            }
-//        });
-//    }
-
-//    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-//        if(rButtonEspecifico.isSelected()){
-//            String fecha_1 = jcomboEspecifico.getSelectedItem()+"%";
-//            GetTrazaSegunFecha trazaSegunFecha = new GetTrazaSegunFecha(1, fecha_1);
-//        }else if(rButtonBetween.isSelected()){
-//            String fecha_1 = jcomboEspecifico.getSelectedItem()+"%";
-//            String fecha_2 = comboBetween.getSelectedItem()+"%";
-//            GetTrazaSegunFecha trazaSegunFecha = new GetTrazaSegunFecha(1, fecha_1, fecha_2);
-//        }
-//    }    
+    private void llenarLastDate() {
+        datesFromTraza = new GetDatesFromTraza(trazav, "desc");
+        jcCompuesto.setModel(datesFromTraza.getDateFrom());
+    }
 }

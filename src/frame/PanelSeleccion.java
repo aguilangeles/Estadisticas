@@ -37,7 +37,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 ////
         this.traza = verificacion.getTraza();
 
-        CheckBox checkBox = new CheckBox(jchTodos, jchFecha, jchDocumento, jchUsuario, verificacion, null);
+        CheckBox checkBox = new CheckBox(jchTodos, jchFecha, jchDocumento, jchUsuario, verificacion);
 
     }
 
@@ -49,7 +49,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private void actionDatesRadioButton() {
         group = new ButtonGroup();
-//        group.add(jrbAnyDate);
         group.add(jrbEspecifica);
         group.add(jrbCompuesta);
     }
@@ -431,7 +430,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcTipodocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipodocActionPerformed
-        // TODO add your handling code here:
         String doctype = jcTipodoc.getSelectedItem() + "";
         traza.setDoctype(doctype);
         jlNameTipodoc.setText("Tipo de Doc : " + doctype);
@@ -440,43 +438,35 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }//GEN-LAST:event_jcTipodocActionPerformed
 
     private void jcTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipoUsuarioActionPerformed
-        // TODO add your handling code here:
         String username = jcTipoUsuario.getSelectedItem() + "";
         jlUsername.setText("Usuario: " + username);
         traza.setUsername(username);
         changeUser();
-
-
     }//GEN-LAST:event_jcTipoUsuarioActionPerformed
 
     private void jComboExpecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboExpecificoActionPerformed
         changeDates();
-
     }//GEN-LAST:event_jComboExpecificoActionPerformed
 
     private void jComboCompuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCompuestoActionPerformed
-        // TODO add your handling code here:
         changeDates();
     }//GEN-LAST:event_jComboCompuestoActionPerformed
     private TrazaporVerificacion changeDates() {
         ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
         change.valuesFromDate();
         return change.getTrazav();
-
     }
 
     private TrazaporVerificacion changeDoctype() {
         ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
         change.valuesFromDoctype();
         return change.getTrazav();
-
     }
 
     private TrazaporVerificacion changeUser() {
         ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
         change.valuesFromUser();
         return change.getTrazav();
-
     }
 
     /**

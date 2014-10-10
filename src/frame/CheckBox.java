@@ -20,14 +20,13 @@ public class CheckBox {
     private final JCheckBox documento;
     private final JCheckBox usuario;
     private final TipoVerificacion verificacion;
-    private final GetDates dates;
-    public CheckBox(final JCheckBox todos, final JCheckBox fecha, final JCheckBox documento, final JCheckBox usuario, final TipoVerificacion verificacion, GetDates dates) {
+
+    public CheckBox(final JCheckBox todos, final JCheckBox fecha, final JCheckBox documento, final JCheckBox usuario, final TipoVerificacion verificacion) {
         this.todos = todos;
         this.fecha = fecha;
         this.documento = documento;
         this.usuario = usuario;
         this.verificacion = verificacion;
-        this.dates=dates;
 
         this.todos.addActionListener(new ActionListener() {
             @Override
