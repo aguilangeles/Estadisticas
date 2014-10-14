@@ -5,10 +5,8 @@
  */
 package frame;
 
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Action;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,20 +21,13 @@ import models.TrazaporVerificacion;
  */
 public class TipoVerificacion extends JFrame {
 
-    private int idTraza;
-    private String condition = ";";
     TrazaporVerificacion traza = new TrazaporVerificacion();
 
     private javax.swing.JComboBox jComboCompuesto;
     private javax.swing.JComboBox jComboExpecifico;
-    private javax.swing.JButton jbAddDate;
-    private javax.swing.JButton jbAddDoctype;
-    private javax.swing.JButton jbAddUsername;
-    private javax.swing.JButton jbNextDate;
-    private javax.swing.JButton jbNextUsername;
-    private javax.swing.JButton jbnextDoctype;
     private javax.swing.JComboBox jcTipoUsuario;
     private javax.swing.JComboBox jcTipodoc;
+
     private javax.swing.JLabel jlFirstDate;
     private javax.swing.JLabel jlLastDate;
     private javax.swing.JLabel jlNameTipodoc;
@@ -47,8 +38,8 @@ public class TipoVerificacion extends JFrame {
     private javax.swing.JLabel jlnumTrazas;
     private javax.swing.JRadioButton jrbCalidad;
     private javax.swing.JRadioButton jrbCompuesta;
-    private javax.swing.JRadioButton jrbDocumento;
     private javax.swing.JRadioButton jrbEspecifica;
+    private javax.swing.JRadioButton jrbDocumento;
     private javax.swing.JCheckBox jchDocumento;
     private javax.swing.JCheckBox jchFecha;
     private javax.swing.JCheckBox jchTodos;
@@ -57,9 +48,9 @@ public class TipoVerificacion extends JFrame {
     private JCTipoUsuario tipoUsuario;
     private GetDates dates;
     private GetCantidadVerificacion cantidadverificacion;
+    private ActivarJCombos combo;
 
     public TipoVerificacion() {
-
     }
 
     public TipoVerificacion(final JComboBox jComboCompuesto, final JComboBox jComboExpecifico, JComboBox jcTipoUsuario, JComboBox jcTipodoc, JLabel jlFirstDate, JLabel jlLastDate, JLabel jlNameTipodoc, JLabel jlUsername, JLabel jlnumAcep, JLabel jlnumNull, JLabel jlnumRech, JLabel jlnumTrazas, JRadioButton jrbCalidad, JRadioButton jrbCompuesta, JRadioButton jrbDocumento, JRadioButton jrbEspecifica, JCheckBox jchtodos, JCheckBox jchfecha, JCheckBox jchdocumento, JCheckBox jchusuario) {
@@ -83,119 +74,22 @@ public class TipoVerificacion extends JFrame {
         this.jchFecha = jchfecha;
         this.jchDocumento = jchdocumento;
         this.jchUsuario = jchusuario;
+        this.combo = new ActivarJCombos(jrbCompuesta, jrbEspecifica, jcTipoUsuario, jcTipodoc);
         calidadActionPerformed();
         documentoActionPerformed();
-        setComboEspecifico();
-        setComboCompuesto();
-
     }
 
-    public void setComboEspecifico() {
-        this.jComboExpecifico.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String condition = new ChangeValuesOfTrazas(traza).conditionFromDate(jComboExpecifico, jComboCompuesto);
-                setTrazaByVerification(condition);
-            }
-        });
-    }
-
-    public void setComboCompuesto() {
-        jComboCompuesto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String condition = new ChangeValuesOfTrazas(traza).conditionFromDate(jComboExpecifico, jComboCompuesto);
-                setTrazaByVerification(condition);
-            }
-        });
-    }
-
-    public void setJCUserNAme() {
-        this.jcTipoUsuario.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String username = jcTipoUsuario.getSelectedItem() + "";
-                jlUsername.setText("Usuario: " + username);
-                traza.setUsername(username);
-                String condition = new ChangeValuesOfTrazas().conditionFromUser(jcTipoUsuario);
-                setTrazaByVerification(condition);
-
-            }
-        });
-    }
-
-    public void setJCDoctype() {
-        this.jcTipodoc.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String doctype = jcTipodoc.getSelectedItem() + "";
-                traza.setDoctype(doctype);
-                jlNameTipodoc.setText("Tipo de Doc : " + doctype);
-                String condition = new ChangeValuesOfTrazas().conditionFromTypedoc(jcTipodoc);
-                setTrazaByVerification(condition);
-            }
-        });
-    }
-
-    private void habilitarSelecciondefiltros() {
-        this.jchTodos.setEnabled(true);
-        this.jchFecha.setEnabled(true);
-        this.jchDocumento.setEnabled(true);
-        this.jchUsuario.setEnabled(true);
-    }
-
-    public TipoVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, JComboBox jcTipoDoc, JComboBox jcTipoUsuario, TrazaporVerificacion traza) throws HeadlessException {
-        this.jlnumTrazas = numTrazas;
-        this.jlnumAcep = numAcept;
-        this.jlnumRech = numRech;
-        this.jlnumNull = numNull;
-        this.jcTipodoc = jcTipoDoc;
-        this.jcTipoUsuario = jcTipoUsuario;
-        this.traza = traza;
-    }
-
-    public void habilitarFiltros(boolean select) {
-
-        //como hago para que se habiliten los filtros independientes
-        jrbEspecifica.setEnabled(select);
-        jrbCompuesta.setEnabled(select);
-        jcTipodoc.setEnabled(select);
-        jcTipoUsuario.setEnabled(select);
-
-    }
-
-    public void enableDate(boolean select) {
-        jrbEspecifica.setEnabled(select);
-        jrbCompuesta.setEnabled(select);
-    }
-
-    public void enableDoctype(boolean select) {
-        jcTipodoc.setEnabled(select);
-
-    }
-
-    public void enableUserName(boolean select) {
-        jcTipoUsuario.setEnabled(select);
-
-    }
-
-    public void getDate() {
-        dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico,
-                jComboCompuesto, jlFirstDate, jlLastDate, getTraza());
-
-    }
-
+    /**
+     * *********************************************************************************
+     * PREPARO LOS ELEMENTOS PARA FILTRAR SEGUN LA VERIFICACION SELECCIONADA
+     * *********************************************************************************
+     */
     private void calidadActionPerformed() {
         this.jrbCalidad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(1);
-                setTrazaByVerification(condition);
-                habilitarSelecciondefiltros();
-                setusername();
-                setdoctype();
+                prepareFrame();
             }
         });
     }
@@ -205,12 +99,98 @@ public class TipoVerificacion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 traza.setIdVerificacion(2);
-                setTrazaByVerification(condition);
-                setusername();
-                setdoctype();
-                habilitarSelecciondefiltros();
+                prepareFrame();
             }
         });
+    }
+
+    private void prepareFrame() {
+        setAllCheckBox();//habilito los filtros
+        String condition = new ChangeValuesOfTrazas().valuedefault();//preparo query
+        setTrazaByVerification(condition);//traigo los resultados desde database
+    }
+
+    /**
+     * *********************************************************************************
+     * TRAIGO LOS RESULTADOS DE LA SELECCION SEGUN LA FECHA
+     * *********************************************************************************
+     */
+    public void actionComboEspecifico() {
+        this.jComboExpecifico.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setTrazaByDate();
+            }
+        });
+    }
+
+    public void actionComboCompuesto() {
+        jComboCompuesto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setTrazaByDate();
+            }
+
+        });
+    }
+
+    private void setTrazaByDate() {
+        String condition = new ChangeValuesOfTrazas(traza).dateCondition(jComboExpecifico, jComboCompuesto);
+        setTrazaByVerification(condition);
+    }
+
+    public void getDate() {
+        dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico,
+                jComboCompuesto, jlFirstDate, jlLastDate, getTraza());
+
+    }
+
+    /**
+     * *********************************************************************************
+     * HABILITO LAS ACCIONES DE TIPO DE DOCUMENTO Y DE TIPO DE USUARIO
+     * *********************************************************************************
+     */
+    public void setModelUsername() {
+        jcTipoUsuario.setModel(cantidadverificacion.getUserCombo());
+    }
+
+    public void setModelTypedoc() {
+        jcTipodoc.setModel(cantidadverificacion.getDoctypeCombo());
+    }
+
+    public void actionComboUsername() {
+        this.jcTipoUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = jcTipoUsuario.getSelectedItem() + "";
+                jlUsername.setText("Usuario: " + username);
+                traza.setUsername(username);
+                String condition = new ChangeValuesOfTrazas().usernameCondition(jcTipoUsuario);
+                setTrazaByVerification(condition);
+            }
+        });
+    }
+
+    public void actionComboTypedoc() {
+        this.jcTipodoc.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String doctype = jcTipodoc.getSelectedItem() + "";
+                traza.setDoctype(doctype);
+                jlNameTipodoc.setText("Tipo de Doc : " + doctype);
+                String condition = new ChangeValuesOfTrazas().typedocCondition(jcTipodoc);
+                setTrazaByVerification(condition);
+            }
+        });
+    }
+
+//
+    private void setAllCheckBox() {
+        this.jchTodos.setEnabled(true);
+        this.jchFecha.setEnabled(true);
+        this.jchDocumento.setEnabled(true);
+        this.jchUsuario.setEnabled(true);
     }
 
     public void setTrazaByVerification(String condition) {
@@ -218,23 +198,6 @@ public class TipoVerificacion extends JFrame {
         traza = cantidadverificacion.getTraza();
     }
 
-    public void setusername() {
-        jcTipoUsuario.setModel(cantidadverificacion.getUserCombo());
-    }
-
-    public void setdoctype() {
-        jcTipodoc.setModel(cantidadverificacion.getDoctypeCombo());
-    }
-
-//    public void llenarTipoDoc(String condition) {
-//        jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), condition);
-//        jcTipodoc.setModel(jComboTipoDoc.getModel());
-//    }
-//    
-//    public void llenarTipoUsuario(String condition) {
-//        tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), condition);
-//        jcTipoUsuario.setModel(tipoUsuario.getModel());
-//    }
     public int getIdTraza() {
         return traza.getIdVerificacion();
     }
@@ -247,4 +210,25 @@ public class TipoVerificacion extends JFrame {
         this.traza = traza;
     }
 
+    /**
+     * *********************************************************************************
+     * ACTIVAR LOS FILTROS SEGUN EL COMBO BOX SELECCIONADO
+     * ********************************************************************************
+     */
+    public void allFilters(boolean select) {
+        combo.setAll(select);
+    }
+
+    public void onlyDate(boolean select) {
+        combo.setdateGroup(select);
+    }
+
+    public void onlyTypedoc(boolean select) {
+        combo.setTypeDoc(select);
+
+    }
+
+    public void onlyUsername(boolean select) {
+        combo.setUsername(select);
+    }
 }

@@ -20,6 +20,7 @@ public class CheckBox {
     private final JCheckBox documento;
     private final JCheckBox usuario;
     private final TipoVerificacion verificacion;
+    private ActivarJCombos combo;
 
     public CheckBox(final JCheckBox todos, final JCheckBox fecha, final JCheckBox documento, final JCheckBox usuario, final TipoVerificacion verificacion) {
         this.todos = todos;
@@ -28,11 +29,68 @@ public class CheckBox {
         this.usuario = usuario;
         this.verificacion = verificacion;
 
-        setActionTodos(fecha, documento, usuario, verificacion, todos);
+        setActionTodos();
         setActionFecha();
         setActionDocument();
         setActionUsername();
 
+    }
+
+    private void setActionTodos() {
+        this.todos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean selected = isSelected();
+                fecha.setSelected(selected);
+                documento.setSelected(selected);
+                usuario.setSelected(selected);
+                verificacion.allFilters(selected);
+                verificacion.getDate();
+                verificacion.actionComboCompuesto();
+                verificacion.actionComboEspecifico();
+                //TODO arreglar que los filtros no se pisen
+                verificacion.setModelTypedoc();
+                verificacion.actionComboTypedoc();
+                verificacion.setModelUsername();
+                verificacion.actionComboUsername();
+            }
+
+            private boolean isSelected() {
+                boolean selected;
+                if (todos.isSelected()) {
+                    selected = true;
+                } else {
+                    selected = false;
+                }
+                return selected;
+            }
+        });
+    }
+    /* TRAE LA O LAS FECHAS Y SETEA LOS VALORES */
+
+    private void setActionFecha() {
+        this.fecha.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean isselsected = fechaisselected();
+                verificacion.getDate();
+                verificacion.onlyDate(isselsected);
+                verificacion.actionComboCompuesto();
+                verificacion.actionComboEspecifico();
+            }
+
+            private boolean fechaisselected() {
+                boolean isfecha;
+                if (fecha.isSelected()) {
+                    isfecha = true;
+                } else {
+
+                    isfecha = false;
+                }
+                return isfecha;
+            }
+        });
     }
 
     private void setActionUsername() {
@@ -40,8 +98,8 @@ public class CheckBox {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                verificacion.enableUserName(true);
-                verificacion.setJCUserNAme();
+                verificacion.onlyUsername(true);
+                verificacion.actionComboUsername();
 
             }
         });
@@ -53,48 +111,8 @@ public class CheckBox {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                verificacion.enableDoctype(true);
-                verificacion.setJCDoctype();
-            }
-        });
-    }
-
-    private void setActionFecha() {
-        this.fecha.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                verificacion.enableDate(true);
-                verificacion.getDate();
-//                verificacion.setComboCompuesto();
-//                verificacion.setComboEspecifico();
-
-            }
-        });
-    }
-
-    private void setActionTodos(final JCheckBox fecha1, final JCheckBox documento1, final JCheckBox usuario1, final TipoVerificacion verificacion1, final JCheckBox todos1) {
-        this.todos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean selected = selected();
-                fecha1.setSelected(selected);
-                documento1.setSelected(selected);
-                usuario1.setSelected(selected);
-                verificacion1.habilitarFiltros(selected);
-                verificacion1.getDate();
-                verificacion1.setdoctype();
-                verificacion1.setusername();
-            }
-
-            private boolean selected() {
-                boolean selected;
-                if (todos1.isSelected()) {
-                    selected = true;
-                } else {
-                    selected = false;
-                }
-                return selected;
+                verificacion.onlyTypedoc(true);
+                verificacion.actionComboTypedoc();
             }
         });
     }
