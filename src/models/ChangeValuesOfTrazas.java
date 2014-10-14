@@ -7,7 +7,6 @@ package models;
 
 import frame.SetTrazaFromDoctype;
 import frame.SetTrazaFromUser;
-import frame.TipoVerificacion;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
@@ -17,33 +16,11 @@ import javax.swing.JLabel;
  */
 public class ChangeValuesOfTrazas {
 
-//    private   JComboBox jcEspecifico;
-//    private   JComboBox jctipodoc;
-//    private   JComboBox jctipousuario;
-//    private   JComboBox jcCompuesto;
-    private   JLabel jlnumTrazas;
-    private   JLabel jlnumAcep;
-    private   JLabel jlnumRech;
-    private   JLabel jlnumNull;
-    private   TrazaporVerificacion traza;
-    TipoVerificacion verificacion;
-
-//    public ChangeValuesOfTrazas(JComboBox jcEspecifico, JComboBox jctipodoc, JComboBox jctipousuario, JComboBox jcCompuesto, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, TrazaporVerificacion traza) {
-//        this.jcEspecifico = jcEspecifico;
-//        this.jctipodoc = jctipodoc;
-//        this.jctipousuario = jctipousuario;
-//        this.jcCompuesto = jcCompuesto;
-//        this.jlnumTrazas = jlnumTrazas;
-//        this.jlnumAcep = jlnumAcep;
-//        this.jlnumRech = jlnumRech;
-//        this.jlnumNull = jlnumNull;
-//        this.traza = traza;
-//        this.verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza);
-//    }
-//
-//    public ChangeValuesOfTrazas(JComboBox jctipodoc) {
-//        this.jctipodoc = jctipodoc;
-//    }
+    private JLabel jlnumTrazas;
+    private JLabel jlnumAcep;
+    private JLabel jlnumRech;
+    private JLabel jlnumNull;
+    private TrazaporVerificacion traza;
 
     public ChangeValuesOfTrazas() {
     }
@@ -51,35 +28,12 @@ public class ChangeValuesOfTrazas {
     public ChangeValuesOfTrazas(TrazaporVerificacion traza) {
         this.traza = traza;
     }
-
-    
-  
-    
-    
-
-    public void valuesDefault() {
-        String condition = ";";
-        verificacion.setTrazaByVerification(condition);
-        verificacion.setdoctype();
-        verificacion.setusername();
-    }
-
-//    public void valuesFromDate() {
-//        String condition = conditionFromDate();
+//
+//    public void valuesDefault() {
+//        String condition = ";";
 //        verificacion.setTrazaByVerification(condition);
 //        verificacion.setdoctype();
 //        verificacion.setusername();
-//    }
-//
-//    public void valuesFromDoctype() {
-//        String condition = conditionFromTypedoc();
-//        verificacion.setTrazaByVerification(condition);
-//
-//    }
-//
-//    public void valuesFromUser() {
-//        String condition = conditionFromUser();
-//        verificacion.setTrazaByVerification(condition);
 //    }
 
     public String conditionFromDate(JComboBox jcEspecifico, JComboBox jcCompuesto) {
@@ -123,7 +77,7 @@ public class ChangeValuesOfTrazas {
     }
 
     public TrazaporVerificacion getTrazav() {
-        return verificacion.getTraza();
+        return traza;
     }
 
 }
