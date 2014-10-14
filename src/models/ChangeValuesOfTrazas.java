@@ -8,7 +8,6 @@ package models;
 import frame.SetTrazaFromDoctype;
 import frame.SetTrazaFromUser;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 
 /**
  *
@@ -16,11 +15,8 @@ import javax.swing.JLabel;
  */
 public class ChangeValuesOfTrazas {
 
-    private JLabel jlnumTrazas;
-    private JLabel jlnumAcep;
-    private JLabel jlnumRech;
-    private JLabel jlnumNull;
     private TrazaporVerificacion traza;
+  
 
     public ChangeValuesOfTrazas() {
     }
@@ -28,15 +24,12 @@ public class ChangeValuesOfTrazas {
     public ChangeValuesOfTrazas(TrazaporVerificacion traza) {
         this.traza = traza;
     }
-//
-//    public void valuesDefault() {
-//        String condition = ";";
-//        verificacion.setTrazaByVerification(condition);
-//        verificacion.setdoctype();
-//        verificacion.setusername();
-//    }
 
-    public String conditionFromDate(JComboBox jcEspecifico, JComboBox jcCompuesto) {
+    public String valuedefault() {
+        return ";";
+    }
+
+    public String dateCondition(JComboBox jcEspecifico, JComboBox jcCompuesto) {
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
         String lastDate = null;
@@ -54,25 +47,17 @@ public class ChangeValuesOfTrazas {
         return condition;
     }
 
-    public String conditionFromTypedoc(JComboBox jctipodoc) {
+    public String typedocCondition(JComboBox jctipodoc) {
         String condition = null;
-        if (jctipodoc.getSelectedItem().equals("Todos")) {
-            condition = ";";
-        } else {
-            int id = new SetTrazaFromDoctype(jctipodoc.getSelectedItem() + "").getIdDoctype();
-            condition = " and idtipodocumento = '" + id + "';";
-        }
+        int id = new SetTrazaFromDoctype(jctipodoc.getSelectedItem() + "").getIdDoctype();
+        condition = " and idtipodocumento = '" + id + "';";
         return condition;
     }
 
-    public String conditionFromUser(JComboBox jctipouser) {
+    public String usernameCondition(JComboBox jctipouser) {
         String condition = null;
-        if (jctipouser.getSelectedItem().equals("Todos")) {
-            condition = ";";
-        } else {
-            int id = new SetTrazaFromUser(jctipouser.getSelectedItem() + "").getIdUsuario();
-            condition = " and idusuarios = " + id + ";";
-        }
+        int id = new SetTrazaFromUser(jctipouser.getSelectedItem() + "").getIdUsuario();
+        condition = " and idusuarios = " + id + ";";
         return condition;
     }
 
