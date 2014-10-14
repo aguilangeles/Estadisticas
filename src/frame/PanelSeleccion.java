@@ -36,11 +36,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 jlnumAcep, jlnumNull, jlnumRech, jlnumTrazas, jrbCalidad,
                 jrbCompuesta, jrbDocumento, jrbEspecifica, jchTodos, jchFecha, jchDocumento, jchUsuario);
 
-////
-        this.traza = verificacion.getTraza();
 
         CheckBox checkBox = new CheckBox(jchTodos, jchFecha, jchDocumento, jchUsuario, verificacion);
-//        this.change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
+        this.traza = verificacion.getTraza();
 
     }
 
@@ -177,11 +175,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jcTipodoc.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jcTipodoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcTipodoc.setEnabled(false);
-        jcTipodoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcTipodocActionPerformed(evt);
-            }
-        });
 
         jlNameTipodoc.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jlNameTipodoc.setText("Tipo de Documento");
@@ -223,11 +216,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jcTipoUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jcTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcTipoUsuario.setEnabled(false);
-        jcTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcTipoUsuarioActionPerformed(evt);
-            }
-        });
 
         jlUsername.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jlUsername.setText("Usuario");
@@ -286,20 +274,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jComboExpecifico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aaaa-mm-dd" }));
         jComboExpecifico.setToolTipText("");
         jComboExpecifico.setEnabled(false);
-        jComboExpecifico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboExpecificoActionPerformed(evt);
-            }
-        });
 
         jComboCompuesto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboCompuesto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aaaa-mm-dd" }));
         jComboCompuesto.setEnabled(false);
-        jComboCompuesto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboCompuestoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -445,52 +423,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcTipodocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipodocActionPerformed
-//        String doctype = jcTipodoc.getSelectedItem() + "";
-//        traza.setDoctype(doctype);
-//        jlNameTipodoc.setText("Tipo de Doc : " + doctype);
-//        changeDoctype();
-
-    }//GEN-LAST:event_jcTipodocActionPerformed
-
-    private void jcTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipoUsuarioActionPerformed
-//        String username = jcTipoUsuario.getSelectedItem() + "";
-//        jlUsername.setText("Usuario: " + username);
-//        traza.setUsername(username);
-//        changeUser();
-    }//GEN-LAST:event_jcTipoUsuarioActionPerformed
-
-    private void jComboExpecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboExpecificoActionPerformed
-//        changeDates();
-    }//GEN-LAST:event_jComboExpecificoActionPerformed
-
-    private void jComboCompuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCompuestoActionPerformed
-//        changeDates();
-    }//GEN-LAST:event_jComboCompuestoActionPerformed
-
     private void jbVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerActionPerformed
         System.out.println("===========================================");
         System.out.println(traza.toString());
         System.out.println("===========================================");
     }//GEN-LAST:event_jbVerActionPerformed
-
-    private TrazaporVerificacion changeDates() {
-//        change.valuesFromDate();
-//        return change.getTrazav();
-        return null;
-    }
-
-    private TrazaporVerificacion changeDoctype() {
-//        change.valuesFromDoctype();
-//        return change.getTrazav();
-        return null;
-    }
-
-    private TrazaporVerificacion changeUser() {
-//        change.valuesFromUser();
-//        return change.getTrazav();
-        return null;
-    }
 
     /**
      * @param args the command line arguments

@@ -275,9 +275,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcTipodocActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlNameTipodoc">
               <Properties>
@@ -360,9 +357,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcTipoUsuarioActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlUsername">
               <Properties>
@@ -496,9 +490,6 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboExpecificoActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboCompuesto">
               <Properties>
@@ -512,9 +503,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboCompuestoActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
