@@ -41,7 +41,7 @@ public class CheckBox {
             @Override
             public void actionPerformed(ActionEvent e) {
                 verificacion.enableUserName(true);
-                verificacion.setusername();
+                verificacion.setJCUserNAme();
 
             }
         });
@@ -66,6 +66,8 @@ public class CheckBox {
             public void actionPerformed(ActionEvent e) {
                 verificacion.enableDate(true);
                 verificacion.getDate();
+//                verificacion.setComboCompuesto();
+//                verificacion.setComboEspecifico();
 
             }
         });

@@ -454,18 +454,18 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }//GEN-LAST:event_jcTipodocActionPerformed
 
     private void jcTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipoUsuarioActionPerformed
-        String username = jcTipoUsuario.getSelectedItem() + "";
-        jlUsername.setText("Usuario: " + username);
-        traza.setUsername(username);
-        changeUser();
+//        String username = jcTipoUsuario.getSelectedItem() + "";
+//        jlUsername.setText("Usuario: " + username);
+//        traza.setUsername(username);
+//        changeUser();
     }//GEN-LAST:event_jcTipoUsuarioActionPerformed
 
     private void jComboExpecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboExpecificoActionPerformed
-        changeDates();
+//        changeDates();
     }//GEN-LAST:event_jComboExpecificoActionPerformed
 
     private void jComboCompuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCompuestoActionPerformed
-        changeDates();
+//        changeDates();
     }//GEN-LAST:event_jComboCompuestoActionPerformed
 
     private void jbVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerActionPerformed

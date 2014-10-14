@@ -17,10 +17,10 @@ import javax.swing.JLabel;
  */
 public class ChangeValuesOfTrazas {
 
-    private   JComboBox jcEspecifico;
-    private   JComboBox jctipodoc;
-    private   JComboBox jctipousuario;
-    private   JComboBox jcCompuesto;
+//    private   JComboBox jcEspecifico;
+//    private   JComboBox jctipodoc;
+//    private   JComboBox jctipousuario;
+//    private   JComboBox jcCompuesto;
     private   JLabel jlnumTrazas;
     private   JLabel jlnumAcep;
     private   JLabel jlnumRech;
@@ -40,11 +40,19 @@ public class ChangeValuesOfTrazas {
 //        this.traza = traza;
 //        this.verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza);
 //    }
+//
+//    public ChangeValuesOfTrazas(JComboBox jctipodoc) {
+//        this.jctipodoc = jctipodoc;
+//    }
 
-    public ChangeValuesOfTrazas(JComboBox jctipodoc) {
-        this.jctipodoc = jctipodoc;
+    public ChangeValuesOfTrazas() {
     }
 
+    public ChangeValuesOfTrazas(TrazaporVerificacion traza) {
+        this.traza = traza;
+    }
+
+    
   
     
     
@@ -74,7 +82,7 @@ public class ChangeValuesOfTrazas {
 //        verificacion.setTrazaByVerification(condition);
 //    }
 
-    public String conditionFromDate() {
+    public String conditionFromDate(JComboBox jcEspecifico, JComboBox jcCompuesto) {
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
         String lastDate = null;
@@ -92,7 +100,7 @@ public class ChangeValuesOfTrazas {
         return condition;
     }
 
-    public String conditionFromTypedoc() {
+    public String conditionFromTypedoc(JComboBox jctipodoc) {
         String condition = null;
         if (jctipodoc.getSelectedItem().equals("Todos")) {
             condition = ";";
@@ -103,12 +111,12 @@ public class ChangeValuesOfTrazas {
         return condition;
     }
 
-    public String conditionFromUser() {
+    public String conditionFromUser(JComboBox jctipouser) {
         String condition = null;
-        if (jctipousuario.getSelectedItem().equals("Todos")) {
+        if (jctipouser.getSelectedItem().equals("Todos")) {
             condition = ";";
         } else {
-            int id = new SetTrazaFromUser(jctipousuario.getSelectedItem() + "").getIdUsuario();
+            int id = new SetTrazaFromUser(jctipouser.getSelectedItem() + "").getIdUsuario();
             condition = " and idusuarios = " + id + ";";
         }
         return condition;
