@@ -28,22 +28,66 @@ public class CheckBox {
         this.usuario = usuario;
         this.verificacion = verificacion;
 
+        setActionTodos(fecha, documento, usuario, verificacion, todos);
+        setActionFecha();
+        setActionDocument();
+        setActionUsername();
+
+    }
+
+    private void setActionUsername() {
+        this.usuario.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                verificacion.enableUserName(true);
+                verificacion.setusername();
+
+            }
+        });
+    }
+
+    private void setActionDocument() {
+        this.documento.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                verificacion.enableDoctype(true);
+                verificacion.setJCDoctype();
+            }
+        });
+    }
+
+    private void setActionFecha() {
+        this.fecha.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                verificacion.enableDate(true);
+                verificacion.getDate();
+
+            }
+        });
+    }
+
+    private void setActionTodos(final JCheckBox fecha1, final JCheckBox documento1, final JCheckBox usuario1, final TipoVerificacion verificacion1, final JCheckBox todos1) {
         this.todos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean selected = selected();
-                fecha.setSelected(selected);
-                documento.setSelected(selected);
-                usuario.setSelected(selected);
-                verificacion.habilitarFiltros(selected);
-                verificacion.getDate();
-                verificacion.setdoctype();
-                verificacion.setusername();
+                fecha1.setSelected(selected);
+                documento1.setSelected(selected);
+                usuario1.setSelected(selected);
+                verificacion1.habilitarFiltros(selected);
+                verificacion1.getDate();
+                verificacion1.setdoctype();
+                verificacion1.setusername();
             }
 
             private boolean selected() {
                 boolean selected;
-                if (todos.isSelected()) {
+                if (todos1.isSelected()) {
                     selected = true;
                 } else {
                     selected = false;
@@ -51,7 +95,6 @@ public class CheckBox {
                 return selected;
             }
         });
-
     }
 
 }

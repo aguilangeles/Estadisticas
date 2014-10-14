@@ -8,11 +8,13 @@ package frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Action;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import models.ChangeValuesOfTrazas;
 import models.TrazaporVerificacion;
 
 /**
@@ -83,6 +85,39 @@ public class TipoVerificacion extends JFrame {
         this.jchUsuario = jchusuario;
         calidadActionPerformed();
         documentoActionPerformed();
+        setJCUserNAme();
+    }
+
+    private void setJCUserNAme() {
+        //        setJCDoctype();
+        this.jcTipoUsuario.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+
+                String username = jcTipoUsuario.getSelectedItem() + "";
+                jlUsername.setText("Usuario: " + username);
+                traza.setUsername(username);
+                String condition = new ChangeValuesOfTrazas(jcTipoUsuario).conditionFromTypedoc();
+                setTrazaByVerification(condition);
+
+            }
+        });
+    }
+
+    public void setJCDoctype() {
+        this.jcTipodoc.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String doctype = jcTipodoc.getSelectedItem() + "";
+                traza.setDoctype(doctype);
+                jlNameTipodoc.setText("Tipo de Doc : " + doctype);
+                String condition = new ChangeValuesOfTrazas(jcTipodoc).conditionFromTypedoc();
+                setTrazaByVerification(condition);
+            }
+        });
     }
 
     private void habilitarSelecciondefiltros() {
@@ -104,9 +139,27 @@ public class TipoVerificacion extends JFrame {
     }
 
     public void habilitarFiltros(boolean select) {
+
+        //como hago para que se habiliten los filtros independientes
         jrbEspecifica.setEnabled(select);
         jrbCompuesta.setEnabled(select);
         jcTipodoc.setEnabled(select);
+        jcTipoUsuario.setEnabled(select);
+
+    }
+
+    public void enableDate(boolean select) {
+
+        jrbEspecifica.setEnabled(select);
+        jrbCompuesta.setEnabled(select);
+    }
+
+    public void enableDoctype(boolean select) {
+        jcTipodoc.setEnabled(select);
+
+    }
+
+    public void enableUserName(boolean select) {
         jcTipoUsuario.setEnabled(select);
 
     }

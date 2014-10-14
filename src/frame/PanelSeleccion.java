@@ -18,6 +18,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
     TrazaporVerificacion traza = new TrazaporVerificacion();
     private boolean selected;
     private ButtonGroup group;
+    private ChangeValuesOfTrazas change;
 
     /**
      * Creates new form PanelSeleccion
@@ -34,10 +35,12 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 jcTipodoc, jlFirstDate, jlLastDate, jlNameTipodoc, jlUsername,
                 jlnumAcep, jlnumNull, jlnumRech, jlnumTrazas, jrbCalidad,
                 jrbCompuesta, jrbDocumento, jrbEspecifica, jchTodos, jchFecha, jchDocumento, jchUsuario);
+
 ////
         this.traza = verificacion.getTraza();
 
         CheckBox checkBox = new CheckBox(jchTodos, jchFecha, jchDocumento, jchUsuario, verificacion);
+//        this.change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
 
     }
 
@@ -92,6 +95,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jchFecha = new javax.swing.JCheckBox();
         jchDocumento = new javax.swing.JCheckBox();
         jchUsuario = new javax.swing.JCheckBox();
+        jbVer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,7 +134,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addGroup(jpVerificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jrbCalidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jrbDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
-                .addGap(18, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpVerificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -151,16 +155,16 @@ public class PanelSeleccion extends javax.swing.JFrame {
                         .addComponent(jrbDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpVerificacionLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jpVerificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator1)
-                            .addGroup(jpVerificacionLayout.createSequentialGroup()
-                                .addComponent(jlnumTrazas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(9, 9, 9)
-                                .addComponent(jlnumAcep, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jlnumRech, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jlnumNull, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jlnumTrazas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(jlnumAcep, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlnumRech, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlnumNull, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpVerificacionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -333,7 +337,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                         .addComponent(jComboExpecifico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlLastDate)
-                        .addGap(14, 14, 14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboCompuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))
@@ -355,20 +359,29 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jchUsuario.setText("Usuario");
         jchUsuario.setEnabled(false);
 
+        jbVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eye-20.png"))); // NOI18N
+        jbVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(21, 21, 21)
                 .addComponent(jchTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jchFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(jchDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jchUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addGap(9, 9, 9)
+                .addComponent(jbVer)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,6 +393,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
                     .addComponent(jchDocumento)
                     .addComponent(jchUsuario))
                 .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jbVer)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -430,10 +446,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcTipodocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipodocActionPerformed
-        String doctype = jcTipodoc.getSelectedItem() + "";
-        traza.setDoctype(doctype);
-        jlNameTipodoc.setText("Tipo de Doc : " + doctype);
-        changeDoctype();
+//        String doctype = jcTipodoc.getSelectedItem() + "";
+//        traza.setDoctype(doctype);
+//        jlNameTipodoc.setText("Tipo de Doc : " + doctype);
+//        changeDoctype();
 
     }//GEN-LAST:event_jcTipodocActionPerformed
 
@@ -451,22 +467,29 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private void jComboCompuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCompuestoActionPerformed
         changeDates();
     }//GEN-LAST:event_jComboCompuestoActionPerformed
+
+    private void jbVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerActionPerformed
+        System.out.println("===========================================");
+        System.out.println(traza.toString());
+        System.out.println("===========================================");
+    }//GEN-LAST:event_jbVerActionPerformed
+
     private TrazaporVerificacion changeDates() {
-        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
-        change.valuesFromDate();
-        return change.getTrazav();
+//        change.valuesFromDate();
+//        return change.getTrazav();
+        return null;
     }
 
     private TrazaporVerificacion changeDoctype() {
-        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
-        change.valuesFromDoctype();
-        return change.getTrazav();
+//        change.valuesFromDoctype();
+//        return change.getTrazav();
+        return null;
     }
 
     private TrazaporVerificacion changeUser() {
-        ChangeValuesOfTrazas change = new ChangeValuesOfTrazas(jComboExpecifico, jcTipodoc, jcTipoUsuario, jComboCompuesto, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, traza);
-        change.valuesFromUser();
-        return change.getTrazav();
+//        change.valuesFromUser();
+//        return change.getTrazav();
+        return null;
     }
 
     /**
@@ -516,6 +539,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JButton jbVer;
     private javax.swing.JComboBox jcTipoUsuario;
     private javax.swing.JComboBox jcTipodoc;
     private javax.swing.JCheckBox jchDocumento;

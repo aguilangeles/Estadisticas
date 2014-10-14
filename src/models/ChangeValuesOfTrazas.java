@@ -17,57 +17,64 @@ import javax.swing.JLabel;
  */
 public class ChangeValuesOfTrazas {
 
-    private final JComboBox jcEspecifico;
-    private final JComboBox jctipodoc;
-    private final JComboBox jctipousuario;
-    private final JComboBox jcCompuesto;
-    private final JLabel jlnumTrazas;
-    private final JLabel jlnumAcep;
-    private final JLabel jlnumRech;
-    private final JLabel jlnumNull;
-    private final TrazaporVerificacion traza;
+    private   JComboBox jcEspecifico;
+    private   JComboBox jctipodoc;
+    private   JComboBox jctipousuario;
+    private   JComboBox jcCompuesto;
+    private   JLabel jlnumTrazas;
+    private   JLabel jlnumAcep;
+    private   JLabel jlnumRech;
+    private   JLabel jlnumNull;
+    private   TrazaporVerificacion traza;
     TipoVerificacion verificacion;
 
-    public ChangeValuesOfTrazas(JComboBox jcEspecifico, JComboBox jctipodoc, JComboBox jctipousuario, JComboBox jcCompuesto, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, TrazaporVerificacion traza) {
-        this.jcEspecifico = jcEspecifico;
+//    public ChangeValuesOfTrazas(JComboBox jcEspecifico, JComboBox jctipodoc, JComboBox jctipousuario, JComboBox jcCompuesto, JLabel jlnumTrazas, JLabel jlnumAcep, JLabel jlnumRech, JLabel jlnumNull, TrazaporVerificacion traza) {
+//        this.jcEspecifico = jcEspecifico;
+//        this.jctipodoc = jctipodoc;
+//        this.jctipousuario = jctipousuario;
+//        this.jcCompuesto = jcCompuesto;
+//        this.jlnumTrazas = jlnumTrazas;
+//        this.jlnumAcep = jlnumAcep;
+//        this.jlnumRech = jlnumRech;
+//        this.jlnumNull = jlnumNull;
+//        this.traza = traza;
+//        this.verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza);
+//    }
+
+    public ChangeValuesOfTrazas(JComboBox jctipodoc) {
         this.jctipodoc = jctipodoc;
-        this.jctipousuario = jctipousuario;
-        this.jcCompuesto = jcCompuesto;
-        this.jlnumTrazas = jlnumTrazas;
-        this.jlnumAcep = jlnumAcep;
-        this.jlnumRech = jlnumRech;
-        this.jlnumNull = jlnumNull;
-        this.traza = traza;
-        this.verificacion = new TipoVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull, jctipodoc, jctipousuario, traza);
     }
+
+  
+    
+    
 
     public void valuesDefault() {
         String condition = ";";
         verificacion.setTrazaByVerification(condition);
-
         verificacion.setdoctype();
         verificacion.setusername();
     }
 
-    public void valuesFromDate() {
-        String condition = conditionFromDate();
-        verificacion.setTrazaByVerification(condition);
-        verificacion.setdoctype();
-        verificacion.setusername();
-    }
+//    public void valuesFromDate() {
+//        String condition = conditionFromDate();
+//        verificacion.setTrazaByVerification(condition);
+//        verificacion.setdoctype();
+//        verificacion.setusername();
+//    }
+//
+//    public void valuesFromDoctype() {
+//        String condition = conditionFromTypedoc();
+//        verificacion.setTrazaByVerification(condition);
+//
+//    }
+//
+//    public void valuesFromUser() {
+//        String condition = conditionFromUser();
+//        verificacion.setTrazaByVerification(condition);
+//    }
 
-    public void valuesFromDoctype() {
-        String condition = conditionFromTypedoc();
-        verificacion.setTrazaByVerification(condition);
-
-    }
-
-    public void valuesFromUser() {
-        String condition = conditionFromUser();
-        verificacion.setTrazaByVerification(condition);
-    }
-
-    private String conditionFromDate() {
+    public String conditionFromDate() {
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
         String lastDate = null;
@@ -85,7 +92,7 @@ public class ChangeValuesOfTrazas {
         return condition;
     }
 
-    private String conditionFromTypedoc() {
+    public String conditionFromTypedoc() {
         String condition = null;
         if (jctipodoc.getSelectedItem().equals("Todos")) {
             condition = ";";
@@ -96,7 +103,7 @@ public class ChangeValuesOfTrazas {
         return condition;
     }
 
-    private String conditionFromUser() {
+    public String conditionFromUser() {
         String condition = null;
         if (jctipousuario.getSelectedItem().equals("Todos")) {
             condition = ";";
