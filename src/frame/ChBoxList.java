@@ -21,7 +21,7 @@ public class ChBoxList {
     private javax.swing.JCheckBox jchFecha;
 //    private javax.swing.JCheckBox jchTodos;
     private javax.swing.JCheckBox jchUsuario;
-    private List<JCheckBox> checks = new ArrayList<>();
+    private List<String> checks = new ArrayList<>();
 
     public ChBoxList(JCheckBox jchFecha, JCheckBox jchDocumento, JCheckBox jchUsuario) {
         this.jchDocumento = jchDocumento;
@@ -41,19 +41,19 @@ public class ChBoxList {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (aCheck.isSelected()) {
-                    if (!checks.contains(aCheck)) {
-                        checks.add(aCheck);
+                    if (!checks.contains(aCheck.getText())) {
+                        checks.add(aCheck.getText());
 
                     }
                 } else {
-                    checks.remove(aCheck);
+                    checks.remove(aCheck.getText());
                 }
 
             }
         });
     }
 
-    public List<JCheckBox> getChecks() {
+    public List<String> getChecks() {
         return checks;
     }
 

@@ -5,8 +5,11 @@
  */
 package frame;
 
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import models.Filtro;
 //import models.ChangeValuesOfTrazas;
 //import models.ValuesTraza;
 
@@ -22,6 +25,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private final GetCantidadVerificacion cantidades;
     private final ChBoxList list;
+    private final GetDates dates;
+    private final Filtro filtro;
 
     /**
      * Creates new form PanelSeleccion
@@ -35,7 +40,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jlLastDate.setVisible(false);
         cantidades = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
         list = new ChBoxList(jchFecha, jchDocumento, jchUsuario);
+        dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate);
         TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchFecha, jchDocumento, jchUsuario, cantidades);
+        filtro = verificacion.getFiltro();
 
     }
 
@@ -414,13 +421,33 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerActionPerformed
-        System.out.println("===========================================");
-//        System.out.println(traza.toString());
-        for (JCheckBox c : list.getChecks()) {
-            System.out.println(c.getText());
-        }
-        System.out.println("===========================================");
+        int valores = valores();
     }//GEN-LAST:event_jbVerActionPerformed
+    private int valores() {
+        List lista = list.getChecks();
+        int v = 0;
+        if (lista.size() == 3 && lista.contains("Fecha") && lista.contains("Documento") && lista.contains("Usuario")) {
+            v = 1;
+        } else if (lista.size() == 2 && lista.contains("Fecha") && lista.contains("Documento")) {
+            v = 2;
+        } else if (lista.size() == 2 && lista.contains("Fecha") && lista.contains("Usuario")) {
+            v = 3;
+
+        } else if (lista.size() == 2 && lista.contains("Documento") && lista.contains("Usuario")) {
+            v = 4;
+
+        } else if (lista.size() == 1 && lista.contains("Fecha")) {
+            v = 5;
+
+        } else if (lista.size() == 1 && lista.contains("Documento")) {
+            v = 6;
+
+        } else if (lista.size() == 1 && lista.contains("Usuario")) {
+            v = 7;
+        }
+
+        return v;
+    }
 
     /**
      * @param args the command line arguments

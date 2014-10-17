@@ -44,7 +44,7 @@ public class TipoVerificacion extends JFrame {
     private javax.swing.JCheckBox jchUsuario;
     private JComboTipoDoc jComboTipoDoc;
     private JCTipoUsuario tipoUsuario;
-    private GetDates dates;
+//    private GetDates dates;
     private GetCantidadVerificacion cantidadverificacion;
     private ActivarJCombos combo;
     private GetCantidadVerificacion cantidades;
@@ -105,7 +105,6 @@ public class TipoVerificacion extends JFrame {
         this.jrbCalidad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                traza.setIdVerificacion(1);
                 filtro.setId(1);
                 prepareFrame();
             }
@@ -116,7 +115,6 @@ public class TipoVerificacion extends JFrame {
         this.jrbDocumento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                traza.setIdVerificacion(2);
                 filtro.setId(2);
                 prepareFrame();
             }
@@ -153,6 +151,11 @@ public class TipoVerificacion extends JFrame {
             
         });
     }
+
+    public Filtro getFiltro() {
+        return filtro;
+    }
+    
     
 //    private void setTrazaByDate() {
 //        String condition = new ChangeValuesOfTrazas(traza).dateCondition(jComboExpecifico, jComboCompuesto);
