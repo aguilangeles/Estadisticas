@@ -53,12 +53,12 @@ public class TipoVerificacion extends JFrame {
     public TipoVerificacion() {
     }
     
-    public TipoVerificacion(JRadioButton jrbCalidad, JRadioButton jrbDocumento, JCheckBox jchtodos, JCheckBox jchfecha, JCheckBox jchdocumento, JCheckBox jchusuario, GetCantidadVerificacion cantidades) {
+    public TipoVerificacion(JRadioButton jrbCalidad, JRadioButton jrbDocumento, JCheckBox jchfecha, JCheckBox jchdocumento, JCheckBox jchusuario, GetCantidadVerificacion cantidades) {
 //        this.jcTipoUsuario = jcTipoUsuario;
 //        this.jcTipodoc = jcTipodoc;
 //        this.jlFirstDate = jlFirstDate;
 //        this.jlLastDate = jlLastDate;
-        this.jchTodos = jchtodos;
+//        this.jchTodos = jchtodos;
         this.jchFecha = jchfecha;
         this.jchDocumento = jchdocumento;
         this.jchUsuario = jchusuario;
@@ -207,7 +207,7 @@ public class TipoVerificacion extends JFrame {
 
 //
     private void setAllCheckBox() {
-        this.jchTodos.setEnabled(true);
+//        this.jchTodos.setEnabled(true);
         this.jchFecha.setEnabled(true);
         this.jchDocumento.setEnabled(true);
         this.jchUsuario.setEnabled(true);

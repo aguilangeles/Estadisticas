@@ -526,13 +526,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="jchTodos" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="jchFecha" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Component id="jchDocumento" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
                       <Component id="jchUsuario" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Component id="jbVer" min="-2" max="-2" attributes="0"/>
@@ -545,7 +543,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jchTodos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jchFecha" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jchDocumento" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jchUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -560,12 +557,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JCheckBox" name="jchTodos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Todos"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JCheckBox" name="jchFecha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha"/>

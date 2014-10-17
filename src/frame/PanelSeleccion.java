@@ -6,6 +6,7 @@
 package frame;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 //import models.ChangeValuesOfTrazas;
 //import models.ValuesTraza;
 
@@ -19,7 +20,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private ButtonGroup group;
 //    private ChangeValuesOfTrazas change;
 
-    private GetCantidadVerificacion cantidades;
+    private final GetCantidadVerificacion cantidades;
+    private final ChBoxList list;
 
     /**
      * Creates new form PanelSeleccion
@@ -32,14 +34,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jComboCompuesto.setVisible(false);
         jlLastDate.setVisible(false);
         cantidades = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
-        
-        
-        TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchTodos, jchFecha, jchDocumento, jchUsuario, cantidades);
-//        (jcTipoUsuario,
-//                jcTipodoc, jlFirstDate, jlLastDate, jrbCalidad, jrbDocumento, jchTodos, jchFecha, jchDocumento, jchUsuario, cantidades);
-
-//        CheckBox checkBox = new CheckBox(jchTodos, jchFecha, jchDocumento, jchUsuario, verificacion);
-//        this.traza = verificacion.getTraza();
+        list = new ChBoxList(jchFecha, jchDocumento, jchUsuario);
+        TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchFecha, jchDocumento, jchUsuario, cantidades);
 
     }
 
@@ -90,7 +86,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jComboExpecifico = new javax.swing.JComboBox();
         jComboCompuesto = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
-        jchTodos = new javax.swing.JCheckBox();
         jchFecha = new javax.swing.JCheckBox();
         jchDocumento = new javax.swing.JCheckBox();
         jchUsuario = new javax.swing.JCheckBox();
@@ -326,9 +321,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Seleccione los filtros que desea aplicar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arimo", 2, 18), new java.awt.Color(255, 153, 153))); // NOI18N
         jPanel3.setOpaque(false);
 
-        jchTodos.setText("Todos");
-        jchTodos.setEnabled(false);
-
         jchFecha.setText("Fecha");
         jchFecha.setEnabled(false);
 
@@ -350,13 +342,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jchTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(53, 53, 53)
                 .addComponent(jchFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(49, 49, 49)
                 .addComponent(jchDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(jchUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addComponent(jbVer)
@@ -367,7 +357,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jchTodos)
                     .addComponent(jchFecha)
                     .addComponent(jchDocumento)
                     .addComponent(jchUsuario))
@@ -427,7 +416,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private void jbVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerActionPerformed
         System.out.println("===========================================");
 //        System.out.println(traza.toString());
-//        System.out.println("===========================================");
+        for (JCheckBox c : list.getChecks()) {
+            System.out.println(c.getText());
+        }
+        System.out.println("===========================================");
     }//GEN-LAST:event_jbVerActionPerformed
 
     /**
@@ -482,7 +474,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JComboBox jcTipodoc;
     private javax.swing.JCheckBox jchDocumento;
     private javax.swing.JCheckBox jchFecha;
-    private javax.swing.JCheckBox jchTodos;
     private javax.swing.JCheckBox jchUsuario;
     private javax.swing.JLabel jlFirstDate;
     private javax.swing.JLabel jlLastDate;
