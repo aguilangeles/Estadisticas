@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
-import models.TrazaporVerificacion;
 
 /**
  * TRAE LAS CANTIDADES DE TRAZAS, ACEPTADAS, RECHAZADAS Y NULAS SEGUN EL ID
@@ -21,52 +20,61 @@ import models.TrazaporVerificacion;
  */
 public class GetCantidadVerificacion {
 
-    private final String condition;
-    private final TrazaporVerificacion traza;
-    private final DefaultComboBoxModel doctypeCombo;
-    private final DefaultComboBoxModel userCombo;
+//    private String condition;
+////    private final ValuesTraza traza;
+//    private DefaultComboBoxModel doctypeCombo;
+//    private DefaultComboBoxModel userCombo;
+    private final JLabel total, aceptadas, rechazadas, nulas;
 
-    public GetCantidadVerificacion(String condition, TrazaporVerificacion traza, JLabel total, JLabel aceptadas, JLabel rechazadas, JLabel nulas) {
-        this.condition = condition;
-        this.traza = traza;
-        int id = traza.getIdVerificacion();
-        setvalueoftraza(id, condition);
-
-        setlabels(total, aceptadas, rechazadas, nulas);
-        this.doctypeCombo = modelDoctype(condition);
-        this.userCombo = modelUsername(condition);
-
+//    public GetCantidadVerificacion(String condition, ValuesTraza traza, JLabel total, JLabel aceptadas, JLabel rechazadas, JLabel nulas) {
+//        this.condition = condition;
+//        this.traza = traza;
+//        int id = traza.getIdVerificacion();
+//        setvalueoftraza(id, condition);
+//
+//        setlabels(total, aceptadas, rechazadas, nulas);
+//        this.doctypeCombo = modelDoctype(condition);
+//        this.userCombo = modelUsername(condition);
+//
+//    }
+    public GetCantidadVerificacion(JLabel total, JLabel aceptadas, JLabel rechazadas, JLabel nulas) {
+        this.total = total;
+        this.aceptadas = aceptadas;
+        this.rechazadas = rechazadas;
+        this.nulas = nulas;
     }
 
-    private void setlabels(JLabel total, JLabel aceptadas, JLabel rechazadas, JLabel nulas) {
+    private void setlabels(int t, int a, int r, int n) {
 
-        total.setText("Total Trazas: " + traza.getTrazas());
-        aceptadas.setText("Total Aceptadas: " + traza.getAceptadas());
-        rechazadas.setText("Total Rechazadas: " + traza.getRechazadas());
-        nulas.setText("Total Nulas: " + traza.getNulas());
+        total.setText("Total Trazas: " + t);
+        aceptadas.setText("Total Aceptadas: " + a);
+        rechazadas.setText("Total Rechazadas: " + r);
+        nulas.setText("Total Nulas: " + n);
     }
 
-    private void setvalueoftraza(int id, String condition1) {
+    public void setvalueoftraza(String condition1) {
         //
-        int tot = getQuantityofTrazas(id, condition1);
-        int aceptada = getQuantityof(id, "= '1'", condition1);
-        int rechazado = getQuantityof(id, "= '0'", condition1);
-        int nula = getQuantityof(id, "IS NULL", condition1);
+        int tot = getQuantityofTrazas(condition1);
+        int aceptada = getQuantityof("= '1'", condition1);
+        int rechazado = getQuantityof("= '0'", condition1);
+        int nula = getQuantityof("IS NULL", condition1);
         //
-        this.traza.setTrazas(tot);
-        this.traza.setAceptadas(aceptada);
-        this.traza.setRechazadas(rechazado);
-        this.traza.setNulas(nula);
+        setlabels(tot, aceptada, rechazado, nula);
+//        this.traza.setTrazas(tot);
+//        this.traza.setAceptadas(aceptada);
+//        this.traza.setRechazadas(rechazado);
+//        this.traza.setNulas(nula);
     }
 
-    private int getQuantityofTrazas(int id, String condition) {
+    private int getQuantityofTrazas(String condition) {
         int result = 0;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
             String query = "SELECT count(*)"
                     + " FROM qualitys.traza "
-                    + " where idVerificacion = "
-                    + id + condition;
+                    //                    + " where idVerificacion = "
+                    //                    + id 
+                    + condition;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
@@ -81,15 +89,16 @@ public class GetCantidadVerificacion {
         return result;
     }
 
-    private int getQuantityof(int idTraza, String value, String condition) {
+    private int getQuantityof(String value, String condition) {
         int result = 0;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
             String query = "SELECT count(*) "
                     + " FROM qualitys.traza "
-                    + " where idverificacion = " + idTraza
+                    + condition
+                    //                    + " where idverificacion = " + idTraza
                     + " and estadoLote "
-                    + value + condition;
+                    + value;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
@@ -103,28 +112,24 @@ public class GetCantidadVerificacion {
         return result;
     }
 
-    public TrazaporVerificacion getTraza() {
-        return traza;
-    }
+   
 
-    public final DefaultComboBoxModel modelDoctype(String condition) {
-        JComboTipoDoc jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), condition);
-        return jComboTipoDoc.getModel();
-    }
-
-    public final DefaultComboBoxModel modelUsername(String condition) {
-        JCTipoUsuario tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), condition);
-        return tipoUsuario.getModel();
-    }
-
-    public DefaultComboBoxModel getDoctypeCombo() {
-        return doctypeCombo;
-    }
-
-    public DefaultComboBoxModel getUserCombo() {
-        return userCombo;
-    }
-    
-
+//    public final DefaultComboBoxModel modelDoctype(String condition) {
+//        JComboTipoDoc jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), condition);
+//        return jComboTipoDoc.getModel();
+//    }
+//
+//    public final DefaultComboBoxModel modelUsername(String condition) {
+//        JCTipoUsuario tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), condition);
+//        return tipoUsuario.getModel();
+//    }
+//
+//    public DefaultComboBoxModel getDoctypeCombo() {
+//        return doctypeCombo;
+//    }
+//
+//    public DefaultComboBoxModel getUserCombo() {
+//        return userCombo;
+//    }
 
 }

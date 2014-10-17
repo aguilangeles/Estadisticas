@@ -6,8 +6,8 @@
 package frame;
 
 import javax.swing.ButtonGroup;
-import models.ChangeValuesOfTrazas;
-import models.TrazaporVerificacion;
+//import models.ChangeValuesOfTrazas;
+//import models.ValuesTraza;
 
 /**
  *
@@ -15,10 +15,11 @@ import models.TrazaporVerificacion;
  */
 public class PanelSeleccion extends javax.swing.JFrame {
 
-    TrazaporVerificacion traza ;
     private boolean selected;
     private ButtonGroup group;
-    private ChangeValuesOfTrazas change;
+//    private ChangeValuesOfTrazas change;
+
+    private GetCantidadVerificacion cantidades;
 
     /**
      * Creates new form PanelSeleccion
@@ -30,15 +31,15 @@ public class PanelSeleccion extends javax.swing.JFrame {
         this.setResizable(false);
         jComboCompuesto.setVisible(false);
         jlLastDate.setVisible(false);
-        TipoVerificacion verificacion = new TipoVerificacion(jComboCompuesto,
-                jComboExpecifico, jcTipoUsuario,
-                jcTipodoc, jlFirstDate, jlLastDate, jlNameTipodoc, jlUsername,
-                jlnumAcep, jlnumNull, jlnumRech, jlnumTrazas, jrbCalidad,
-                jrbCompuesta, jrbDocumento, jrbEspecifica, jchTodos, jchFecha, jchDocumento, jchUsuario);
+        cantidades = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
+        
+        
+        TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchTodos, jchFecha, jchDocumento, jchUsuario, cantidades);
+//        (jcTipoUsuario,
+//                jcTipodoc, jlFirstDate, jlLastDate, jrbCalidad, jrbDocumento, jchTodos, jchFecha, jchDocumento, jchUsuario, cantidades);
 
-
-        CheckBox checkBox = new CheckBox(jchTodos, jchFecha, jchDocumento, jchUsuario, verificacion);
-        this.traza = verificacion.getTraza();
+//        CheckBox checkBox = new CheckBox(jchTodos, jchFecha, jchDocumento, jchUsuario, verificacion);
+//        this.traza = verificacion.getTraza();
 
     }
 
@@ -425,8 +426,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private void jbVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerActionPerformed
         System.out.println("===========================================");
-        System.out.println(traza.toString());
-        System.out.println("===========================================");
+//        System.out.println(traza.toString());
+//        System.out.println("===========================================");
     }//GEN-LAST:event_jbVerActionPerformed
 
     /**
