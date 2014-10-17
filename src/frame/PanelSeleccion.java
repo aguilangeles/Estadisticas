@@ -40,7 +40,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jlLastDate.setVisible(false);
         cantidades = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
         list = new ChBoxList(jchFecha, jchDocumento, jchUsuario);
-        dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate);
+        
+        dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
         TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchFecha, jchDocumento, jchUsuario, cantidades);
         filtro = verificacion.getFiltro();
 
@@ -422,6 +423,34 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private void jbVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerActionPerformed
         int valores = valores();
+        String condicion = filtro.toString();
+        switch (valores) {
+            case 0:
+                break;
+            case 1:
+                dates.activar(condicion,true);
+                break;
+            case 2:
+                dates.activar(condicion,true);
+                break;
+            case 3:
+                dates.activar(condicion,true);
+                break;
+            case 4:
+                dates.activar("",false);
+                break;
+            case 5:
+                dates.activar(condicion,true);
+                
+                break;
+            case 6:
+                dates.activar("",false);
+                break;
+            case 7:
+                dates.activar("",false);
+                break;
+
+        }
     }//GEN-LAST:event_jbVerActionPerformed
     private int valores() {
         List lista = list.getChecks();

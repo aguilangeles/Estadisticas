@@ -123,7 +123,6 @@ public class TipoVerificacion extends JFrame {
     
     private void prepareFrame() {
         setAllCheckBox();//habilito los filtros
-//        String condition = new ChangeValuesOfTrazas().valuedefault();//preparo query
         String condition = filtro.toString();//preparo query
         setTrazaByVerification(condition);//traigo los resultados desde database
     }
