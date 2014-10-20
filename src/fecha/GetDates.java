@@ -42,8 +42,7 @@ public class GetDates extends JFrame {
         this.entre = entre;
         this.buttongroup = bg;
         this.filtro = filtro;
-//        actionFirstCombo();
-//        actionLastCombo();
+    
     }
 
     private void actionLastCombo() {

@@ -28,6 +28,7 @@ public class GetTypedocs {
         this.typedoc = typedoc;
         this.nametypedoc = nametypedoc;
         this.filtro = filtro;
+       
     }
 
     private void actionTypeCombo(final JComboBox typedoc1) {
@@ -40,7 +41,6 @@ public class GetTypedocs {
                 String valor = "" + typedoc1.getSelectedItem();
                 int id = jComboTipoDoc.getiddocument(valor);
                 String adoc = new ChangeValuesOfTrazas().typedocCondition(id);
-                System.out.println("adoc"+ adoc);
                 filtro.setDocumento(adoc);
                 nametypedoc.setText(valor);
             }
@@ -54,9 +54,7 @@ public class GetTypedocs {
             //se llena el combo y se le agrega la action
             jComboTipoDoc.getdocumentos(condicion);
             typedoc.setModel(jComboTipoDoc.getModel());
-            actionTypeCombo(typedoc);
         } else {
-            System.out.println("esta aqui?");
             //se vuelven los valores a default
             typedoc.setEnabled(false);
             typedoc.setModel(getDefault());
@@ -64,6 +62,7 @@ public class GetTypedocs {
             filtro.setDocumento("");
 
         }
+        actionTypeCombo(typedoc);
 
     }
 

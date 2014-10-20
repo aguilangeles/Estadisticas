@@ -28,6 +28,7 @@ public class GetUsername {
         this.usuario = user;
         this.nameusuario = nameusuario;
         this.filtro = filtro;
+
     }
 
     private void actionUserCombo(final JComboBox username1) {

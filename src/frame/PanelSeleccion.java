@@ -5,6 +5,7 @@
  */
 package frame;
 
+import com.sun.org.apache.bcel.internal.Constants;
 import fecha.GetDates;
 import usuario.GetUsername;
 import documento.GetTypedocs;
@@ -19,7 +20,8 @@ import models.Filtro;
 public class PanelSeleccion extends javax.swing.JFrame {
 
     private boolean selected;
-    private ButtonGroup group;
+    private ButtonGroup groupDate;
+    private ButtonGroup groupVerificacion;
 
     private final GetCantidadVerificacion cantidades;
     private final ChBoxList list;
@@ -27,6 +29,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private final Filtro filtro;
     private GetTypedocs typedocs;
     private GetUsername username;
+    private EnableFilters allow;
 
     /**
      * Creates new form PanelSeleccion
@@ -40,22 +43,22 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jlLastDate.setVisible(false);
         cantidades = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
         list = new ChBoxList(jchFecha, jchDocumento, jchUsuario);
-
-        TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchFecha, jchDocumento, jchUsuario, cantidades, jbChecks);
+        allow = new EnableFilters(jchDocumento, jchFecha, jchUsuario, jbChecks, jbPrevius, jbGo, jbReset);
+        TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchFecha, jchDocumento, jchUsuario, cantidades, jbChecks, allow);
         filtro = verificacion.getFiltro();
 
     }
 
     private void actionVerificacionButtonGroup() {
-        group = new ButtonGroup();
-        group.add(jrbCalidad);
-        group.add(jrbDocumento);
+        groupVerificacion = new ButtonGroup();
+        groupVerificacion.add(jrbCalidad);
+        groupVerificacion.add(jrbDocumento);
     }
 
     private void actionDatesRadioButton() {
-        group = new ButtonGroup();
-        group.add(jrbEspecifica);
-        group.add(jrbCompuesta);
+        groupDate = new ButtonGroup();
+        groupDate.add(jrbEspecifica);
+        groupDate.add(jrbCompuesta);
     }
 
     /**
@@ -97,9 +100,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jchDocumento = new javax.swing.JCheckBox();
         jchUsuario = new javax.swing.JCheckBox();
         jbChecks = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbPrevius = new javax.swing.JButton();
+        jbGo = new javax.swing.JButton();
+        jbReset = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -353,17 +356,25 @@ public class PanelSeleccion extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eye-20.png"))); // NOI18N
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbPrevius.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eye-20.png"))); // NOI18N
+        jbPrevius.setToolTipText("");
+        jbPrevius.setEnabled(false);
+        jbPrevius.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbPreviusActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
+        jbGo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
+        jbGo.setEnabled(false);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross-16.png"))); // NOI18N
+        jbReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross-16.png"))); // NOI18N
+        jbReset.setEnabled(false);
+        jbReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbResetActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Previo");
 
@@ -385,7 +396,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(jbPrevius)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,13 +406,13 @@ public class PanelSeleccion extends javax.swing.JFrame {
                         .addGap(39, 39, 39))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(jbGo)
                         .addGap(39, 39, 39)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbChecks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(46, 46, 46))
         );
         jPanel3Layout.setVerticalGroup(
@@ -415,14 +426,14 @@ public class PanelSeleccion extends javax.swing.JFrame {
                     .addComponent(jchFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbGo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbPrevius, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbReset, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -447,9 +458,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 .addComponent(jpVerificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -479,7 +490,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
             case 0:
                 //sin seleccion
 
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group, filtro);
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro);
                 typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
                 username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
                 System.out.println("advertencia!");
@@ -490,7 +501,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
             case 1:
                 //fecha, documento y usuario
 
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group, filtro);
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro);
                 typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
                 username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
                 dates.activarDate(condicion, true);
@@ -500,7 +511,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
             case 2:
                 //fecha y documento
 
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group, filtro);
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro);
                 typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
                 username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
                 dates.activarDate(condicion, true);
@@ -510,7 +521,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
             case 3:
                 //fecha y usuario
 
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group, filtro);
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro);
                 typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
                 username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
                 dates.activarDate(condicion, true);
@@ -520,7 +531,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
             case 4:
                 //documento y usuario
 
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group, filtro);
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro);
                 typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
                 username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
                 dates.activarDate("", false);
@@ -530,7 +541,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
             case 5:
                 // solo fecha
 
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group, filtro);
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro);
                 typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
                 username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
                 dates.activarDate(condicion, true);
@@ -541,7 +552,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
             case 6:
                 //solo documento
 
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group, filtro);
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro);
                 typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
                 username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
                 dates.activarDate("", false);
@@ -550,7 +561,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 break;
             case 7:
                 //solo usuario
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group, filtro);
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro);
                 typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
                 username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
                 dates.activarDate("", false);
@@ -561,12 +572,24 @@ public class PanelSeleccion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbChecksActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbPreviusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreviusActionPerformed
         // TODO add your handling code here:
-        
-        
-        System.out.println("filtro: \t"+filtro.toString());
-    }//GEN-LAST:event_jButton1ActionPerformed
+        cantidades.setvalueoftraza(filtro.toString());
+
+        System.out.println("filtro: \t" + filtro.toString());
+    }//GEN-LAST:event_jbPreviusActionPerformed
+
+    private void jbResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbResetActionPerformed
+        groupVerificacion.clearSelection();
+        filtro.setId(0);
+        filtro.setFechas("");
+        filtro.setDocumento("");
+        filtro.setUsuario("");
+        //filtros set enables
+        allow.allowFilters(false);
+        //combos set original value
+
+    }//GEN-LAST:event_jbResetActionPerformed
     private int valores() {
         List lista = list.getChecks();
         int v = 0;
@@ -628,9 +651,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboCompuesto;
     private javax.swing.JComboBox jComboExpecifico;
     private javax.swing.JLabel jLabel1;
@@ -646,6 +666,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton jbChecks;
+    private javax.swing.JButton jbGo;
+    private javax.swing.JButton jbPrevius;
+    private javax.swing.JButton jbReset;
     private javax.swing.JComboBox jcTipoUsuario;
     private javax.swing.JComboBox jcTipodoc;
     private javax.swing.JCheckBox jchDocumento;
