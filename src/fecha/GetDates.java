@@ -5,6 +5,7 @@
  */
 package fecha;
 
+import frame.EnableFilters;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,8 +33,9 @@ public class GetDates extends JFrame {
     private final ButtonGroup buttongroup;
     private GetDatesFromTraza datesFromTraza;
     private final Filtro filtro;
+    private EnableFilters allow;
 
-    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, ButtonGroup bg, Filtro filtro) throws HeadlessException {
+    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, ButtonGroup bg, Filtro filtro, EnableFilters allow) throws HeadlessException {
         this.simpleDate = especifica;
         this.compoustDate = compuesta;
         this.jcFirstDate = jcEspecifico;
@@ -42,7 +44,8 @@ public class GetDates extends JFrame {
         this.entre = entre;
         this.buttongroup = bg;
         this.filtro = filtro;
-    
+        this.allow = allow;
+
     }
 
     private void actionLastCombo() {
@@ -81,18 +84,24 @@ public class GetDates extends JFrame {
             actionLastCombo();
 
         } else {
-            buttongroup.clearSelection();
-            jcFirstDate.removeAllItems();
-            jcFirstDate.setModel(modeldefault());
-            jcFirstDate.setEnabled(false);
-            jcLastDate.removeAllItems();
-            jcLastDate.setModel(modeldefault());
-            jcLastDate.setEnabled(false);
-            jcLastDate.setVisible(false);
-            entre.setVisible(false);
-            fecha.setText("Fecha ");
-            filtro.setFechas("");
+            resetDates();
         }
+    }
+
+    public void resetDates() {
+        simpleDate.setEnabled(false);
+        compoustDate.setEnabled(false);
+        buttongroup.clearSelection();
+        jcFirstDate.removeAllItems();
+        jcFirstDate.setModel(modeldefault());
+        jcFirstDate.setEnabled(false);
+        jcLastDate.removeAllItems();
+        jcLastDate.setModel(modeldefault());
+        jcLastDate.setEnabled(false);
+        jcLastDate.setVisible(false);
+        entre.setVisible(false);
+        fecha.setText("Fecha ");
+        filtro.setFechas("");
     }
 
     public void actionSelectSimple(final String condicion) {
@@ -148,5 +157,9 @@ public class GetDates extends JFrame {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         model.addElement("aaaa-mm-dd");
         return model;
+    }
+
+    public void clearSeleccion() {
+
     }
 }

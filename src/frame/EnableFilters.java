@@ -18,6 +18,7 @@ public class EnableFilters {
     private final javax.swing.JCheckBox jchFecha;
     private final javax.swing.JCheckBox jchUsuario;
     private final JButton jbchecks, jbPrevius, jbGo, jbReset;
+    private boolean allow;
 
     public EnableFilters(JCheckBox jchDocumento, JCheckBox jchFecha, JCheckBox jchUsuario, JButton jbchecks, JButton jbPrevius, JButton jbGo, JButton jbReset) {
         this.jchDocumento = jchDocumento;
@@ -30,6 +31,7 @@ public class EnableFilters {
     }
 
     public void allowFilters(boolean isenabled) {
+        allow = isenabled;
         jchDocumento.setEnabled(isenabled);
         jchFecha.setEnabled(isenabled);
         jchUsuario.setEnabled(isenabled);
@@ -39,4 +41,13 @@ public class EnableFilters {
         jbReset.setEnabled(isenabled);
 
     }
+
+    public boolean isAllow() {
+        return allow;
+    }
+
+    public void setAllow(boolean allow) {
+        this.allow = allow;
+    }
+
 }
