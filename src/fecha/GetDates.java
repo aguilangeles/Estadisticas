@@ -92,6 +92,7 @@ public class GetDates extends JFrame {
             jcLastDate.setVisible(false);
             entre.setVisible(false);
             fecha.setText("Fecha ");
+            filtro.setFechas("");
         }
     }
 

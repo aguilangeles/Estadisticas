@@ -56,10 +56,12 @@ public class GetTypedocs {
             typedoc.setModel(jComboTipoDoc.getModel());
             actionTypeCombo(typedoc);
         } else {
+            System.out.println("esta aqui?");
             //se vuelven los valores a default
             typedoc.setEnabled(false);
             typedoc.setModel(getDefault());
             nametypedoc.setText("-----");
+            filtro.setDocumento("");
 
         }
 

@@ -34,16 +34,11 @@ public class ChangeValuesOfTrazas {
     }
 
     public String typedocCondition(int id) {
-        return " and idtipodocumento = " + id + "";
+        return " and idtipodocumento = " + id;
     }
 //
-//    public String usernameCondition(JComboBox jctipouser) {
-//        String condition = null;
-//        int id = new SetTrazaFromUser(jctipouser.getSelectedItem() + "").getIdUsuario();
-//        condition = " and idusuarios = " + id + ";";
-//        return condition;
-//    }
-//    public ValuesTraza getTrazav() {
-//        return traza;
-//    }
+    public String usernameCondition(int id) {
+        return " and idusuarios = " + id;
+    }
+
 }
