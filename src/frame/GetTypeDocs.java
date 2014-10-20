@@ -19,11 +19,11 @@ public class GetTypeDocs {
 
     private final JComboBox typedoc;
     private final JLabel nametypedoc;
+    private final JComboTipoDoc jComboTipoDoc = new JComboTipoDoc();
 
     public GetTypeDocs(JComboBox typedoc, JLabel nametypedoc) {
         this.typedoc = typedoc;
         this.nametypedoc = nametypedoc;
-//        actionTypeCombo(typedoc);
     }
 
     private void actionTypeCombo(final JComboBox typedoc1) {
@@ -31,9 +31,12 @@ public class GetTypeDocs {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                nametypedoc.setText("" + typedoc1.getSelectedItem());
-
+                //cuando se selecciona el valor, se graba en el jlabel 
+                // y de paso se obtiene el id, para usar en el filtro.
+                String valor = "" + typedoc1.getSelectedItem();
+                int id = jComboTipoDoc.getiddocument(valor);
+                String result = id + "-" + valor;
+                nametypedoc.setText(result);
             }
         }
         );
@@ -42,11 +45,12 @@ public class GetTypeDocs {
     public void activarTypeDoc(String condicion, boolean isActiveDoc) {
         typedoc.setEnabled(true);
         if (isActiveDoc) {
-            
-            JComboTipoDoc jComboTipoDoc = new JComboTipoDoc(condicion);
+            //se llena el combo y se le agrega la action
+            jComboTipoDoc.getdocumentos(condicion);
             typedoc.setModel(jComboTipoDoc.getModel());
             actionTypeCombo(typedoc);
         } else {
+            //se vuelven los valores a default
             typedoc.setEnabled(false);
             typedoc.setModel(getDefault());
             nametypedoc.setText("-----");

@@ -18,14 +18,11 @@ import javax.swing.DefaultComboBoxModel;
 public class JComboTipoDoc {
 
     private final DefaultComboBoxModel model = new DefaultComboBoxModel();
-    private final String condition;
 
-    public JComboTipoDoc(String condition) {
-        this.condition = condition;
-        getdocumentos();
+    public JComboTipoDoc() {
     }
 
-    private void getdocumentos() {
+    public void getdocumentos(String condition) {
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
             String query = "SELECT    "
