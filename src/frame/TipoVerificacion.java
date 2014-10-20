@@ -9,6 +9,7 @@ import usuario.JCTipoUsuario;
 import documento.JCTiipoDoc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -46,6 +47,7 @@ public class TipoVerificacion extends JFrame {
     private javax.swing.JCheckBox jchUsuario;
     private JCTiipoDoc jComboTipoDoc;
     private JCTipoUsuario tipoUsuario;
+    private JButton jbchecks;
 //    private GetDates dates;
     private GetCantidadVerificacion cantidadverificacion;
     private ActivarJCombos combo;
@@ -55,7 +57,7 @@ public class TipoVerificacion extends JFrame {
     public TipoVerificacion() {
     }
     
-    public TipoVerificacion(JRadioButton jrbCalidad, JRadioButton jrbDocumento, JCheckBox jchfecha, JCheckBox jchdocumento, JCheckBox jchusuario, GetCantidadVerificacion cantidades) {
+    public TipoVerificacion(JRadioButton jrbCalidad, JRadioButton jrbDocumento, JCheckBox jchfecha, JCheckBox jchdocumento, JCheckBox jchusuario, GetCantidadVerificacion cantidades, JButton jbcheck) {
 //        this.jcTipoUsuario = jcTipoUsuario;
 //        this.jcTipodoc = jcTipodoc;
 //        this.jlFirstDate = jlFirstDate;
@@ -65,8 +67,9 @@ public class TipoVerificacion extends JFrame {
         this.jchDocumento = jchdocumento;
         this.jchUsuario = jchusuario;
         this.cantidades = cantidades;
-        this.jrbCalidad=jrbCalidad;
-        this.jrbDocumento=jrbDocumento;
+        this.jrbCalidad = jrbCalidad;
+        this.jrbDocumento = jrbDocumento;
+        this.jbchecks = jbcheck;
 //        this.combo = new ActivarJCombos(jrbCompuesta, jrbEspecifica, jcTipoUsuario, jcTipodoc);
         calidadActionPerformed();
         documentoActionPerformed();
@@ -152,12 +155,11 @@ public class TipoVerificacion extends JFrame {
             
         });
     }
-
+    
     public Filtro getFiltro() {
         return filtro;
     }
-    
-    
+
 //    private void setTrazaByDate() {
 //        String condition = new ChangeValuesOfTrazas(traza).dateCondition(jComboExpecifico, jComboCompuesto);
 //        setTrazaByVerification(condition);
@@ -168,7 +170,6 @@ public class TipoVerificacion extends JFrame {
 //                jComboCompuesto, jlFirstDate, jlLastDate, getTraza());
 //        
 //    }
-
     /**
      * *********************************************************************************
      * HABILITO LAS ACCIONES DE TIPO DE DOCUMENTO Y DE TIPO DE USUARIO
@@ -208,13 +209,13 @@ public class TipoVerificacion extends JFrame {
 //            }
 //        });
 //    }
-
 //
     private void setAllCheckBox() {
 //        this.jchTodos.setEnabled(true);
         this.jchFecha.setEnabled(true);
         this.jchDocumento.setEnabled(true);
         this.jchUsuario.setEnabled(true);
+        this.jbchecks.setEnabled(true);
     }
     
     public void setTrazaByVerification(String condition) {
@@ -222,7 +223,7 @@ public class TipoVerificacion extends JFrame {
 //        cantidadverificacion = new GetCantidadVerificacion(condition, traza, jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
 //        traza = cantidadverificacion.getTraza();
     }
-    
+
 //    public int getIdTraza() {
 //        return traza.getIdVerificacion();
 //    }
@@ -234,7 +235,6 @@ public class TipoVerificacion extends JFrame {
 //    public void setTraza(ValuesTraza traza) {
 //        this.traza = traza;
 //    }
-
     /**
      * *********************************************************************************
      * ACTIVAR LOS FILTROS SEGUN EL COMBO BOX SELECCIONADO
