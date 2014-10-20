@@ -42,7 +42,7 @@ public class TipoVerificacion extends JFrame {
     private javax.swing.JCheckBox jchFecha;
     private javax.swing.JCheckBox jchTodos;
     private javax.swing.JCheckBox jchUsuario;
-    private JComboTipoDoc jComboTipoDoc;
+    private JCTiipoDoc jComboTipoDoc;
     private JCTipoUsuario tipoUsuario;
 //    private GetDates dates;
     private GetCantidadVerificacion cantidadverificacion;

@@ -15,17 +15,14 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author aguilangeles@gmail.com
  */
-public class JComboUsuarios {
-    
-    private DefaultComboBoxModel model = new DefaultComboBoxModel();
-    private final int id;
-    
-    public JComboUsuarios(int id) {
-        this.id = id;
-        getdocumentos();
+public class JCTiipoDoc {
+
+    private final DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+    public JCTiipoDoc() {
     }
-    
-    private void getdocumentos() {
+
+    public void getdocumentos(String condition) {
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
             String query = "SELECT    "
@@ -33,40 +30,40 @@ public class JComboUsuarios {
                     + "FROM qualitys.traza t "
                     + "join qualitys.tipos_documentos td "
                     + "on t.idTipoDocumento = td.id "
-                    + "where t.idVerificacion = " + id + ";";
-            
+                    + condition;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
+
                     model.addElement(conexion.resulset.getString(1));
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(JComboUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JCTiipoDoc.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
         conexion.isConexionClose();
     }
 
-    /*  private void getDates(int idverificacion, String order) {
-     Conexion conexion = new Conexion();
-     if (conexion.isConexion()) {
-     String query = " SELECT distinct date(fecha_control) "
-     + " FROM qualitys.traza "
-     + " where idVerificacion = " + idverificacion
-     + " order by fecha_control " + order + ";";
-     conexion.executeQuery(query);
-     try {
-     while (conexion.resulset.next()) {
-     dates.addElement(conexion.resulset.getDate(1));
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(GetDatesFromTraza.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     }
-     conexion.isConexionClose();
-     }*/
+    public int getiddocument(String description) {
+        int id = 0;
+        Conexion conexion = new Conexion();
+        if (conexion.isConexion()) {
+            String query = "SELECT id FROM qualitys.tipos_documentos where descripcion = '" + description + "';";
+            conexion.executeQuery(query);
+            try {
+                while (conexion.resulset.next()) {
+                    id = conexion.resulset.getInt(1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JCTiipoDoc.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        conexion.isConexionClose();
+        return id;
+    }
+
     public DefaultComboBoxModel getModel() {
         return model;
     }
+
 }

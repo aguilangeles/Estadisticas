@@ -18,16 +18,8 @@ import javax.swing.DefaultComboBoxModel;
 public class JCTipoUsuario {
 
     private DefaultComboBoxModel model = new DefaultComboBoxModel();
-    private final String condition;
-    private final int id;
 
-    public JCTipoUsuario( int id,String condition) {
-        this.id = id;
-        this.condition = condition;
-        getUsuarios();
-    }
-
-    private void getUsuarios() {
+    public void getUsuarios(String condition) {
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
             String query = "SELECT distinct t.idUsuarios "
@@ -35,19 +27,37 @@ public class JCTipoUsuario {
                     + "FROM qualitys.traza t "
                     + "join qualitys.usuarios tu "
                     + "on t.idUsuarios = tu.id "
-                    + "where t.idVerificacion = "
-                     + id + condition;
+                    //                    + "where t.idVerificacion = "
+                    //                     + id 
+                    + condition;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
                     model.addElement(conexion.resulset.getString(2));
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(JComboUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JCTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-//        model.addElement("Todos");
         conexion.isConexionClose();
+    }
+    
+    public int getiddocument(String nombre) {
+        int id = 0;
+        Conexion conexion = new Conexion();
+        if (conexion.isConexion()) {
+            String query = "SELECT id FROM qualitys.usuarios where nombre = '" + nombre + "';";
+            conexion.executeQuery(query);
+            try {
+                while (conexion.resulset.next()) {
+                    id = conexion.resulset.getInt(1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JCTiipoDoc.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        conexion.isConexionClose();
+        return id;
     }
 
     public DefaultComboBoxModel getModel() {

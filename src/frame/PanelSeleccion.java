@@ -25,7 +25,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private final ChBoxList list;
     private final GetDates dates;
     private final Filtro filtro;
-    private final GetTypeDocs typedocs;
+    private final GetTypedocs typedocs;
+    private final GetUsername username;
 
     /**
      * Creates new form PanelSeleccion
@@ -41,7 +42,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
         list = new ChBoxList(jchFecha, jchDocumento, jchUsuario);
 
         dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
-        typedocs = new GetTypeDocs(jcTipodoc, jlNameTipodoc);
+        typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
+        username = new GetUsername(jcTipoUsuario, jlUsername);
         TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchFecha, jchDocumento, jchUsuario, cantidades);
         filtro = verificacion.getFiltro();
 
@@ -430,42 +432,50 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 System.out.println("advertencia!");
                 dates.activarDate("", false);
                 typedocs.activarTypeDoc("", false);
+                username.activarUsername("", false);
                 break;
             case 1:
                 //fecha, documento y usuario
                 dates.activarDate(condicion, true);
                 typedocs.activarTypeDoc(condicion, true);
+                username.activarUsername(condicion, true);
                 break;
             case 2:
                 //fecha y documento
                 dates.activarDate(condicion, true);
                 typedocs.activarTypeDoc(condicion, true);
+                username.activarUsername("", false);
                 break;
             case 3:
                 //fecha y usuario
                 dates.activarDate(condicion, true);
                 typedocs.activarTypeDoc("", false);
+                username.activarUsername(condicion, true);
                 break;
             case 4:
                 //documento y usuario
                 dates.activarDate("", false);
                 typedocs.activarTypeDoc(condicion, true);
+                username.activarUsername(condicion, true);
                 break;
             case 5:
                 // solo fecha
                 dates.activarDate(condicion, true);
                 typedocs.activarTypeDoc("", false);
+                username.activarUsername("", false);
 
                 break;
             case 6:
                 //solo documento
                 dates.activarDate("", false);
                 typedocs.activarTypeDoc(condicion, true);
+                username.activarUsername("", false);
                 break;
             case 7:
                 //solo usuario
                 dates.activarDate("", false);
                 typedocs.activarTypeDoc("", false);
+                username.activarUsername(condicion, true);
                 break;
 
         }
@@ -479,7 +489,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
             v = 2;
         } else if (lista.size() == 2 && lista.contains("Fecha") && lista.contains("Usuario")) {
             v = 3;
-
         } else if (lista.size() == 2 && lista.contains("Documento") && lista.contains("Usuario")) {
             v = 4;
 
