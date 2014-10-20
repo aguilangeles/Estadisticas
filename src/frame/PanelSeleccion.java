@@ -8,8 +8,6 @@ package frame;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import models.Filtro;
-//import models.ChangeValuesOfTrazas;
-//import models.ValuesTraza;
 
 /**
  *
@@ -19,14 +17,13 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private boolean selected;
     private ButtonGroup group;
-//    private ChangeValuesOfTrazas change;
 
     private final GetCantidadVerificacion cantidades;
     private final ChBoxList list;
-    private final GetDates dates;
+    private GetDates dates;
     private final Filtro filtro;
-    private final GetTypedocs typedocs;
-    private final GetUsername username;
+    private GetTypedocs typedocs;
+    private GetUsername username;
 
     /**
      * Creates new form PanelSeleccion
@@ -429,6 +426,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
         switch (valores) {
             case 0:
                 //sin seleccion
+
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
+                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
+                username = new GetUsername(jcTipoUsuario, jlUsername);
                 System.out.println("advertencia!");
                 dates.activarDate("", false);
                 typedocs.activarTypeDoc("", false);
@@ -436,30 +437,50 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 break;
             case 1:
                 //fecha, documento y usuario
+
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
+                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
+                username = new GetUsername(jcTipoUsuario, jlUsername);
                 dates.activarDate(condicion, true);
                 typedocs.activarTypeDoc(condicion, true);
                 username.activarUsername(condicion, true);
                 break;
             case 2:
                 //fecha y documento
+
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
+                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
+                username = new GetUsername(jcTipoUsuario, jlUsername);
                 dates.activarDate(condicion, true);
                 typedocs.activarTypeDoc(condicion, true);
                 username.activarUsername("", false);
                 break;
             case 3:
                 //fecha y usuario
+
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
+                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
+                username = new GetUsername(jcTipoUsuario, jlUsername);
                 dates.activarDate(condicion, true);
                 typedocs.activarTypeDoc("", false);
                 username.activarUsername(condicion, true);
                 break;
             case 4:
                 //documento y usuario
+
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
+                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
+                username = new GetUsername(jcTipoUsuario, jlUsername);
                 dates.activarDate("", false);
                 typedocs.activarTypeDoc(condicion, true);
                 username.activarUsername(condicion, true);
                 break;
             case 5:
                 // solo fecha
+
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
+                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
+                username = new GetUsername(jcTipoUsuario, jlUsername);
                 dates.activarDate(condicion, true);
                 typedocs.activarTypeDoc("", false);
                 username.activarUsername("", false);
@@ -467,12 +488,20 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 break;
             case 6:
                 //solo documento
+
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
+                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
+                username = new GetUsername(jcTipoUsuario, jlUsername);
                 dates.activarDate("", false);
                 typedocs.activarTypeDoc(condicion, true);
                 username.activarUsername("", false);
                 break;
             case 7:
                 //solo usuario
+
+                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
+                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
+                username = new GetUsername(jcTipoUsuario, jlUsername);
                 dates.activarDate("", false);
                 typedocs.activarTypeDoc("", false);
                 username.activarUsername(condicion, true);

@@ -27,8 +27,6 @@ public class JCTipoUsuario {
                     + "FROM qualitys.traza t "
                     + "join qualitys.usuarios tu "
                     + "on t.idUsuarios = tu.id "
-                    //                    + "where t.idVerificacion = "
-                    //                     + id 
                     + condition;
             conexion.executeQuery(query);
             try {
@@ -41,7 +39,7 @@ public class JCTipoUsuario {
         }
         conexion.isConexionClose();
     }
-    
+
     public int getiddocument(String nombre) {
         int id = 0;
         Conexion conexion = new Conexion();

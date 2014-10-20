@@ -18,15 +18,8 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class GetDatesFromTraza {
 
-//    private final String condicion, order;
     private DefaultComboBoxModel dates = new DefaultComboBoxModel();
 
-//    public GetDatesFromTraza(String condicion, String order) {
-//        this.condicion = condicion;
-//        this.order = order;
-////        int idverificacion = traza.getIdVerificacion();
-////        getDates(idverificacion, order);
-//    }
     public GetDatesFromTraza() {
     }
 
@@ -36,12 +29,12 @@ public class GetDatesFromTraza {
             String query = " SELECT distinct date(fecha_control) "
                     + " FROM qualitys.traza "
                     + condicion
-                    //                    + " where idVerificacion = " + idverificacion
                     + " order by fecha_control " + order + ";";
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
                     dates.addElement(conexion.resulset.getDate(1));
+
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(GetDatesFromTraza.class.getName()).log(Level.SEVERE, null, ex);

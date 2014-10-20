@@ -28,7 +28,7 @@ public class GetDates extends JFrame {
     private final JLabel fecha;
     private final JLabel entre;
     private final ButtonGroup buttongroup;
-    private final GetDatesFromTraza datesFromTraza = new GetDatesFromTraza();
+    private GetDatesFromTraza datesFromTraza;
 
     public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, ButtonGroup bg) throws HeadlessException {
         this.simpleDate = especifica;
@@ -43,8 +43,13 @@ public class GetDates extends JFrame {
     public void activarDate(String condicion, boolean isDateSelected) {
         simpleDate.setEnabled(isDateSelected);
         compoustDate.setEnabled(isDateSelected);
+
         if (isDateSelected) {
-            activeOptions(condicion);
+           
+//                actionSelectSimple(condicion);
+            
+                actionSelectCompuesta(condicion);
+            
         } else {
             buttongroup.clearSelection();
             jcFirstDate.removeAllItems();
@@ -56,18 +61,13 @@ public class GetDates extends JFrame {
         }
     }
 
-    public void activeOptions(String condition) {
-        actionSelectSimple(condition);
-        actionSelectCompuesta(condition);
-    }
-
     public void actionSelectSimple(final String condicion) {
         this.simpleDate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //llenar el primer combo y visiblilizarlo
-                jcFirstDate.setModel(datesFromTraza.getDates(condicion, "asc"));
+
                 jcFirstDate.setEnabled(true);
+                setFirstModel(condicion);
                 //esconder lo referente al secundo combo
                 jcLastDate.setVisible(false);
                 entre.setVisible(false);
@@ -81,20 +81,31 @@ public class GetDates extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //llenar el primer combo y visibilizarlo
-                jcFirstDate.setModel(datesFromTraza.getDates(condicion, "asc"));
                 jcFirstDate.setEnabled(true);
-                //llenar el segundo combo y visibilizarlo
-                jcLastDate.setModel(datesFromTraza.getDates(condicion, "desc"));
                 jcLastDate.setVisible(true);
                 jcLastDate.setEnabled(true);
                 //activar y visibilizar los labels
                 fecha.setText("Fecha ENTRE");
                 entre.setVisible(true);
                 entre.setText("Y");
+                setFirstModel(condicion);
+                setLastModel(condicion);
             }
         });
     }
- 
+
+    private void setFirstModel(String condicion) {
+        //llenar el primer combo y visiblilizarlo
+        datesFromTraza = new GetDatesFromTraza();
+        jcFirstDate.setModel(datesFromTraza.getDates(condicion, "asc"));
+    }
+
+    private void setLastModel(String condicion) {
+        //llenar el segundo combo y visibilizarlo
+        datesFromTraza = new GetDatesFromTraza();
+        
+        jcLastDate.setModel(datesFromTraza.getDates(condicion, "desc"));
+    }
 
     /**
      * ***MODELO VACIO EN CASO DE QUE SE DESESTIME LA FECHA
