@@ -601,6 +601,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
         groupDate.clearSelection();
         dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
         dates.resetDates();
+        typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
+        typedocs.resetDocs();
+        username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
+        username.resetUser();
+        cantidades.reset();
 
 
     }//GEN-LAST:event_jbResetActionPerformed

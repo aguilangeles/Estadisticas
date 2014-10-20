@@ -60,10 +60,6 @@ public class GetCantidadVerificacion {
         int nula = getQuantityof("IS NULL", condition1);
         //
         setlabels(tot, aceptada, rechazado, nula);
-//        this.traza.setTrazas(tot);
-//        this.traza.setAceptadas(aceptada);
-//        this.traza.setRechazadas(rechazado);
-//        this.traza.setNulas(nula);
     }
 
     private int getQuantityofTrazas(String condition) {
@@ -72,8 +68,6 @@ public class GetCantidadVerificacion {
         if (conexion.isConexion()) {
             String query = "SELECT count(*)"
                     + " FROM qualitys.traza "
-                    //                    + " where idVerificacion = "
-                    //                    + id 
                     + condition;
             conexion.executeQuery(query);
             try {
@@ -96,7 +90,6 @@ public class GetCantidadVerificacion {
             String query = "SELECT count(*) "
                     + " FROM qualitys.traza "
                     + condition
-                    //                    + " where idverificacion = " + idTraza
                     + " and estadoLote "
                     + value;
             conexion.executeQuery(query);
@@ -110,6 +103,9 @@ public class GetCantidadVerificacion {
             conexion.isConexionClose();
         }
         return result;
+    }
+    public void reset(){
+         setlabels(0, 0, 0, 0);
     }
 
    

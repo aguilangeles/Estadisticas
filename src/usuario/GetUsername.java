@@ -55,14 +55,18 @@ public class GetUsername {
             usuario.setModel(typeuser.getModel());
             actionUserCombo(usuario);
         } else {
-            //se vuelven los valores a default
-            usuario.setEnabled(false);
-            usuario.setModel(getDefault());
-            nameusuario.setText("-----");
-            filtro.setUsuario("");
+            resetUser();
 
         }
 
+    }
+
+    public void resetUser() {
+        //se vuelven los valores a default
+        usuario.setEnabled(false);
+        usuario.setModel(getDefault());
+        nameusuario.setText("-----");
+        filtro.setUsuario("");
     }
 
     private DefaultComboBoxModel getDefault() {

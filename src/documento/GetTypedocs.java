@@ -28,7 +28,7 @@ public class GetTypedocs {
         this.typedoc = typedoc;
         this.nametypedoc = nametypedoc;
         this.filtro = filtro;
-       
+
     }
 
     private void actionTypeCombo(final JComboBox typedoc1) {
@@ -55,15 +55,19 @@ public class GetTypedocs {
             jComboTipoDoc.getdocumentos(condicion);
             typedoc.setModel(jComboTipoDoc.getModel());
         } else {
-            //se vuelven los valores a default
-            typedoc.setEnabled(false);
-            typedoc.setModel(getDefault());
-            nametypedoc.setText("-----");
-            filtro.setDocumento("");
+            resetDocs();
 
         }
         actionTypeCombo(typedoc);
 
+    }
+
+    public void resetDocs() {
+        //se vuelven los valores a default
+        typedoc.setEnabled(false);
+        typedoc.setModel(getDefault());
+        nametypedoc.setText("-----");
+        filtro.setDocumento("");
     }
 
     private DefaultComboBoxModel getDefault() {
