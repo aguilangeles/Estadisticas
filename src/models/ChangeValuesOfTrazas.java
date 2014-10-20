@@ -16,35 +16,26 @@ public class ChangeValuesOfTrazas {
     public ChangeValuesOfTrazas() {
     }
 
-    public String valuedefault() {
-        return ";";
-    }
-
     public String dateCondition(JComboBox jcEspecifico, JComboBox jcCompuesto) {
         String condition;
         String firstDate = jcEspecifico.getSelectedItem() + "%";
         String lastDate = null;
 
         if (!jcCompuesto.isVisible()) {
-            condition = " and fecha_control like '" + firstDate + "';";
+            condition = " and fecha_control like '" + firstDate + "'";
         } else {
             lastDate = jcCompuesto.getSelectedItem() + "%";
             condition = " and fecha_control "
                     + " between '" + firstDate + "'"
-                    + " and '" + lastDate + "';";
+                    + " and '" + lastDate + "'";
         }
-//        traza.setFirstDate(firstDate);
-//        traza.setLastDate(lastDate);
-        System.out.println(condition);
+
         return condition;
     }
 
-//    public String typedocCondition(JComboBox jctipodoc) {
-//        String condition = null;
-//        int id = new SetTrazaFromDoctype(jctipodoc.getSelectedItem() + "").getIdDoctype();
-//        condition = " and idtipodocumento = '" + id + "';";
-//        return condition;
-//    }
+    public String typedocCondition(int id) {
+        return " and idtipodocumento = " + id + "";
+    }
 //
 //    public String usernameCondition(JComboBox jctipouser) {
 //        String condition = null;
