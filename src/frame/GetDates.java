@@ -9,7 +9,6 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,80 +21,84 @@ import javax.swing.JRadioButton;
  */
 public class GetDates extends JFrame {
 
-    private final JRadioButton especifica;
-    private final JRadioButton compuesta;
-    private final JComboBox jcEspecifico;
-    private final JComboBox jcCompuesto;
-    private final JLabel simple;
+    private final JRadioButton simpleDate;
+    private final JRadioButton compoustDate;
+    private final JComboBox jcFirstDate;
+    private final JComboBox jcLastDate;
+    private final JLabel fecha;
     private final JLabel entre;
-    private final ButtonGroup gr;
+    private final ButtonGroup buttongroup;
     private final GetDatesFromTraza datesFromTraza = new GetDatesFromTraza();
 
     public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, ButtonGroup bg) throws HeadlessException {
-        this.especifica = especifica;
-        this.compuesta = compuesta;
-        this.jcEspecifico = jcEspecifico;
-        this.jcCompuesto = jcCompuesto;
-        this.simple = simple;
+        this.simpleDate = especifica;
+        this.compoustDate = compuesta;
+        this.jcFirstDate = jcEspecifico;
+        this.jcLastDate = jcCompuesto;
+        this.fecha = simple;
         this.entre = entre;
-        this.gr = bg;
+        this.buttongroup = bg;
     }
 
-    public void activar(String condicion, boolean algo) {
-        especifica.setEnabled(algo);
-        compuesta.setEnabled(algo);
-        if (algo) {
-            dates(condicion);
+    public void activarDate(String condicion, boolean isDateSelected) {
+        simpleDate.setEnabled(isDateSelected);
+        compoustDate.setEnabled(isDateSelected);
+        if (isDateSelected) {
+            activeOptions(condicion);
         } else {
-            gr.clearSelection();
-            jcEspecifico.removeAllItems();
-            jcEspecifico.setModel(modeldefault());
-            jcEspecifico.setEnabled(false);
+            buttongroup.clearSelection();
+            jcFirstDate.removeAllItems();
+            jcFirstDate.setModel(modeldefault());
+            jcFirstDate.setEnabled(false);
+            jcLastDate.removeAllItems();
+            jcLastDate.setModel(modeldefault());
+            jcLastDate.setEnabled(false);
         }
     }
 
-    public void dates(String condition) {
-        especificaActionPerformed(condition);
-        compuestaActionPerformed(condition);
+    public void activeOptions(String condition) {
+        actionSelectSimple(condition);
+        actionSelectCompuesta(condition);
     }
 
-    public void especificaActionPerformed(final String condicion) {
-        this.especifica.addActionListener(new ActionListener() {
+    public void actionSelectSimple(final String condicion) {
+        this.simpleDate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jcEspecifico.setEnabled(true);
-                jcCompuesto.setVisible(false);
+                //llenar el primer combo y visiblilizarlo
+                jcFirstDate.setModel(datesFromTraza.getDates(condicion, "asc"));
+                jcFirstDate.setEnabled(true);
+                //esconder lo referente al secundo combo
+                jcLastDate.setVisible(false);
                 entre.setVisible(false);
-                simple.setText("Fecha: ");
-                llenarJCEspecifico(condicion);
+                fecha.setText("Fecha ");
             }
         });
     }
 
-    public void compuestaActionPerformed(final String condicion) {
-        this.compuesta.addActionListener(new ActionListener() {
+    public void actionSelectCompuesta(final String condicion) {
+        this.compoustDate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                llenarJCEspecifico(condicion);
-                jcEspecifico.setEnabled(true);
-                jcCompuesto.setVisible(true);
-                jcCompuesto.setEnabled(true);
-                simple.setText("Fecha ENTRE");
+                //llenar el primer combo y visibilizarlo
+                jcFirstDate.setModel(datesFromTraza.getDates(condicion, "asc"));
+                jcFirstDate.setEnabled(true);
+                //llenar el segundo combo y visibilizarlo
+                jcLastDate.setModel(datesFromTraza.getDates(condicion, "desc"));
+                jcLastDate.setVisible(true);
+                jcLastDate.setEnabled(true);
+                //activar y visibilizar los labels
+                fecha.setText("Fecha ENTRE");
                 entre.setVisible(true);
                 entre.setText("Y");
-                llenarLastDate(condicion);
             }
         });
     }
+ 
 
-    private void llenarJCEspecifico(String condicion) {
-        jcEspecifico.setModel(datesFromTraza.getDates(condicion, "asc"));
-    }
-
-    private void llenarLastDate(String condicion) {
-        jcCompuesto.setModel(datesFromTraza.getDates(condicion, "desc"));
-    }
-
+    /**
+     * ***MODELO VACIO EN CASO DE QUE SE DESESTIME LA FECHA
+     */
     private DefaultComboBoxModel modeldefault() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         model.addElement("aaaa-mm-dd");
