@@ -19,10 +19,8 @@ public class JComboTipoDoc {
 
     private final DefaultComboBoxModel model = new DefaultComboBoxModel();
     private final String condition;
-    private final int id;
 
-    public JComboTipoDoc(int id, String condition) {
-        this.id = id;
+    public JComboTipoDoc(String condition) {
         this.condition = condition;
         getdocumentos();
     }
@@ -35,7 +33,7 @@ public class JComboTipoDoc {
                     + "FROM qualitys.traza t "
                     + "join qualitys.tipos_documentos td "
                     + "on t.idTipoDocumento = td.id "
-                    + "where t.idVerificacion = " + id + condition;
+                    + condition;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
@@ -46,7 +44,6 @@ public class JComboTipoDoc {
                 Logger.getLogger(JComboTipoDoc.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-//        model.addElement("Todos");
         conexion.isConexionClose();
     }
 

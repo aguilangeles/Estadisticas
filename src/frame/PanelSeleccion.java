@@ -7,8 +7,6 @@ package frame;
 
 import java.util.List;
 import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import models.Filtro;
 //import models.ChangeValuesOfTrazas;
 //import models.ValuesTraza;
@@ -27,6 +25,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private final ChBoxList list;
     private final GetDates dates;
     private final Filtro filtro;
+    private final GetTypeDocs typedocs;
 
     /**
      * Creates new form PanelSeleccion
@@ -40,8 +39,9 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jlLastDate.setVisible(false);
         cantidades = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
         list = new ChBoxList(jchFecha, jchDocumento, jchUsuario);
-        
+
         dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
+        typedocs = new GetTypeDocs(jcTipodoc, jlNameTipodoc);
         TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchFecha, jchDocumento, jchUsuario, cantidades);
         filtro = verificacion.getFiltro();
 
@@ -177,11 +177,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jcTipodoc.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jcTipodoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcTipodoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo de Documento", " " }));
         jcTipodoc.setEnabled(false);
 
         jlNameTipodoc.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jlNameTipodoc.setText("Tipo de Documento");
+        jlNameTipodoc.setText("------");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -426,28 +426,46 @@ public class PanelSeleccion extends javax.swing.JFrame {
         String condicion = filtro.toString();
         switch (valores) {
             case 0:
+                //sin seleccion
+                System.out.println("advertencia!");
+                dates.activarDate("", false);
+                typedocs.activarTypeDoc("", false);
                 break;
             case 1:
-                dates.activar(condicion,true);
+                //fecha, documento y usuario
+                dates.activarDate(condicion, true);
+                typedocs.activarTypeDoc(condicion, true);
                 break;
             case 2:
-                dates.activar(condicion,true);
+                //fecha y documento
+                dates.activarDate(condicion, true);
+                typedocs.activarTypeDoc(condicion, true);
                 break;
             case 3:
-                dates.activar(condicion,true);
+                //fecha y usuario
+                dates.activarDate(condicion, true);
+                typedocs.activarTypeDoc("", false);
                 break;
             case 4:
-                dates.activar("",false);
+                //documento y usuario
+                dates.activarDate("", false);
+                typedocs.activarTypeDoc(condicion, true);
                 break;
             case 5:
-                dates.activar(condicion,true);
-                
+                // solo fecha
+                dates.activarDate(condicion, true);
+                typedocs.activarTypeDoc("", false);
+
                 break;
             case 6:
-                dates.activar("",false);
+                //solo documento
+                dates.activarDate("", false);
+                typedocs.activarTypeDoc(condicion, true);
                 break;
             case 7:
-                dates.activar("",false);
+                //solo usuario
+                dates.activarDate("", false);
+                typedocs.activarTypeDoc("", false);
                 break;
 
         }
