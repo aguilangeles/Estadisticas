@@ -45,11 +45,10 @@ public class GetDates extends JFrame {
         compoustDate.setEnabled(isDateSelected);
 
         if (isDateSelected) {
-           
-//                actionSelectSimple(condicion);
-            
-                actionSelectCompuesta(condicion);
-            
+
+            actionSelectSimple(condicion);
+            actionSelectCompuesta(condicion);
+
         } else {
             buttongroup.clearSelection();
             jcFirstDate.removeAllItems();
@@ -58,6 +57,9 @@ public class GetDates extends JFrame {
             jcLastDate.removeAllItems();
             jcLastDate.setModel(modeldefault());
             jcLastDate.setEnabled(false);
+            jcLastDate.setVisible(false);
+            entre.setVisible(false);
+            fecha.setText("Fecha ");
         }
     }
 
@@ -103,7 +105,7 @@ public class GetDates extends JFrame {
     private void setLastModel(String condicion) {
         //llenar el segundo combo y visibilizarlo
         datesFromTraza = new GetDatesFromTraza();
-        
+
         jcLastDate.setModel(datesFromTraza.getDates(condicion, "desc"));
     }
 
