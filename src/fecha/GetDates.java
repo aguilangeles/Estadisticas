@@ -14,6 +14,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import models.ChangeValuesOfTrazas;
+import models.Filtro;
 
 /**
  *
@@ -29,8 +31,9 @@ public class GetDates extends JFrame {
     private final JLabel entre;
     private final ButtonGroup buttongroup;
     private GetDatesFromTraza datesFromTraza;
+    private final Filtro filtro;
 
-    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, ButtonGroup bg) throws HeadlessException {
+    public GetDates(JRadioButton especifica, JRadioButton compuesta, JComboBox jcEspecifico, JComboBox jcCompuesto, JLabel simple, JLabel entre, ButtonGroup bg, Filtro filtro) throws HeadlessException {
         this.simpleDate = especifica;
         this.compoustDate = compuesta;
         this.jcFirstDate = jcEspecifico;
@@ -38,6 +41,33 @@ public class GetDates extends JFrame {
         this.fecha = simple;
         this.entre = entre;
         this.buttongroup = bg;
+        this.filtro = filtro;
+//        actionFirstCombo();
+//        actionLastCombo();
+    }
+
+    private void actionLastCombo() {
+        jcLastDate.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String acondicion = new ChangeValuesOfTrazas().dateCondition(jcFirstDate, jcLastDate);
+                filtro.setFechas(acondicion);
+
+            }
+        });
+    }
+
+    private void actionFirstCombo() {
+        jcFirstDate.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String acondicion = new ChangeValuesOfTrazas().dateCondition(jcFirstDate, jcLastDate);
+                filtro.setFechas(acondicion);
+
+            }
+        });
     }
 
     public void activarDate(String condicion, boolean isDateSelected) {
@@ -48,6 +78,8 @@ public class GetDates extends JFrame {
 
             actionSelectSimple(condicion);
             actionSelectCompuesta(condicion);
+            actionFirstCombo();
+            actionLastCombo();
 
         } else {
             buttongroup.clearSelection();

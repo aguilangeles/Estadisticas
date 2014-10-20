@@ -5,12 +5,12 @@
  */
 package documento;
 
-import documento.JCTiipoDoc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import models.Filtro;
 
 /**
  *
@@ -20,11 +20,13 @@ public class GetTypedocs {
 
     private final JComboBox typedoc;
     private final JLabel nametypedoc;
+    private final Filtro filtro;
     private final JCTiipoDoc jComboTipoDoc = new JCTiipoDoc();
 
-    public GetTypedocs(JComboBox typedoc, JLabel nametypedoc) {
+    public GetTypedocs(JComboBox typedoc, JLabel nametypedoc, Filtro filtro) {
         this.typedoc = typedoc;
         this.nametypedoc = nametypedoc;
+        this.filtro = filtro;
     }
 
     private void actionTypeCombo(final JComboBox typedoc1) {

@@ -5,27 +5,31 @@
  */
 package usuario;
 
-import usuario.JCTipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import models.Filtro;
 
 /**
  *
  * @author aguilangeles@gmail.com
  */
 public class GetUsername {
+
     private final JComboBox usuario;
     private final JLabel nameusuario;
     private final JCTipoUsuario typeuser = new JCTipoUsuario();
+    private final Filtro filtro;
 
-    public GetUsername(JComboBox user, JLabel nameusuario) {
+    public GetUsername(JComboBox user, JLabel nameusuario, Filtro filtro) {
         this.usuario = user;
         this.nameusuario = nameusuario;
+        this.filtro = filtro;
     }
-        private void actionUserCombo(final JComboBox username1) {
+
+    private void actionUserCombo(final JComboBox username1) {
         username1.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
