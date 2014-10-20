@@ -5,6 +5,8 @@
  */
 package frame;
 
+import usuario.JCTipoUsuario;
+import documento.JCTiipoDoc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JCheckBox;

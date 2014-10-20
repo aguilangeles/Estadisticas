@@ -5,6 +5,9 @@
  */
 package frame;
 
+import fecha.GetDates;
+import usuario.GetUsername;
+import documento.GetTypedocs;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import models.Filtro;
@@ -38,9 +41,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
         cantidades = new GetCantidadVerificacion(jlnumTrazas, jlnumAcep, jlnumRech, jlnumNull);
         list = new ChBoxList(jchFecha, jchDocumento, jchUsuario);
 
-        dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
-        typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
-        username = new GetUsername(jcTipoUsuario, jlUsername);
         TipoVerificacion verificacion = new TipoVerificacion(jrbCalidad, jrbDocumento, jchFecha, jchDocumento, jchUsuario, cantidades);
         filtro = verificacion.getFiltro();
 
@@ -498,7 +498,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
                 break;
             case 7:
                 //solo usuario
-
                 dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, group);
                 typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc);
                 username = new GetUsername(jcTipoUsuario, jlUsername);

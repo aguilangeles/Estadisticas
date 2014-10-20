@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frame;
+package documento;
 
 import estadisticas.Conexion;
 import java.sql.SQLException;
@@ -15,36 +15,40 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author aguilangeles@gmail.com
  */
-public class JCTipoUsuario {
+public class JCTiipoDoc {
 
-    private DefaultComboBoxModel model = new DefaultComboBoxModel();
+    private final DefaultComboBoxModel model = new DefaultComboBoxModel();
 
-    public void getUsuarios(String condition) {
+    public JCTiipoDoc() {
+    }
+
+    public void getdocumentos(String condition) {
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT distinct t.idUsuarios "
-                    + ", tu.nombre  "
+            String query = "SELECT    "
+                    + "distinct td.descripcion "
                     + "FROM qualitys.traza t "
-                    + "join qualitys.usuarios tu "
-                    + "on t.idUsuarios = tu.id "
+                    + "join qualitys.tipos_documentos td "
+                    + "on t.idTipoDocumento = td.id "
                     + condition;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
-                    model.addElement(conexion.resulset.getString(2));
+
+                    model.addElement(conexion.resulset.getString(1));
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(JCTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JCTiipoDoc.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         conexion.isConexionClose();
     }
 
-    public int getiddocument(String nombre) {
+    public int getiddocument(String description) {
         int id = 0;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT id FROM qualitys.usuarios where nombre = '" + nombre + "';";
+            String query = "SELECT id FROM qualitys.tipos_documentos where descripcion = '" + description + "';";
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
@@ -60,10 +64,6 @@ public class JCTipoUsuario {
 
     public DefaultComboBoxModel getModel() {
         return model;
-    }
-
-    public void setModel(DefaultComboBoxModel model) {
-        this.model = model;
     }
 
 }
