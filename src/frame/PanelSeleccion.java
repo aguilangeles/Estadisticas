@@ -10,6 +10,7 @@ import usuario.GetUsername;
 import documento.GetTypedocs;
 import java.util.List;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import models.Filtro;
 
 /**
@@ -513,98 +514,16 @@ public class PanelSeleccion extends javax.swing.JFrame {
         int valores = getValor();
         String condicion = filtro.toString();
 
-        switch (valores) {
-            case 0:
-                //sin seleccion
-                System.out.println("0");
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
-                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
-                username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
-                System.out.println("advertencia!");
-                dates.desactive();
-                typedocs.desactivar();
-                username.desactive();
-                break;
-            case 1:
-                //fecha, documento y usuario
-                System.out.println("1");
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
-                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
-                username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
-                dates.active(condicion);
-                typedocs.activar(condicion);
-                username.active(condicion);
-                break;
-            case 2:
-                //fecha y documento
-                System.out.println("2");
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
-                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
-                username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
-                dates.active(condicion);
-                typedocs.activar(condicion);
-                username.desactive();
-                break;
-            case 3:
-                System.out.println("3");
-                //fecha y usuario
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
-                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
-                username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
-                dates.active(condicion);
-                typedocs.activar(condicion);
-                username.active(condicion);
-                break;
-            case 4:
-                //documento y usuario
-                System.out.println("4");
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
-                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
-                username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
-                dates.desactive();
-                typedocs.activar(condicion);
-                username.active(condicion);
-                break;
-            case 5:
-                // solo fecha
-                System.out.println("5");
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
-                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
-                username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
-                dates.active(condicion);
-                typedocs.desactivar();
-                username.desactive();
+        dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
+        typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
+        username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
+        SeleccionChecks jButtonSeleccin = new SeleccionChecks(valor, condicion, dates, typedocs, username);
 
-                break;
-            case 6:
-                //solo documento
-                System.out.println("6");
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
-                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
-                username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
-                dates.desactive();
-                typedocs.activar(condicion);
-                username.desactive();
-                break;
-            case 7:
-                //solo usuario
-                System.out.println("7");
-                dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
-                typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
-                username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
-                dates.desactive();
-                typedocs.desactivar();
-                username.active(condicion);
-                break;
-
-        }
     }//GEN-LAST:event_jbChecksActionPerformed
 
     private void jbPreviusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreviusActionPerformed
-        // TODO add your handling code here:
-        cantidades.setvalueoftraza(filtro.toString());
-
         System.out.println("filtro: \t" + filtro.toString());
+        cantidades.setvalueoftraza(filtro.toString());
     }//GEN-LAST:event_jbPreviusActionPerformed
 
     private void jbResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbResetActionPerformed
@@ -622,14 +541,13 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jchUsuario.setSelected(false);
         groupDate.clearSelection();
         dates = new GetDates(jrbEspecifica, jrbCompuesta, jComboExpecifico, jComboCompuesto, jlFirstDate, jlLastDate, groupDate, filtro, allow);
-        dates.resetDates();
+        dates.desactivar();
         typedocs = new GetTypedocs(jcTipodoc, jlNameTipodoc, filtro);
-        typedocs.resetDocs();
+        typedocs.desactivar();
         username = new GetUsername(jcTipoUsuario, jlUsername, filtro);
-        username.resetUser();
+        username.desactivar();
         cantidades.reset();
         setValor(0);
-
 
     }//GEN-LAST:event_jbResetActionPerformed
     private int valores() {

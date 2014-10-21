@@ -41,19 +41,4 @@ public class EnableFilters {
         jbReset.setEnabled(isenabled);
 
     }
-
-    public void setselected() {
-        jchFecha.setSelected(false);
-        jchUsuario.setSelected(false);
-        jbchecks.setSelected(false);
-    }
-
-    public boolean isAllow() {
-        return allow;
-    }
-
-    public void setAllow(boolean allow) {
-        this.allow = allow;
-    }
-
 }

@@ -72,22 +72,7 @@ public class GetDates extends JFrame {
         });
     }
 
-//    public void activarDate(String condicion, boolean isDateSelected) {
-//        simpleDate.setEnabled(isDateSelected);
-//        compoustDate.setEnabled(isDateSelected);
-//
-//        if (isDateSelected) {
-//
-//            actionSelectSimple(condicion);
-//            actionSelectCompuesta(condicion);
-//            actionFirstCombo();
-//            actionLastCombo();
-//
-//        } else {
-//            resetDates();
-//        }
-//    }
-    public void active(String condicion) {
+    public void activar(String condicion) {
         simpleDate.setEnabled(true);
         compoustDate.setEnabled(true);
         actionSelectSimple(condicion);
@@ -96,11 +81,7 @@ public class GetDates extends JFrame {
         actionLastCombo();
     }
 
-    public void desactive() {
-        resetDates();
-    }
-
-    public void resetDates() {
+    public void desactivar() {
         simpleDate.setEnabled(false);
         compoustDate.setEnabled(false);
         buttongroup.clearSelection();
@@ -115,6 +96,7 @@ public class GetDates extends JFrame {
         fecha.setText("Fecha ");
         filtro.setFechas("");
     }
+
 
     public void actionSelectSimple(final String condicion) {
         this.simpleDate.addActionListener(new ActionListener() {
@@ -169,9 +151,5 @@ public class GetDates extends JFrame {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         model.addElement("aaaa-mm-dd");
         return model;
-    }
-
-    public void clearSeleccion() {
-
     }
 }

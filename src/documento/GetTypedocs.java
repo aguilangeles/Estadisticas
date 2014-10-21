@@ -18,22 +18,22 @@ import models.Filtro;
  * @author aguilangeles@gmail.com
  */
 public class GetTypedocs {
-    
+
     private final JComboBox typedoc;
     private final JLabel nametypedoc;
     private final Filtro filtro;
     private final JCTiipoDoc jComboTipoDoc = new JCTiipoDoc();
-    
+
     public GetTypedocs(JComboBox typedoc, JLabel nametypedoc, Filtro filtro) {
         this.typedoc = typedoc;
         this.nametypedoc = nametypedoc;
         this.filtro = filtro;
-        
+
     }
-    
+
     private void actionTypeCombo(final JComboBox typedoc1) {
         typedoc1.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 //cuando se selecciona el valor, se graba en el jlabel 
@@ -47,20 +47,6 @@ public class GetTypedocs {
         }
         );
     }
-    
-//    public void activarTypeDoc(String condicion, boolean isActiveDoc) {
-//        typedoc.setEnabled(isActiveDoc);
-//        if (isActiveDoc) {
-//            //se llena el combo y se le agrega la action
-//            jComboTipoDoc.getdocumentos(condicion);
-//            typedoc.setModel(jComboTipoDoc.getModel());
-//        actionTypeCombo(typedoc);
-//        } else {
-//            resetDocs();
-//            
-//        }
-//        
-//    }
 
     public void activar(String condicion) {
         typedoc.setEnabled(true);
@@ -70,35 +56,16 @@ public class GetTypedocs {
     }
 
     public void desactivar() {
-        resetDocs();
-    }
-//    public void activarTypeDoc(String condicion, boolean isActiveDoc) {
-//        typedoc.setEnabled(isActiveDoc);
-//        if (isActiveDoc) {
-//            //se llena el combo y se le agrega la action
-//            jComboTipoDoc.getdocumentos(condicion);
-//            typedoc.setModel(jComboTipoDoc.getModel());
-//        } else {
-//            resetDocs();
-//
-//        }
-//        actionTypeCombo(typedoc);
-//
-//    }
-
-    public void resetDocs() {
-        //se vuelven los valores a default
-        System.out.println("reset doc");
         typedoc.setEnabled(false);
         typedoc.setModel(getDefault());
         nametypedoc.setText("-----");
         filtro.setDocumento("");
     }
-    
+
     private DefaultComboBoxModel getDefault() {
         DefaultComboBoxModel defaultDco = new DefaultComboBoxModel();
         defaultDco.addElement("Tipo de Documento");
         return defaultDco;
     }
-    
+
 }

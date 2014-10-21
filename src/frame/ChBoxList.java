@@ -26,10 +26,7 @@ public class ChBoxList {
     public ChBoxList(JCheckBox jchFecha, JCheckBox jchDocumento, JCheckBox jchUsuario) {
         this.jchDocumento = jchDocumento;
         this.jchFecha = jchFecha;
-//        this.jchTodos = jchTodos;
         this.jchUsuario = jchUsuario;
-
-//        actionListenerChecks(jchTodos);
         actionListenerChecks(jchFecha);
         actionListenerChecks(jchDocumento);
         actionListenerChecks(jchUsuario);
@@ -56,7 +53,8 @@ public class ChBoxList {
     public List<String> getChecks() {
         return checks;
     }
-    public void remove(){
+
+    public void remove() {
         boolean removeAll = checks.removeAll(checks);
     }
 

@@ -46,20 +46,6 @@ public class GetUsername {
         }
         );
     }
-//
-//    public void activarUsername(String condicion, boolean isActiveUser) {
-//        usuario.setEnabled(true);
-//        if (isActiveUser) {
-//            //se llena el combo y se le agrega la action
-//            typeuser.getUsuarios(condicion);
-//            usuario.setModel(typeuser.getModel());
-//            actionUserCombo(usuario);
-//        } else {
-//            resetUser();
-//
-//        }
-//
-//    }
 
     public void active(String condicion) {
         usuario.setEnabled(true);
@@ -68,12 +54,7 @@ public class GetUsername {
         actionUserCombo(usuario);
     }
 
-    public void desactive() {
-        resetUser();
-    }
-
-    public void resetUser() {
-        //se vuelven los valores a default
+    public void desactivar() {
         usuario.setEnabled(false);
         usuario.setModel(getDefault());
         nameusuario.setText("-----");
