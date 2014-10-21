@@ -46,19 +46,30 @@ public class GetUsername {
         }
         );
     }
+//
+//    public void activarUsername(String condicion, boolean isActiveUser) {
+//        usuario.setEnabled(true);
+//        if (isActiveUser) {
+//            //se llena el combo y se le agrega la action
+//            typeuser.getUsuarios(condicion);
+//            usuario.setModel(typeuser.getModel());
+//            actionUserCombo(usuario);
+//        } else {
+//            resetUser();
+//
+//        }
+//
+//    }
 
-    public void activarUsername(String condicion, boolean isActiveUser) {
+    public void active(String condicion) {
         usuario.setEnabled(true);
-        if (isActiveUser) {
-            //se llena el combo y se le agrega la action
-            typeuser.getUsuarios(condicion);
-            usuario.setModel(typeuser.getModel());
-            actionUserCombo(usuario);
-        } else {
-            resetUser();
+        typeuser.getUsuarios(condicion);
+        usuario.setModel(typeuser.getModel());
+        actionUserCombo(usuario);
+    }
 
-        }
-
+    public void desactive() {
+        resetUser();
     }
 
     public void resetUser() {

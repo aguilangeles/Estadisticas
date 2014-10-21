@@ -56,5 +56,8 @@ public class ChBoxList {
     public List<String> getChecks() {
         return checks;
     }
+    public void remove(){
+        boolean removeAll = checks.removeAll(checks);
+    }
 
 }

@@ -72,20 +72,32 @@ public class GetDates extends JFrame {
         });
     }
 
-    public void activarDate(String condicion, boolean isDateSelected) {
-        simpleDate.setEnabled(isDateSelected);
-        compoustDate.setEnabled(isDateSelected);
+//    public void activarDate(String condicion, boolean isDateSelected) {
+//        simpleDate.setEnabled(isDateSelected);
+//        compoustDate.setEnabled(isDateSelected);
+//
+//        if (isDateSelected) {
+//
+//            actionSelectSimple(condicion);
+//            actionSelectCompuesta(condicion);
+//            actionFirstCombo();
+//            actionLastCombo();
+//
+//        } else {
+//            resetDates();
+//        }
+//    }
+    public void active(String condicion) {
+        simpleDate.setEnabled(true);
+        compoustDate.setEnabled(true);
+        actionSelectSimple(condicion);
+        actionSelectCompuesta(condicion);
+        actionFirstCombo();
+        actionLastCombo();
+    }
 
-        if (isDateSelected) {
-
-            actionSelectSimple(condicion);
-            actionSelectCompuesta(condicion);
-            actionFirstCombo();
-            actionLastCombo();
-
-        } else {
-            resetDates();
-        }
+    public void desactive() {
+        resetDates();
     }
 
     public void resetDates() {

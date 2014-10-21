@@ -42,6 +42,12 @@ public class EnableFilters {
 
     }
 
+    public void setselected() {
+        jchFecha.setSelected(false);
+        jchUsuario.setSelected(false);
+        jbchecks.setSelected(false);
+    }
+
     public boolean isAllow() {
         return allow;
     }
