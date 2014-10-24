@@ -6,6 +6,7 @@
 package frame;
 
 import ErroresPorTraza.GEtListOfTrazas;
+import ErroresPorTraza.TrazaControl;
 import fecha.GetDates;
 import usuario.GetUsername;
 import documento.GetTypedocs;
@@ -529,7 +530,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
 //        System.out.println("filtro: \t" + filtro.toString());
         //storear las trazas resultantes con este filtro
         cantidades.setvalueoftraza(filtro.toString());
-        GEtListOfTrazas list = new GEtListOfTrazas(filtro, 0);
+        GEtListOfTrazas list = new GEtListOfTrazas(filtro);
+        for (TrazaControl cc : list.getListTrazas()) {
+            System.out.println(cc.toString());
+        }
     }//GEN-LAST:event_jbPreviusActionPerformed
 
     private void jbResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbResetActionPerformed
