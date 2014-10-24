@@ -17,11 +17,10 @@ import javax.swing.JCheckBox;
  */
 public class ChBoxList {
 
-    private javax.swing.JCheckBox jchDocumento;
-    private javax.swing.JCheckBox jchFecha;
-//    private javax.swing.JCheckBox jchTodos;
-    private javax.swing.JCheckBox jchUsuario;
-    private List<String> checks = new ArrayList<>();
+    private final javax.swing.JCheckBox jchDocumento;
+    private final javax.swing.JCheckBox jchFecha;
+    private final javax.swing.JCheckBox jchUsuario;
+    private final List<String> checks = new ArrayList<>();
 
     public ChBoxList(JCheckBox jchFecha, JCheckBox jchDocumento, JCheckBox jchUsuario) {
         this.jchDocumento = jchDocumento;
@@ -40,7 +39,6 @@ public class ChBoxList {
                 if (aCheck.isSelected()) {
                     if (!checks.contains(aCheck.getText())) {
                         checks.add(aCheck.getText());
-
                     }
                 } else {
                     checks.remove(aCheck.getText());
@@ -58,4 +56,24 @@ public class ChBoxList {
         boolean removeAll = checks.removeAll(checks);
     }
 
+    public int sss() {
+        int valor = 0;
+        List lista = getChecks();
+        if (lista.size() == 3 && lista.contains("Fecha") && lista.contains("Documento") && lista.contains("Usuario")) {
+            valor = 1;
+        } else if (lista.size() == 2 && lista.contains("Fecha") && lista.contains("Documento")) {
+            valor = 2;
+        } else if (lista.size() == 2 && lista.contains("Fecha") && lista.contains("Usuario")) {
+            valor = 3;
+        } else if (lista.size() == 2 && lista.contains("Documento") && lista.contains("Usuario")) {
+            valor = 4;
+        } else if (lista.size() == 1 && lista.contains("Fecha")) {
+            valor = 5;
+        } else if (lista.size() == 1 && lista.contains("Documento")) {
+            valor = 6;
+        } else if (lista.size() == 1 && lista.contains("Usuario")) {
+            valor = 7;
+        }
+        return valor;
+    }
 }
