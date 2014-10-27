@@ -398,6 +398,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
         jbGo.setBackground(new java.awt.Color(204, 255, 255));
         jbGo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-20.png"))); // NOI18N
         jbGo.setEnabled(false);
+        jbGo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGoActionPerformed(evt);
+            }
+        });
 
         jbReset.setBackground(new java.awt.Color(204, 255, 255));
         jbReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross-16.png"))); // NOI18N
@@ -527,13 +532,12 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }//GEN-LAST:event_jbChecksActionPerformed
 
     private void jbPreviusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreviusActionPerformed
-//        System.out.println("filtro: \t" + filtro.toString());
-        //storear las trazas resultantes con este filtro
         cantidades.setvalueoftraza(filtro.toString());
-        GEtListOfTrazas list = new GEtListOfTrazas(filtro);
-        for (TrazaControl cc : list.getListTrazas()) {
-            System.out.println(cc.toString());
-        }
+        
+//        GEtListOfTrazas list = new GEtListOfTrazas(filtro);
+//        for (TrazaControl cc : list.getListTrazas()) {
+//            System.out.println(cc.toString());
+//        }
     }//GEN-LAST:event_jbPreviusActionPerformed
 
     private void jbResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbResetActionPerformed
@@ -561,6 +565,16 @@ public class PanelSeleccion extends javax.swing.JFrame {
         setValor(0);
 
     }//GEN-LAST:event_jbResetActionPerformed
+
+    private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
+         cantidades.setvalueoftraza(filtro.toString());
+        GEtListOfTrazas list = new GEtListOfTrazas(filtro);
+        for (TrazaControl cc : list.getListTrazas()) {
+            System.out.println(cc.toString());
+        }
+        
+        
+    }//GEN-LAST:event_jbGoActionPerformed
     private int valores() {
         List lista = list.getChecks();
 

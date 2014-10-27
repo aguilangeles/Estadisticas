@@ -12,11 +12,14 @@ import java.util.List;
  * @author aguilangeles@gmail.com
  */
 public class TrazaControl {
+
     private int id;
+    private int muestra;
     private List<TipodeControl> controles;
 
-    public TrazaControl(int id, List<TipodeControl> controles) {
+    public TrazaControl(int id, List<TipodeControl> controles, int muestr) {
         this.id = id;
+        this.muestra = muestr;
         this.controles = controles;
     }
 
@@ -36,10 +39,20 @@ public class TrazaControl {
         this.controles = controles;
     }
 
+    public int getMuestra() {
+        return muestra;
+    }
+
+    public void setMuestra(int muestra) {
+        this.muestra = muestra;
+    }
+
     @Override
     public String toString() {
-        return "TrazaControl{" + "id=" + id + ", controles=" + controles + '}';
+        return "TrazaControl{" + "id=" + id + ", muestra=" + muestra + ", controles=" + controles + '}';
     }
+
     
     
+
 }

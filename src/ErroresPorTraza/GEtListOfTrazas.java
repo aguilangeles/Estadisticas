@@ -19,7 +19,7 @@ import models.Filtro;
  */
 public class GEtListOfTrazas {
 
-    private  List<TrazaControl> trazas;
+    private List<TrazaControl> trazas;
 
     public GEtListOfTrazas(Filtro filtroFinal) {
         trazas = getTrazas(filtroFinal);
@@ -30,14 +30,16 @@ public class GEtListOfTrazas {
         TrazaControl trazacontrol = null;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT id FROM qualitys.traza " + filtroFinal.toString();
+            String query = "SELECT id, cantidad_muestreada FROM qualitys.traza " + filtroFinal.toString() + "and estadoLote is not null";
+            System.out.println("query:" + query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
 
                     int result = conexion.resulset.getInt(1);
+                    int muestr = conexion.resulset.getInt(2);
                     List<TipodeControl> control = getTiposdeControlPorTraza(result);
-                    trazacontrol = new TrazaControl(result, control);
+                    trazacontrol = new TrazaControl(result, control, muestr);
                     traza.add(trazacontrol);
                 }
             } catch (SQLException ex) {

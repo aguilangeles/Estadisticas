@@ -9,7 +9,6 @@ import estadisticas.Conexion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 
 /**
@@ -20,23 +19,9 @@ import javax.swing.JLabel;
  */
 public class GetCantidadVerificacion {
 
-//    private String condition;
-////    private final ValuesTraza traza;
-//    private DefaultComboBoxModel doctypeCombo;
-//    private DefaultComboBoxModel userCombo;
     private final JLabel total, aceptadas, rechazadas, nulas;
+    private int ftotal, facept, frech, fnull;
 
-//    public GetCantidadVerificacion(String condition, ValuesTraza traza, JLabel total, JLabel aceptadas, JLabel rechazadas, JLabel nulas) {
-//        this.condition = condition;
-//        this.traza = traza;
-//        int id = traza.getIdVerificacion();
-//        setvalueoftraza(id, condition);
-//
-//        setlabels(total, aceptadas, rechazadas, nulas);
-//        this.doctypeCombo = modelDoctype(condition);
-//        this.userCombo = modelUsername(condition);
-//
-//    }
     public GetCantidadVerificacion(JLabel total, JLabel aceptadas, JLabel rechazadas, JLabel nulas) {
         this.total = total;
         this.aceptadas = aceptadas;
@@ -104,11 +89,10 @@ public class GetCantidadVerificacion {
         }
         return result;
     }
-    public void reset(){
-         setlabels(0, 0, 0, 0);
-    }
 
-   
+    public void reset() {
+        setlabels(0, 0, 0, 0);
+    }
 
 //    public final DefaultComboBoxModel modelDoctype(String condition) {
 //        JComboTipoDoc jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), condition);
@@ -127,5 +111,4 @@ public class GetCantidadVerificacion {
 //    public DefaultComboBoxModel getUserCombo() {
 //        return userCombo;
 //    }
-
 }
