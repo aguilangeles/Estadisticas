@@ -33,33 +33,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private final EnableFilters allow;
     private int valor;
 
-    public int getValor() {
-        //TODO pasar esto a la clase de la lista
-        List lista = list.getChecks();
-
-        if (lista.size() == 3 && lista.contains("Fecha") && lista.contains("Documento") && lista.contains("Usuario")) {
-            valor = 1;
-        } else if (lista.size() == 2 && lista.contains("Fecha") && lista.contains("Documento")) {
-            valor = 2;
-        } else if (lista.size() == 2 && lista.contains("Fecha") && lista.contains("Usuario")) {
-            valor = 3;
-        } else if (lista.size() == 2 && lista.contains("Documento") && lista.contains("Usuario")) {
-            valor = 4;
-        } else if (lista.size() == 1 && lista.contains("Fecha")) {
-            valor = 5;
-        } else if (lista.size() == 1 && lista.contains("Documento")) {
-            valor = 6;
-        } else if (lista.size() == 1 && lista.contains("Usuario")) {
-            valor = 7;
-        }
-
-        return valor;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
-
     /**
      * Creates new form PanelSeleccion
      */
@@ -534,10 +507,6 @@ public class PanelSeleccion extends javax.swing.JFrame {
     private void jbPreviusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreviusActionPerformed
         cantidades.setvalueoftraza(filtro.toString());
 
-//        GEtListOfTrazas list = new GEtListOfTrazas(filtro);
-//        for (TrazaControl cc : list.getListTrazas()) {
-//            System.out.println(cc.toString());
-//        }
     }//GEN-LAST:event_jbPreviusActionPerformed
 
     private void jbResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbResetActionPerformed
@@ -570,7 +539,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
         cantidades.setvalueoftraza(filtro.toString());
         int aceptadas = cantidades.getFacept();
         int rechazadas = cantidades.getFrech();
-     
+
         GEtListOfTrazas list = new GEtListOfTrazas(filtro, aceptadas, rechazadas);
         for (TrazaControl cc : list.getListTrazas()) {
             System.out.println(cc.toString());
@@ -578,7 +547,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jbGoActionPerformed
-    private int valores() {
+    public int getValor() {
+        //TODO pasar esto a la clase de la lista
         List lista = list.getChecks();
 
         if (lista.size() == 3 && lista.contains("Fecha") && lista.contains("Documento") && lista.contains("Usuario")) {
@@ -597,6 +567,10 @@ public class PanelSeleccion extends javax.swing.JFrame {
             valor = 7;
         }
         return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
     }
 
     /**

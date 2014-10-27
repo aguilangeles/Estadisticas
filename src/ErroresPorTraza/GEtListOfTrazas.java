@@ -34,10 +34,12 @@ public class GEtListOfTrazas {
         TrazaControl trazacontrol = null;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT id, cantidad_muestreada FROM qualitys.traza "
+            String query = "SELECT id, "
+                    + "cantidad_muestreada "
+                    + "FROM qualitys.traza "
                     + filtroFinal.toString()
-                    + "and estadoLote is not null";
-            System.out.println("query:" + query);
+                    + " and estadoLote is not null";
+//            System.out.println("query:" + query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {

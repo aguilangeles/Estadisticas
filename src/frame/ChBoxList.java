@@ -56,24 +56,4 @@ public class ChBoxList {
         boolean removeAll = checks.removeAll(checks);
     }
 
-    public int sss() {
-        int valor = 0;
-        List lista = getChecks();
-        if (lista.size() == 3 && lista.contains("Fecha") && lista.contains("Documento") && lista.contains("Usuario")) {
-            valor = 1;
-        } else if (lista.size() == 2 && lista.contains("Fecha") && lista.contains("Documento")) {
-            valor = 2;
-        } else if (lista.size() == 2 && lista.contains("Fecha") && lista.contains("Usuario")) {
-            valor = 3;
-        } else if (lista.size() == 2 && lista.contains("Documento") && lista.contains("Usuario")) {
-            valor = 4;
-        } else if (lista.size() == 1 && lista.contains("Fecha")) {
-            valor = 5;
-        } else if (lista.size() == 1 && lista.contains("Documento")) {
-            valor = 6;
-        } else if (lista.size() == 1 && lista.contains("Usuario")) {
-            valor = 7;
-        }
-        return valor;
-    }
 }

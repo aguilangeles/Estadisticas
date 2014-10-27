@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
-import models.ChangeValuesOfTrazas;
+import models.AddConditionsByFilter;
 import models.Filtro;
 
 /**
@@ -53,7 +53,7 @@ public class GetDates extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                String acondicion = new ChangeValuesOfTrazas().dateCondition(jcFirstDate, jcLastDate);
+                String acondicion = new AddConditionsByFilter().dateCondition(jcFirstDate, jcLastDate);
                 filtro.setFechas(acondicion);
 
             }
@@ -65,7 +65,7 @@ public class GetDates extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                String acondicion = new ChangeValuesOfTrazas().dateCondition(jcFirstDate, jcLastDate);
+                String acondicion = new AddConditionsByFilter().dateCondition(jcFirstDate, jcLastDate);
                 filtro.setFechas(acondicion);
 
             }

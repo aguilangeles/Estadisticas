@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import models.ChangeValuesOfTrazas;
+import models.AddConditionsByFilter;
 import models.Filtro;
 
 /**
@@ -39,7 +39,7 @@ public class GetUsername {
                 // y de paso se obtiene el id, para usar en el filtro.
                 String nombre = "" + username1.getSelectedItem();
                 int id = typeuser.getiddocument(nombre);
-                String ausuario = new ChangeValuesOfTrazas().usernameCondition(id);
+                String ausuario = new AddConditionsByFilter().usernameCondition(id);
                 filtro.setUsuario(ausuario);
                 nameusuario.setText(nombre);
             }

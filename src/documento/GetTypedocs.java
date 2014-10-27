@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import models.ChangeValuesOfTrazas;
+import models.AddConditionsByFilter;
 import models.Filtro;
 
 /**
@@ -40,7 +40,7 @@ public class GetTypedocs {
                 // y de paso se obtiene el id, para usar en el filtro.
                 String valor = "" + typedoc1.getSelectedItem();
                 int id = jComboTipoDoc.getiddocument(valor);
-                String adoc = new ChangeValuesOfTrazas().typedocCondition(id);
+                String adoc = new AddConditionsByFilter().typedocCondition(id);
                 filtro.setDocumento(adoc);
                 nametypedoc.setText(valor);
             }
