@@ -20,9 +20,13 @@ import models.Filtro;
 public class GEtListOfTrazas {
 
     private List<TrazaControl> trazas;
+    private int aceptadas, rechazadas;
 
-    public GEtListOfTrazas(Filtro filtroFinal) {
+    public GEtListOfTrazas(Filtro filtroFinal, int aceptadas, int rechazadas) {
+        this.aceptadas = aceptadas;
+        this.rechazadas = rechazadas;
         trazas = getTrazas(filtroFinal);
+
     }
 
     private List<TrazaControl> getTrazas(Filtro filtroFinal) {
@@ -30,7 +34,9 @@ public class GEtListOfTrazas {
         TrazaControl trazacontrol = null;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT id, cantidad_muestreada FROM qualitys.traza " + filtroFinal.toString() + "and estadoLote is not null";
+            String query = "SELECT id, cantidad_muestreada FROM qualitys.traza "
+                    + filtroFinal.toString()
+                    + "and estadoLote is not null";
             System.out.println("query:" + query);
             conexion.executeQuery(query);
             try {
@@ -39,7 +45,7 @@ public class GEtListOfTrazas {
                     int result = conexion.resulset.getInt(1);
                     int muestr = conexion.resulset.getInt(2);
                     List<TipodeControl> control = getTiposdeControlPorTraza(result);
-                    trazacontrol = new TrazaControl(result, control, muestr);
+                    trazacontrol = new TrazaControl(result, muestr, control);
                     traza.add(trazacontrol);
                 }
             } catch (SQLException ex) {
@@ -86,6 +92,35 @@ public class GEtListOfTrazas {
 
     public List<TrazaControl> getListTrazas() {
         return trazas;
+    }
+
+    public List<TrazaControl> getTrazas() {
+        return trazas;
+    }
+
+    public void setTrazas(List<TrazaControl> trazas) {
+        this.trazas = trazas;
+    }
+
+    public int getAceptadas() {
+        return aceptadas;
+    }
+
+    public void setAceptadas(int aceptadas) {
+        this.aceptadas = aceptadas;
+    }
+
+    public int getRechazadas() {
+        return rechazadas;
+    }
+
+    public void setRechazadas(int rechazadas) {
+        this.rechazadas = rechazadas;
+    }
+
+    @Override
+    public String toString() {
+        return "GEtListOfTrazas{" + "trazas=" + trazas + ", aceptadas=" + aceptadas + ", rechazadas=" + rechazadas + '}';
     }
 
 }

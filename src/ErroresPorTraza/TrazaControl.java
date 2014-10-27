@@ -17,11 +17,13 @@ public class TrazaControl {
     private int muestra;
     private List<TipodeControl> controles;
 
-    public TrazaControl(int id, List<TipodeControl> controles, int muestr) {
+    public TrazaControl(int id, int muestra, List<TipodeControl> controles) {
         this.id = id;
-        this.muestra = muestr;
+        this.muestra = muestra;
         this.controles = controles;
     }
+
+ 
 
     public int getId() {
         return id;
@@ -47,6 +49,7 @@ public class TrazaControl {
         this.muestra = muestra;
     }
 
+    
     @Override
     public String toString() {
         return "TrazaControl{" + "id=" + id + ", muestra=" + muestra + ", controles=" + controles + '}';

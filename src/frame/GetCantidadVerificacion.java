@@ -39,12 +39,12 @@ public class GetCantidadVerificacion {
 
     public void setvalueoftraza(String condition1) {
         //
-        int tot = getQuantityofTrazas(condition1);
-        int aceptada = getQuantityof("= '1'", condition1);
-        int rechazado = getQuantityof("= '0'", condition1);
-        int nula = getQuantityof("IS NULL", condition1);
+        ftotal = getQuantityofTrazas(condition1);
+        facept = getQuantityof("= '1'", condition1);
+        frech = getQuantityof("= '0'", condition1);
+        fnull = getQuantityof("IS NULL", condition1);
         //
-        setlabels(tot, aceptada, rechazado, nula);
+        setlabels(ftotal, facept, frech, fnull);
     }
 
     private int getQuantityofTrazas(String condition) {
@@ -94,21 +94,14 @@ public class GetCantidadVerificacion {
         setlabels(0, 0, 0, 0);
     }
 
-//    public final DefaultComboBoxModel modelDoctype(String condition) {
-//        JComboTipoDoc jComboTipoDoc = new JComboTipoDoc(traza.getIdVerificacion(), condition);
-//        return jComboTipoDoc.getModel();
-//    }
-//
-//    public final DefaultComboBoxModel modelUsername(String condition) {
-//        JCTipoUsuario tipoUsuario = new JCTipoUsuario(traza.getIdVerificacion(), condition);
-//        return tipoUsuario.getModel();
-//    }
-//
-//    public DefaultComboBoxModel getDoctypeCombo() {
-//        return doctypeCombo;
-//    }
-//
-//    public DefaultComboBoxModel getUserCombo() {
-//        return userCombo;
-//    }
+    public int getFacept() {
+        return facept;
+    }
+
+    public int getFrech() {
+        return frech;
+    }
+
+
+
 }

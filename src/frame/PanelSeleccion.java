@@ -533,7 +533,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private void jbPreviusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreviusActionPerformed
         cantidades.setvalueoftraza(filtro.toString());
-        
+
 //        GEtListOfTrazas list = new GEtListOfTrazas(filtro);
 //        for (TrazaControl cc : list.getListTrazas()) {
 //            System.out.println(cc.toString());
@@ -567,13 +567,16 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }//GEN-LAST:event_jbResetActionPerformed
 
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
-         cantidades.setvalueoftraza(filtro.toString());
-        GEtListOfTrazas list = new GEtListOfTrazas(filtro);
+        cantidades.setvalueoftraza(filtro.toString());
+        int aceptadas = cantidades.getFacept();
+        int rechazadas = cantidades.getFrech();
+     
+        GEtListOfTrazas list = new GEtListOfTrazas(filtro, aceptadas, rechazadas);
         for (TrazaControl cc : list.getListTrazas()) {
             System.out.println(cc.toString());
         }
-        
-        
+
+
     }//GEN-LAST:event_jbGoActionPerformed
     private int valores() {
         List lista = list.getChecks();
