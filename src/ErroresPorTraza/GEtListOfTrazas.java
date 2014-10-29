@@ -35,19 +35,23 @@ public class GEtListOfTrazas {
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
             String query = "SELECT id, "
-                    + "cantidad_muestreada "
-                    + "FROM qualitys.traza "
+                    + " cantidad_muestreada ,"
+                    + " estadoLote "
+                    + " FROM qualitys.traza "
                     + filtroFinal.toString()
                     + " and estadoLote is not null";
-//            System.out.println("query:" + query);
+//           System.out.println("query:" + query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
 
                     int result = conexion.resulset.getInt(1);
                     int muestr = conexion.resulset.getInt(2);
+                    int est = conexion.resulset.getInt(3);
+
                     List<TipodeControl> control = getTiposdeControlPorTraza(result);
-                    trazacontrol = new TrazaControl(result, muestr, control);
+
+                    trazacontrol = new TrazaControl(result, muestr, est, control);
                     traza.add(trazacontrol);
                 }
             } catch (SQLException ex) {
@@ -59,6 +63,7 @@ public class GEtListOfTrazas {
     }
 
     private List<TipodeControl> getTiposdeControlPorTraza(int id) {
+        int idsum=0;
         TipodeControl control = null;
         List<TipodeControl> controles = new ArrayList();
         Conexion conexion = new Conexion();
@@ -77,11 +82,11 @@ public class GEtListOfTrazas {
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
-
+                    idsum++;
                     int idcontrol = conexion.resulset.getInt(1);
                     String nombre = conexion.resulset.getString(2);
                     int cantidad = conexion.resulset.getInt(3);
-                    control = new TipodeControl(idcontrol, nombre, cantidad);
+                    control = new TipodeControl(idsum, idcontrol, nombre, cantidad);
                     controles.add(control);
                 }
             } catch (SQLException ex) {

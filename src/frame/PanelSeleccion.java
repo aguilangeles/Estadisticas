@@ -5,8 +5,7 @@
  */
 package frame;
 
-import ErroresPorTraza.GEtListOfTrazas;
-import ErroresPorTraza.TrazaControl;
+import ErroresPorTraza.Procesor;
 import fecha.GetDates;
 import usuario.GetUsername;
 import documento.GetTypedocs;
@@ -536,16 +535,28 @@ public class PanelSeleccion extends javax.swing.JFrame {
     }//GEN-LAST:event_jbResetActionPerformed
 
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
-        cantidades.setvalueoftraza(filtro.toString());
+        cantidades.setvalueoftraza(filtro.toString());//porque no lo hace?
+
         int aceptadas = cantidades.getFacept();
         int rechazadas = cantidades.getFrech();
+        int total = 0;
+        
+        Procesor procesor = new Procesor(filtro, aceptadas, rechazadas);
+//        GEtListOfTrazas list = new GEtListOfTrazas(filtro, aceptadas, rechazadas);
+////        for (TrazaControl cc : list.getListTrazas()) {
+//////            System.out.println(cc.toString());
+////            if (!cc.getControles().isEmpty()) {
+////                System.out.println(cc.getControles());
+////            }
+////            for (TipodeControl tdc : cc.getControles()) {
+////                System.out.println(tdc);
+////            }
+////
+//////            total += cc.getMuestra();
+//////            System.out.println("-----" + total);
+////        }
 
-        GEtListOfTrazas list = new GEtListOfTrazas(filtro, aceptadas, rechazadas);
-        for (TrazaControl cc : list.getListTrazas()) {
-            System.out.println(cc.toString());
-        }
-
-
+        System.exit(0);
     }//GEN-LAST:event_jbGoActionPerformed
     public int getValor() {
         //TODO pasar esto a la clase de la lista

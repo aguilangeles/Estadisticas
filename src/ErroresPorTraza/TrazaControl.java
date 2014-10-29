@@ -15,15 +15,15 @@ public class TrazaControl {
 
     private int id;
     private int muestra;
+    private int estado;
     private List<TipodeControl> controles;
 
-    public TrazaControl(int id, int muestra, List<TipodeControl> controles) {
+    public TrazaControl(int id, int muestra, int estado, List<TipodeControl> controles) {
         this.id = id;
         this.muestra = muestra;
+        this.estado = estado;
         this.controles = controles;
     }
-
- 
 
     public int getId() {
         return id;
@@ -49,13 +49,19 @@ public class TrazaControl {
         this.muestra = muestra;
     }
 
-    
-    @Override
-    public String toString() {
-        return "TrazaControl{" + "id=" + id + ", muestra=" + muestra + ", controles=" + controles + '}';
+    public int getEstado() {
+        return estado;
     }
 
-    
-    
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+  
+
+    @Override
+    public String toString() {
+        return "TrazaControl{" + "id=" + id + ", muestra=" + muestra + ", estado=" + estado + ", controles=" + controles + '}';
+    }
 
 }

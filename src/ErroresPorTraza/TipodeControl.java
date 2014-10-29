@@ -10,17 +10,18 @@ package ErroresPorTraza;
  * @author aguilangeles@gmail.com
  */
 public class TipodeControl {
+
     private int id;
-    private String  nombre;
+    private int idcontrol;
+    private String nombre;
     private int cantidad;
 
-    public TipodeControl(int id, String nombre, int cantidad) {
+    public TipodeControl(int id, int idcontrol, String nombre, int cantidad) {
         this.id = id;
+        this.idcontrol = idcontrol;
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
-
-  
 
     public TipodeControl() {
     }
@@ -32,8 +33,6 @@ public class TipodeControl {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     public String getNombre() {
         return nombre;
@@ -51,12 +50,20 @@ public class TipodeControl {
         this.cantidad = cantidad;
     }
 
+    public int getIdcontrol() {
+        return idcontrol;
+    }
+
+    public void setIdcontrol(int idcontrol) {
+        this.idcontrol = idcontrol;
+    }
+
     @Override
     public String toString() {
-        return "TipodeControl{" + "id=" + id +  ", nombre=" + nombre + ", cantidad=" + cantidad + '}';
+        return "TipodeControl{" + "id=" + id + ", idcontrol=" + idcontrol + ", nombre=" + nombre + ", cantidad=" + cantidad + '}';
     }
     
-    
-    
-    
+
+ 
+
 }
