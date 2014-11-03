@@ -22,8 +22,6 @@ public class Procesor {
     private Filtro filtro;
     private int aceptadas, rechazadas;
     GEtListOfTrazas list = null;
-    List<TipodeControl> ultimalist = new ArrayList<>();
-    Map<Integer, TipodeControl> mapcontrol = new HashMap();
     private DefaultTableModel modelo_;
 
     public Procesor(Filtro filtro, int aceptadas, int rechazadas) {
@@ -36,21 +34,6 @@ public class Procesor {
     }
 
     private void getErroresporTraza() {
-        int valor = 0;
-
-        for (TrazaControl ct : list.getListTrazas()) {
-            if (!ct.getControles().isEmpty()) {
-                List<TipodeControl> listcontrol = ct.getControles();
-                for (TipodeControl listcontrol1 : listcontrol) {
-                    valor += ct.iterar(listcontrol1.getNombre());
-//                    System.out.println("valor " + listcontrol1.getNombre() + "; " + valor);
-                }
-            }
-        }
-    }
-
-    private void getlistafinal(int valor, TipodeControl tipodeControl) {
-        mapcontrol.put(valor, tipodeControl);
 
     }
 
@@ -66,12 +49,12 @@ public class Procesor {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("tipo error");
         modelo.addColumn("cantidad");
-
-        for (Map.Entry<Integer, TipodeControl> entrySet : mapcontrol.entrySet()) {
-            Integer key = entrySet.getKey();
-            TipodeControl value = entrySet.getValue();
-            String nombre = value.getNombre();
-            int cantidad = value.getCantidad();
+        List<TipodeControl> controles = list.getControles();
+        
+        for (TipodeControl controle : controles) {
+            System.out.println(controle);
+            String nombre = controle.getNombre();
+            int cantidad = controle.getCantidad();
             System.out.println("insertando modelo");
             modelo.addRow(new Object[]{nombre, cantidad});
         }

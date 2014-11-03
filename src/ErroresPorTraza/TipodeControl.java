@@ -5,34 +5,47 @@
  */
 package ErroresPorTraza;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author aguilangeles@gmail.com
  */
 public class TipodeControl {
 
-    private int id;
+    private int idtraza;
     private int idcontrol;
     private String nombre;
     private int cantidad;
-        List<String> nombres= new ArrayList();
 
-    public TipodeControl(int id, int idcontrol, String nombre, int cantidad) {
-        this.id = id;
+    public TipodeControl(int idtraza, int idcontrol, String nombre, int cantidad) {
+        this.idtraza = idtraza;
         this.idcontrol = idcontrol;
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
 
-    public int getId() {
-        return id;
+    public TipodeControl(String nombre, int cantidad) {
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+    }
+    
+    
+
+ 
+
+    public int getIdtraza() {
+        return idtraza;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdtraza(int idtraza) {
+        this.idtraza = idtraza;
+    }
+
+    public int getIdcontrol() {
+        return idcontrol;
+    }
+
+    public void setIdcontrol(int idcontrol) {
+        this.idcontrol = idcontrol;
     }
 
     public String getNombre() {
@@ -51,17 +64,9 @@ public class TipodeControl {
         this.cantidad = cantidad;
     }
 
-    public int getIdcontrol() {
-        return idcontrol;
-    }
-
-    public void setIdcontrol(int idcontrol) {
-        this.idcontrol = idcontrol;
-    }
-
     @Override
     public String toString() {
-        return "TipodeControl{" + "id=" + id + ", idcontrol=" + idcontrol + ", nombre=" + nombre + ", cantidad=" + cantidad + '}';
+        return "TipodeControl{" + "idtraza=" + idtraza + ", idcontrol=" + idcontrol + ", nombre=" + nombre + ", cantidad=" + cantidad + '}';
     }
 
 }

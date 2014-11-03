@@ -24,15 +24,18 @@ public class GEtListOfTrazas {
     private List<TrazaControl> trazas;
     private int aceptadas, rechazadas;
     private Set<String> nombres = new HashSet<>();
+    List<Integer> ides = new ArrayList<>();
+    private List<TipodeControl> controles = new ArrayList();
 
     public GEtListOfTrazas(Filtro filtroFinal, int aceptadas, int rechazadas) {
         this.aceptadas = aceptadas;
         this.rechazadas = rechazadas;
         trazas = getTrazas(filtroFinal);
-
+        getTiposdeControlPorTraza();
     }
 
     private List<TrazaControl> getTrazas(Filtro filtroFinal) {
+        int position = 0;
         List<TrazaControl> traza = new ArrayList<>();
         TrazaControl trazacontrol = null;
         Conexion conexion = new Conexion();
@@ -43,17 +46,16 @@ public class GEtListOfTrazas {
                     + " FROM qualitys.traza "
                     + filtroFinal.toString()
                     + " and estadoLote is not null";
-//           System.out.println("query:" + query);
+//            System.out.println("query: " + query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
-
+                    position++;
                     int result = conexion.resulset.getInt(1);
                     int muestr = conexion.resulset.getInt(2);
                     int est = conexion.resulset.getInt(3);
-                    List<TipodeControl> control = getTiposdeControlPorTraza(result);
-
-                    trazacontrol = new TrazaControl(result, muestr, est, control);
+                    agregararray(result);
+                    trazacontrol = new TrazaControl(result, muestr, est, null);
                     traza.add(trazacontrol);
                 }
             } catch (SQLException ex) {
@@ -64,10 +66,16 @@ public class GEtListOfTrazas {
         return traza;
     }
 
-    private List<TipodeControl> getTiposdeControlPorTraza(int id) {
-        int idsum=0;
+    private void agregararray(int id) {
+        ides.add(id);
+
+    }
+
+    private List<TipodeControl> getTiposdeControlPorTraza() {
+        String right = prepareInclude();
+
         TipodeControl control = null;
-        List<TipodeControl> controles = new ArrayList();
+//        List<TipodeControl> controles = new ArrayList();
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
             String query = "SELECT  "
@@ -77,30 +85,40 @@ public class GEtListOfTrazas {
                     + " FROM qualitys.traza_archivo_controles tac "
                     + " join controles c "
                     + " on tac.idcontrol= c.id "
-                    + " where idtraza = " + id
+                    + " where idtraza IN " + right
                     + " and tac.estado = 1 "
                     + " group by tac.idcontrol "
                     + "; ";
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
-                    idsum++;
-                    int idcontrol = conexion.resulset.getInt(1);
                     String nombre = conexion.resulset.getString(2);
                     int cantidad = conexion.resulset.getInt(3);
-                  
-                    nombres.add(nombre);
-                    
-                    control = new TipodeControl(idsum, idcontrol, nombre, cantidad);
+                    control = new TipodeControl(nombre, cantidad);
                     controles.add(control);
+
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(GEtListOfTrazas.class.getName()).log(Level.SEVERE, null, ex);
             }
             conexion.isConexionClose();
         }
-//        System.out.println(nombres.toString());
         return controles;
+    }
+
+    public List<TipodeControl> getControles() {
+        return controles;
+    }
+
+    private String prepareInclude() {
+        String numeros = ides.toString();
+        String left = numeros.replace("[", "(");
+        String right = left.replace("]", ")");
+        return right;
+    }
+
+    public Set<String> getNombres() {
+        return nombres;
     }
 
     public List<TrazaControl> getListTrazas() {
@@ -130,15 +148,6 @@ public class GEtListOfTrazas {
     public void setRechazadas(int rechazadas) {
         this.rechazadas = rechazadas;
     }
-
-    public Set<String> getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(Set<String> nombres) {
-        this.nombres = nombres;
-    }
-    
 
     @Override
     public String toString() {

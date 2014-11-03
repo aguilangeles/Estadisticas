@@ -6,6 +6,7 @@
 package frame;
 
 import ErroresPorTraza.Procesor;
+import ErroresPorTraza.TAbla;
 import fecha.GetDates;
 import usuario.GetUsername;
 import documento.GetTypedocs;
@@ -540,30 +541,15 @@ public class PanelSeleccion extends javax.swing.JFrame {
         int aceptadas = cantidades.getFacept();
         int rechazadas = cantidades.getFrech();
         int total = 0;
-        
-        final Procesor procesor = new Procesor(filtro, aceptadas, rechazadas);
-//         java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new TAbla(procesor).setVisible(true);
-//            }
-//        });
-//         this.dispose();
-        
-//        GEtListOfTrazas list = new GEtListOfTrazas(filtro, aceptadas, rechazadas);
-////        for (TrazaControl cc : list.getListTrazas()) {
-//////            System.out.println(cc.toString());
-////            if (!cc.getControles().isEmpty()) {
-////                System.out.println(cc.getControles());
-////            }
-////            for (TipodeControl tdc : cc.getControles()) {
-////                System.out.println(tdc);
-////            }
-////
-//////            total += cc.getMuestra();
-//////            System.out.println("-----" + total);
-////        }
 
-//        System.exit(0);
+        final Procesor procesor = new Procesor(filtro, aceptadas, rechazadas);
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TAbla(procesor).setVisible(true);
+            }
+        });
+
     }//GEN-LAST:event_jbGoActionPerformed
     public int getValor() {
         //TODO pasar esto a la clase de la lista
