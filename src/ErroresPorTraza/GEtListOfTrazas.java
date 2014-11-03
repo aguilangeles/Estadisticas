@@ -8,7 +8,9 @@ package ErroresPorTraza;
 import estadisticas.Conexion;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Filtro;
@@ -21,6 +23,7 @@ public class GEtListOfTrazas {
 
     private List<TrazaControl> trazas;
     private int aceptadas, rechazadas;
+    private Set<String> nombres = new HashSet<>();
 
     public GEtListOfTrazas(Filtro filtroFinal, int aceptadas, int rechazadas) {
         this.aceptadas = aceptadas;
@@ -48,7 +51,6 @@ public class GEtListOfTrazas {
                     int result = conexion.resulset.getInt(1);
                     int muestr = conexion.resulset.getInt(2);
                     int est = conexion.resulset.getInt(3);
-
                     List<TipodeControl> control = getTiposdeControlPorTraza(result);
 
                     trazacontrol = new TrazaControl(result, muestr, est, control);
@@ -86,6 +88,9 @@ public class GEtListOfTrazas {
                     int idcontrol = conexion.resulset.getInt(1);
                     String nombre = conexion.resulset.getString(2);
                     int cantidad = conexion.resulset.getInt(3);
+                  
+                    nombres.add(nombre);
+                    
                     control = new TipodeControl(idsum, idcontrol, nombre, cantidad);
                     controles.add(control);
                 }
@@ -94,6 +99,7 @@ public class GEtListOfTrazas {
             }
             conexion.isConexionClose();
         }
+//        System.out.println(nombres.toString());
         return controles;
     }
 
@@ -124,6 +130,15 @@ public class GEtListOfTrazas {
     public void setRechazadas(int rechazadas) {
         this.rechazadas = rechazadas;
     }
+
+    public Set<String> getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(Set<String> nombres) {
+        this.nombres = nombres;
+    }
+    
 
     @Override
     public String toString() {

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import javax.swing.table.DefaultTableModel;
 import models.Filtro;
 
 /**
@@ -22,6 +24,7 @@ public class Procesor {
     GEtListOfTrazas list = null;
     List<TipodeControl> ultimalist = new ArrayList<>();
     Map<Integer, TipodeControl> mapcontrol = new HashMap();
+    private DefaultTableModel modelo_;
 
     public Procesor(Filtro filtro, int aceptadas, int rechazadas) {
         this.filtro = filtro;
@@ -29,7 +32,7 @@ public class Procesor {
         this.rechazadas = rechazadas;
         this.list = new GEtListOfTrazas(filtro, aceptadas, rechazadas);
         getErroresporTraza();
-        iterar();
+        this.modelo_ = tabla();
     }
 
     private void getErroresporTraza() {
@@ -39,23 +42,40 @@ public class Procesor {
             if (!ct.getControles().isEmpty()) {
                 List<TipodeControl> listcontrol = ct.getControles();
                 for (TipodeControl listcontrol1 : listcontrol) {
-                    valor++;
-                    getlistafinal(valor, listcontrol1);
-
+                    valor += ct.iterar(listcontrol1.getNombre());
+//                    System.out.println("valor " + listcontrol1.getNombre() + "; " + valor);
                 }
-
             }
-
         }
-
     }
 
     private void getlistafinal(int valor, TipodeControl tipodeControl) {
         mapcontrol.put(valor, tipodeControl);
+
     }
 
-    private void iterar() {
-        
+    public DefaultTableModel getModelo_() {
+        return modelo_;
+    }
 
+    public void setModelo_(DefaultTableModel modelo_) {
+        this.modelo_ = modelo_;
+    }
+
+    private DefaultTableModel tabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("tipo error");
+        modelo.addColumn("cantidad");
+
+        for (Map.Entry<Integer, TipodeControl> entrySet : mapcontrol.entrySet()) {
+            Integer key = entrySet.getKey();
+            TipodeControl value = entrySet.getValue();
+            String nombre = value.getNombre();
+            int cantidad = value.getCantidad();
+            System.out.println("insertando modelo");
+            modelo.addRow(new Object[]{nombre, cantidad});
+        }
+
+        return modelo;
     }
 }

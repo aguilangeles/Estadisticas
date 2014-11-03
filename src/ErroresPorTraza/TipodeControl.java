@@ -5,6 +5,9 @@
  */
 package ErroresPorTraza;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author aguilangeles@gmail.com
@@ -15,15 +18,13 @@ public class TipodeControl {
     private int idcontrol;
     private String nombre;
     private int cantidad;
+        List<String> nombres= new ArrayList();
 
     public TipodeControl(int id, int idcontrol, String nombre, int cantidad) {
         this.id = id;
         this.idcontrol = idcontrol;
         this.nombre = nombre;
         this.cantidad = cantidad;
-    }
-
-    public TipodeControl() {
     }
 
     public int getId() {
@@ -62,8 +63,5 @@ public class TipodeControl {
     public String toString() {
         return "TipodeControl{" + "id=" + id + ", idcontrol=" + idcontrol + ", nombre=" + nombre + ", cantidad=" + cantidad + '}';
     }
-    
-
- 
 
 }

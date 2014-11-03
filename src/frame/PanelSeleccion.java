@@ -541,7 +541,14 @@ public class PanelSeleccion extends javax.swing.JFrame {
         int rechazadas = cantidades.getFrech();
         int total = 0;
         
-        Procesor procesor = new Procesor(filtro, aceptadas, rechazadas);
+        final Procesor procesor = new Procesor(filtro, aceptadas, rechazadas);
+//         java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new TAbla(procesor).setVisible(true);
+//            }
+//        });
+//         this.dispose();
+        
 //        GEtListOfTrazas list = new GEtListOfTrazas(filtro, aceptadas, rechazadas);
 ////        for (TrazaControl cc : list.getListTrazas()) {
 //////            System.out.println(cc.toString());
@@ -556,7 +563,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 //////            System.out.println("-----" + total);
 ////        }
 
-        System.exit(0);
+//        System.exit(0);
     }//GEN-LAST:event_jbGoActionPerformed
     public int getValor() {
         //TODO pasar esto a la clase de la lista

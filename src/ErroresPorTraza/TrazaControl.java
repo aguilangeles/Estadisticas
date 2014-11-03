@@ -57,7 +57,15 @@ public class TrazaControl {
         this.estado = estado;
     }
 
-  
+    public int iterar(String nombre) {
+        int total = 0;
+        for (TipodeControl controle : controles) {
+            if (controle.getNombre().equals(nombre)) {
+                total = controle.getCantidad();
+            }
+        }
+        return total;
+    }
 
     @Override
     public String toString() {
