@@ -9,6 +9,7 @@ import models.TipodeControl;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.Filtro;
+import models.TrazaControl;
 
 /**
  *
@@ -19,23 +20,26 @@ public class Procesor {
     private final Filtro filtro;
     private final int aceptadas, rechazadas;
     GetListadeTrazas trazas = null;
-    private DefaultTableModel modelo_;
+    private DefaultTableModel errorModel;
+    private DefaultTableModel cantidad;
+    private DefaultTableModel pormil;
 
     public Procesor(Filtro filtro, int aceptadas, int rechazadas) {
         this.filtro = filtro;
         this.aceptadas = aceptadas;
         this.rechazadas = rechazadas;
         this.trazas = new GetListadeTrazas(filtro, aceptadas, rechazadas);
-        this.modelo_ = tabla();
+        this.errorModel = tableErrores();
+        this.cantidad = tableCantidad();
+        this.pormil=tableErrorMil();
     }
 
-
-    private DefaultTableModel tabla() {
+    private DefaultTableModel tableErrores() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("tipo error");
         modelo.addColumn("cantidad");
         List<TipodeControl> controles = trazas.getControles();
-        
+
         for (TipodeControl control : controles) {
             String nombre = control.getNombre();
             int cantidad = control.getCantidad();
@@ -43,11 +47,65 @@ public class Procesor {
         }
         return modelo;
     }
-    public DefaultTableModel getModelo_() {
-        return modelo_;
+
+    private DefaultTableModel tableCantidad() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("controles");
+        model.addColumn("cantidad");
+        model.addRow(new Object[]{"Aceptadas", aceptadas});
+        model.addRow(new Object[]{"Rechazadas", rechazadas});
+        ///
+
+        return model;
     }
 
-    public void setModelo_(DefaultTableModel modelo_) {
-        this.modelo_ = modelo_;
+    private DefaultTableModel tableErrorMil() {
+        List<TipodeControl> controles = trazas.getControles();
+        DefaultTableModel model = new DefaultTableModel();
+        int muestra = totalimagenes();
+        //
+        model.addColumn("Tipo de error");
+        model.addColumn("Error x mil");
+        model.addColumn("Cantidad");
+        model.addColumn("Muestra");
+
+        for (TipodeControl control : controles) {
+            String nombre = control.getNombre();
+            int cantidad = control.getCantidad();
+
+            model.addRow(new Object[]{nombre, mill(cantidad, muestra),cantidad, muestra});
+        }
+        return model;
     }
+
+    private Double mill(int error, int muestra) {
+        double aerror = (double) error;
+        double amuestra = (double) muestra;
+        double mil = (aerror / amuestra) * 1000;
+        return mil;
+    }
+
+    private int totalimagenes() {
+        int total = 0;
+        List<TrazaControl> traza = trazas.getTraza();
+
+        for (TrazaControl traza1 : traza) {
+            total += traza1.getMuestra();
+        }
+        return total;
+    }
+
+    public DefaultTableModel getErrorModel() {
+        return errorModel;
+    }
+
+    public DefaultTableModel getCantidad() {
+        return cantidad;
+    }
+
+    public DefaultTableModel getPormil() {
+        return pormil;
+    }
+    
+
 }

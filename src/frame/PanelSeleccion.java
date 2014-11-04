@@ -6,6 +6,7 @@
 package frame;
 
 import ErroresPorTraza.Procesor;
+import ErroresPorTraza.TabbedForm;
 import ErroresPorTraza.Table;
 import fecha.GetDates;
 import usuario.GetUsername;
@@ -546,7 +547,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Table(procesor).setVisible(true);
+                new TabbedForm(procesor).setVisible(true);
             }
         });
 
