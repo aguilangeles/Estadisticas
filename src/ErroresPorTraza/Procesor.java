@@ -20,9 +20,9 @@ public class Procesor {
     private final Filtro filtro;
     private final int aceptadas, rechazadas;
     GetListadeTrazas trazas = null;
-    private DefaultTableModel errorModel;
-    private DefaultTableModel cantidad;
-    private DefaultTableModel pormil;
+    private final DefaultTableModel errorModel;
+    private final DefaultTableModel cantidad;
+    private final DefaultTableModel pormil;
 
     public Procesor(Filtro filtro, int aceptadas, int rechazadas) {
         this.filtro = filtro;
