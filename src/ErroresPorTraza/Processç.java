@@ -23,6 +23,7 @@ public class Processç {
     private final DefaultTableModel errorModel;
     private final DefaultTableModel cantidad;
     private final DefaultTableModel pormil;
+    private int totaltrazas;
 
     public Processç(Filtro filtro, int aceptadas, int rechazadas) {
         this.filtro = filtro;
@@ -31,7 +32,7 @@ public class Processç {
         this.trazas = new GetListadeTrazas(filtro, aceptadas, rechazadas);
         this.errorModel = new CantidaddeErrores(trazas).getErrores();
         this.cantidad = tableCantidad();
-        this.pormil=tableErrorMil();
+        this.pormil = tableErrorMil();
     }
 
 //    private DefaultTableModel tableErrores() {
@@ -47,7 +48,6 @@ public class Processç {
 //        }
 //        return modelo;
 //    }
-
     private DefaultTableModel tableCantidad() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("controles");
@@ -73,7 +73,7 @@ public class Processç {
             String nombre = control.getNombre();
             int cantidad = control.getCantidad();
 
-            model.addRow(new Object[]{nombre, mill(cantidad, muestra),cantidad, muestra});
+            model.addRow(new Object[]{nombre, mill(cantidad, muestra), cantidad, muestra});
         }
         return model;
     }
@@ -106,6 +106,16 @@ public class Processç {
     public DefaultTableModel getPormil() {
         return pormil;
     }
-    
+
+    public String resultados() {
+        String valor = "Tipo de Verificacion:" +filtro.getId()
+                + "\nTotal trazas :" +trazas.getTraza().size()
+                + "\nFecha:" + filtro.getFechas()
+                + "\nTipo de documento"+ filtro.getDocumento()
+                + "\nUsuario:" + filtro.getUsuario();
+
+        return valor;
+
+    }
 
 }

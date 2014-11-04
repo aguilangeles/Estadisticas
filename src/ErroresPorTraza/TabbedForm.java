@@ -22,6 +22,7 @@ public class TabbedForm extends javax.swing.JFrame {
         jTable1.setModel(procesor.getErrorModel());
         jTable2.setModel(procesor.getCantidad());
         jTable3.setModel(procesor.getPormil());
+        jTextArea1.setText(procesor.resultados());
         
         ChartErrores chartError = new ChartErrores();
         ChartPanel chartpanel1 = chartError.getChartPanel("Cantidad de errores", jTable1);
