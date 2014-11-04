@@ -7,7 +7,6 @@ package frame;
 
 import ErroresPorTraza.Procesor;
 import ErroresPorTraza.TabbedForm;
-import ErroresPorTraza.Table;
 import fecha.GetDates;
 import usuario.GetUsername;
 import documento.GetTypedocs;

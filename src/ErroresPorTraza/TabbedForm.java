@@ -5,6 +5,9 @@
  */
 package ErroresPorTraza;
 
+import java.awt.FlowLayout;
+import org.jfree.chart.ChartPanel;
+
 /**
  *
  * @author aguilangeles@gmail.com
@@ -19,6 +22,13 @@ public class TabbedForm extends javax.swing.JFrame {
         jTable1.setModel(procesor.getErrorModel());
         jTable2.setModel(procesor.getCantidad());
         jTable3.setModel(procesor.getPormil());
+        
+        ChartErrores chartError = new ChartErrores();
+        ChartPanel chartpanel1 = chartError.getChartPanel("Cantidad de errores", jTable1);
+        jPanelChartError.removeAll();
+        jPanelChartError.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jPanelChartError.add(chartpanel1);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -34,6 +44,7 @@ public class TabbedForm extends javax.swing.JFrame {
         jPanelErrores = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanelChartError = new javax.swing.JPanel();
         jPanelCantidad = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -63,19 +74,38 @@ public class TabbedForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jPanelChartError.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        javax.swing.GroupLayout jPanelChartErrorLayout = new javax.swing.GroupLayout(jPanelChartError);
+        jPanelChartError.setLayout(jPanelChartErrorLayout);
+        jPanelChartErrorLayout.setHorizontalGroup(
+            jPanelChartErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 446, Short.MAX_VALUE)
+        );
+        jPanelChartErrorLayout.setVerticalGroup(
+            jPanelChartErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanelErroresLayout = new javax.swing.GroupLayout(jPanelErrores);
         jPanelErrores.setLayout(jPanelErroresLayout);
         jPanelErroresLayout.setHorizontalGroup(
             jPanelErroresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelErroresLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 478, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanelChartError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelErroresLayout.setVerticalGroup(
             jPanelErroresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelErroresLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 245, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelErroresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelChartError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPaneErrores.addTab("tab1", jPanelErrores);
@@ -207,6 +237,7 @@ public class TabbedForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanelCantidad;
+    private javax.swing.JPanel jPanelChartError;
     private javax.swing.JPanel jPanelErrores;
     private javax.swing.JPanel jPanelPorMil;
     private javax.swing.JScrollPane jScrollPane1;
