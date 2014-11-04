@@ -540,7 +540,8 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         int aceptadas = cantidades.getFacept();
         int rechazadas = cantidades.getFrech();
-      
+        filtro.setNombreDocumento(jlNameTipodoc.getText());
+        filtro.setLastusuario(jlUsername.getText());
         final Processç procesor = new Processç(filtro, aceptadas, rechazadas);
 
         java.awt.EventQueue.invokeLater(new Runnable() {

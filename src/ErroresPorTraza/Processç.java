@@ -110,9 +110,9 @@ public class Processç {
     public String resultados() {
         String valor = "Tipo de Verificacion:" +filtro.getId()
                 + "\nTotal trazas :" +trazas.getTraza().size()
-                + "\nFecha:" + filtro.getFechas()
-                + "\nTipo de documento"+ filtro.getDocumento()
-                + "\nUsuario:" + filtro.getUsuario();
+                + filtro.getLastfechas()
+                + filtro.getNombreDocumento()
+                + filtro.getLastusuario();
 
         return valor;
 

@@ -15,6 +15,10 @@ public class Filtro {
     private String fechas = "";
     private String documento = "";
     private String usuario = "";
+    //fechas para el textarea
+    private String lastfechas = "";
+    private String nombreDocumento = "";
+    private String lastusuario = "";
 
     public Filtro() {
     }
@@ -50,6 +54,50 @@ public class Filtro {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+    /*ARREGLO PARA EL JTEXTAREA*/
+
+    public String getLastfechas() {
+        String adate = getFechas();
+        String ultima = null;
+        if (adate.contains("and fecha_control  between")) {
+            String string = adate.replace("and fecha_control  between", "");
+            String string2 = string.replace(" and ", " al ");
+            String string3 = string2.replace("%", "");
+            ultima = "\nFecha desde " + string3;
+
+        } else if (adate.contains("and fecha_control like")) {
+            String string = adate.replace("and fecha_control like", "");
+            String string2 = string.replace("%", "");
+            ultima = "\nFecha: " + string2;
+
+        } else if (adate.isEmpty()) {
+            ultima = "";
+        }
+        return ultima;
+    }
+
+    public String getNombreDocumento() {
+        if (nombreDocumento.equals("-----")) {
+            return "";
+        }
+        return "\nTipo de documento: " + nombreDocumento;
+    }
+
+    public void setNombreDocumento(String nombreDocumento) {
+        this.nombreDocumento = nombreDocumento;
+    }
+
+    public String getLastusuario() {
+        if (lastusuario.equals("-----")) {
+            return "";
+        }
+        return "\nUsuario: " + lastusuario;
+    }
+
+    public void setLastusuario(String lastusuario) {
+        this.lastusuario = lastusuario;
+    }
+    
 
     @Override
     public String toString() {
