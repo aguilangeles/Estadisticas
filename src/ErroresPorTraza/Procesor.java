@@ -29,24 +29,24 @@ public class Procesor {
         this.aceptadas = aceptadas;
         this.rechazadas = rechazadas;
         this.trazas = new GetListadeTrazas(filtro, aceptadas, rechazadas);
-        this.errorModel = tableErrores();
+        this.errorModel = new CantidaddeErrores(trazas).getErrores();
         this.cantidad = tableCantidad();
         this.pormil=tableErrorMil();
     }
 
-    private DefaultTableModel tableErrores() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("tipo error");
-        modelo.addColumn("cantidad");
-        List<TipodeControl> controles = trazas.getControles();
-
-        for (TipodeControl control : controles) {
-            String nombre = control.getNombre();
-            int cantidad = control.getCantidad();
-            modelo.addRow(new Object[]{nombre, cantidad});
-        }
-        return modelo;
-    }
+//    private DefaultTableModel tableErrores() {
+//        DefaultTableModel modelo = new DefaultTableModel();
+//        modelo.addColumn("tipo error");
+//        modelo.addColumn("cantidad");
+//        List<TipodeControl> controles = trazas.getControles();
+//
+//        for (TipodeControl control : controles) {
+//            String nombre = control.getNombre();
+//            int cantidad = control.getCantidad();
+//            modelo.addRow(new Object[]{nombre, cantidad});
+//        }
+//        return modelo;
+//    }
 
     private DefaultTableModel tableCantidad() {
         DefaultTableModel model = new DefaultTableModel();
