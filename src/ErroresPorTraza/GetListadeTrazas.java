@@ -5,6 +5,8 @@
  */
 package ErroresPorTraza;
 
+import models.TipodeControl;
+import models.TrazaControl;
 import estadisticas.Conexion;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class GetListadeTrazas {
                     int muestr = conexion.resulset.getInt(2);
                     int estado = conexion.resulset.getInt(3);
                     poblarListaIdtraza(result);
-                    trazacontrol = new TrazaControl(result, muestr, estado, null);
+                    trazacontrol = new TrazaControl(result, muestr, estado);
                     traza.add(trazacontrol);
                 }
             } catch (SQLException ex) {

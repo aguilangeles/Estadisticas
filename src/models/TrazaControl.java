@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ErroresPorTraza;
-
-import java.util.List;
+package models;
 
 /**
  *
@@ -16,13 +14,11 @@ public class TrazaControl {
     private int id;
     private int muestra;
     private int estado;
-    private List<TipodeControl> controles;
 
-    public TrazaControl(int id, int muestra, int estado, List<TipodeControl> controles) {
+    public TrazaControl(int id, int muestra, int estado) {
         this.id = id;
         this.muestra = muestra;
         this.estado = estado;
-        this.controles = controles;
     }
 
     public int getId() {
@@ -31,14 +27,6 @@ public class TrazaControl {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public List<TipodeControl> getControles() {
-        return controles;
-    }
-
-    public void setControles(List<TipodeControl> controles) {
-        this.controles = controles;
     }
 
     public int getMuestra() {
@@ -57,19 +45,9 @@ public class TrazaControl {
         this.estado = estado;
     }
 
-    public int iterar(String nombre) {
-        int total = 0;
-        for (TipodeControl controle : controles) {
-            if (controle.getNombre().equals(nombre)) {
-                total = controle.getCantidad();
-            }
-        }
-        return total;
-    }
-
     @Override
     public String toString() {
-        return "TrazaControl{" + "id=" + id + ", muestra=" + muestra + ", estado=" + estado + ", controles=" + controles + '}';
+        return "TrazaControl{" + "id=" + id + ", muestra=" + muestra + ", estado=" + estado + '}';
     }
 
 }

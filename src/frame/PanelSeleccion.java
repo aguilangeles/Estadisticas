@@ -6,7 +6,7 @@
 package frame;
 
 import ErroresPorTraza.Procesor;
-import ErroresPorTraza.TAbla;
+import ErroresPorTraza.Table;
 import fecha.GetDates;
 import usuario.GetUsername;
 import documento.GetTypedocs;
@@ -546,7 +546,7 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TAbla(procesor).setVisible(true);
+                new Table(procesor).setVisible(true);
             }
         });
 

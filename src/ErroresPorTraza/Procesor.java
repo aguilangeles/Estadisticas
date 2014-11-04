@@ -5,11 +5,8 @@
  */
 package ErroresPorTraza;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import models.TipodeControl;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 import models.Filtro;
 
@@ -19,46 +16,38 @@ import models.Filtro;
  */
 public class Procesor {
 
-    private Filtro filtro;
-    private int aceptadas, rechazadas;
-    GEtListOfTrazas list = null;
+    private final Filtro filtro;
+    private final int aceptadas, rechazadas;
+    GetListadeTrazas trazas = null;
     private DefaultTableModel modelo_;
 
     public Procesor(Filtro filtro, int aceptadas, int rechazadas) {
         this.filtro = filtro;
         this.aceptadas = aceptadas;
         this.rechazadas = rechazadas;
-        this.list = new GEtListOfTrazas(filtro, aceptadas, rechazadas);
-        getErroresporTraza();
+        this.trazas = new GetListadeTrazas(filtro, aceptadas, rechazadas);
         this.modelo_ = tabla();
     }
 
-    private void getErroresporTraza() {
 
+    private DefaultTableModel tabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("tipo error");
+        modelo.addColumn("cantidad");
+        List<TipodeControl> controles = trazas.getControles();
+        
+        for (TipodeControl control : controles) {
+            String nombre = control.getNombre();
+            int cantidad = control.getCantidad();
+            modelo.addRow(new Object[]{nombre, cantidad});
+        }
+        return modelo;
     }
-
     public DefaultTableModel getModelo_() {
         return modelo_;
     }
 
     public void setModelo_(DefaultTableModel modelo_) {
         this.modelo_ = modelo_;
-    }
-
-    private DefaultTableModel tabla() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("tipo error");
-        modelo.addColumn("cantidad");
-        List<TipodeControl> controles = list.getControles();
-        
-        for (TipodeControl controle : controles) {
-            System.out.println(controle);
-            String nombre = controle.getNombre();
-            int cantidad = controle.getCantidad();
-            System.out.println("insertando modelo");
-            modelo.addRow(new Object[]{nombre, cantidad});
-        }
-
-        return modelo;
     }
 }
