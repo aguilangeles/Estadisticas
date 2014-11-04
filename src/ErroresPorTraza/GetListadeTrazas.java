@@ -87,6 +87,7 @@ public class GetListadeTrazas {
                     + " and tac.estado = 1 "
                     + " group by tac.idcontrol "
                     + "; ";
+            System.out.println("");
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {

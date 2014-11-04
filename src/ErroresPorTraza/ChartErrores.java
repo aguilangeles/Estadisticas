@@ -43,7 +43,6 @@ public class ChartErrores extends JPanel {
         for (int row = 0; row < table.getRowCount(); row++) {
             String nombre = (String) table.getValueAt(row, 0);
             int cantidad = (int) table.getValueAt(row, 1);
-            System.out.println(nombre+" - "  +cantidad);
             result.setValue(cantidad, nombre, "");
         }
         return result;

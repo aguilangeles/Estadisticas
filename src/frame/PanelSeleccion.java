@@ -5,7 +5,7 @@
  */
 package frame;
 
-import ErroresPorTraza.Procesor;
+import ErroresPorTraza.Processç;
 import ErroresPorTraza.TabbedForm;
 import fecha.GetDates;
 import usuario.GetUsername;
@@ -540,16 +540,15 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
         int aceptadas = cantidades.getFacept();
         int rechazadas = cantidades.getFrech();
-        int total = 0;
-
-        final Procesor procesor = new Procesor(filtro, aceptadas, rechazadas);
+      
+        final Processç procesor = new Processç(filtro, aceptadas, rechazadas);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TabbedForm(procesor).setVisible(true);
             }
         });
-
+        dispose();
     }//GEN-LAST:event_jbGoActionPerformed
     public int getValor() {
         //TODO pasar esto a la clase de la lista

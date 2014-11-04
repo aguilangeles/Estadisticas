@@ -15,7 +15,7 @@ import models.TrazaControl;
  *
  * @author aguilangeles@gmail.com
  */
-public class Procesor {
+public class Processç {
 
     private final Filtro filtro;
     private final int aceptadas, rechazadas;
@@ -24,7 +24,7 @@ public class Procesor {
     private final DefaultTableModel cantidad;
     private final DefaultTableModel pormil;
 
-    public Procesor(Filtro filtro, int aceptadas, int rechazadas) {
+    public Processç(Filtro filtro, int aceptadas, int rechazadas) {
         this.filtro = filtro;
         this.aceptadas = aceptadas;
         this.rechazadas = rechazadas;
