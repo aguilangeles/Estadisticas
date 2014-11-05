@@ -20,14 +20,14 @@ import org.jfree.data.general.PieDataset;
  *
  * @author aguilangeles@gmail.com
  */
-public class Chartaceptrech extends JPanel {
+public class ChartPorcentajeErrores extends JPanel {
 
-    public Chartaceptrech() {
+    public ChartPorcentajeErrores() {
     }
 
-    public ChartPanel getChartPanel(String chartTitle, JTable table) {
+    public ChartPanel getChartPanel(String chartTitle, JTable table, int total) {
 
-        PieDataset dataset = creaDataset(table);
+        PieDataset dataset = creaDataset(table, total);
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(450, 354));
@@ -36,12 +36,13 @@ public class Chartaceptrech extends JPanel {
 
     }
 
-    private PieDataset creaDataset(JTable table) {
+    private PieDataset creaDataset(JTable table, int total) {
         DefaultPieDataset dataset = new DefaultPieDataset();
         for (int row = 0; row < table.getRowCount(); row++) {
             String nombre = (String) table.getValueAt(row, 0);
             int cantidad = (int) table.getValueAt(row, 1);
-            dataset.setValue(nombre, cantidad);
+            int porcentaje = (cantidad *100)/total;
+            dataset.setValue(nombre, porcentaje);
 
         }
         return dataset;

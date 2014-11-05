@@ -23,6 +23,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class ChartErrores extends JPanel {
 
+        private int totales = 0;
     public ChartErrores() {
     }
 
@@ -31,7 +32,7 @@ public class ChartErrores extends JPanel {
         DefaultCategoryDataset dataset = createDataset(table);
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(450, 300));
+        chartPanel.setPreferredSize(new Dimension(450, 360));
         chartPanel.setMouseWheelEnabled(true);
         return chartPanel;
 
@@ -39,10 +40,10 @@ public class ChartErrores extends JPanel {
 
     private DefaultCategoryDataset createDataset(JTable table) {
         DefaultCategoryDataset result = new DefaultCategoryDataset();
-
         for (int row = 0; row < table.getRowCount(); row++) {
             String nombre = (String) table.getValueAt(row, 0);
             int cantidad = (int) table.getValueAt(row, 1);
+            totales += cantidad;
             result.setValue(cantidad, nombre, "");
         }
         return result;
@@ -56,4 +57,9 @@ public class ChartErrores extends JPanel {
         plot.setBackgroundAlpha(0.5f);
         return chart;
     }
+
+    public int getTotales() {
+        return totales;
+    }
+    
 }

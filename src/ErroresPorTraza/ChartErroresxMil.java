@@ -6,6 +6,7 @@
 package ErroresPorTraza;
 
 import java.awt.Dimension;
+import java.text.DecimalFormat;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import org.jfree.chart.ChartFactory;
@@ -31,7 +32,7 @@ public class ChartErroresxMil extends JPanel {
         DefaultCategoryDataset dataset = createDataset(table);
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(450, 300));
+        chartPanel.setPreferredSize(new Dimension(450, 360));
         chartPanel.setMouseWheelEnabled(true);
         return chartPanel;
 
