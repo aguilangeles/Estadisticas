@@ -54,7 +54,7 @@ public class Chartaceptrech extends JPanel {
         plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         plot.setNoDataMessage("no data");
         plot.setCircular(false);
-        plot.setLabelGap(0.02);
+        plot.setLabelGap(0.08);
         return chart;
     }
 }

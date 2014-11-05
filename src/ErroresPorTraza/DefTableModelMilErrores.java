@@ -46,7 +46,11 @@ public class DefTableModelMilErrores {
         double aerror = (double) error;
         double amuestra = (double) muestra;
         double mil = (aerror / amuestra) * 1000;
-        return mil;
+        return Redondear(mil);
+    }
+
+    private double Redondear(double numero) {
+        return Math.rint(numero * 100) / 100;
     }
 
     private int totalimagenes(GetListadeTrazas trazas) {

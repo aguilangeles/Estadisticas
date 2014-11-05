@@ -6,6 +6,8 @@
 package ErroresPorTraza;
 
 import java.awt.FlowLayout;
+import javax.swing.JTable;
+import javax.swing.table.TableColumnModel;
 import org.jfree.chart.ChartPanel;
 
 /**
@@ -20,15 +22,35 @@ public class TabbedForm extends javax.swing.JFrame {
     public TabbedForm(Procesar procesor) {
         initComponents();
         jTable1.setModel(procesor.getErrorModel());
+        setSizeColumn(jTable1);
+        
         jTableErrores_2.setModel(procesor.getErrorModel());
+        setSizeColumn(jTableErrores_2);
+        
         jTable2.setModel(procesor.getCantidad());
+        setSizeColumn(jTable2);
+        
         jTable3.setModel(procesor.getPormil());
+        setSizeColumnMil(jTable3);
         jTextArea1.setText(procesor.resultados());
 
         setChartCantidadErrores();
         setChartAceptadosRechazados();
         setChartCantidadErroresPorMil();
 
+    }
+
+    private void setSizeColumn(JTable jTable1) {
+        TableColumnModel model1 = jTable1.getColumnModel();
+        model1.getColumn(0).setPreferredWidth(300);
+        model1.getColumn(1).setPreferredWidth(75);
+    }
+    private void setSizeColumnMil(JTable jTable1) {
+        TableColumnModel model1 = jTable1.getColumnModel();
+        model1.getColumn(0).setPreferredWidth(195);
+        model1.getColumn(1).setPreferredWidth(60);
+        model1.getColumn(2).setPreferredWidth(60);
+        model1.getColumn(3).setPreferredWidth(60);
     }
 
     private void setChartCantidadErrores() {
@@ -110,11 +132,11 @@ public class TabbedForm extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 204, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 204), new java.awt.Color(255, 255, 204), new java.awt.Color(255, 204, 0), new java.awt.Color(255, 204, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(153, 153, 255)));
         jPanel1.setOpaque(false);
 
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Arimo", 0, 12)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Arimo", 1, 12)); // NOI18N
         jTextArea1.setRows(5);
         jTextArea1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane4.setViewportView(jTextArea1);
@@ -126,7 +148,7 @@ public class TabbedForm extends javax.swing.JFrame {
         jButton3.setText("Cerrar");
 
         jLabel1.setFont(new java.awt.Font("Arimo", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
+        jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Generales");
 
@@ -164,7 +186,7 @@ public class TabbedForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPaneErrores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 204), new java.awt.Color(255, 255, 204), new java.awt.Color(255, 204, 0), new java.awt.Color(255, 204, 0)));
+        jTabbedPaneErrores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(153, 153, 255)));
 
         jPanelErrores.setOpaque(false);
 
@@ -216,7 +238,7 @@ public class TabbedForm extends javax.swing.JFrame {
                 .addGroup(jPanelErroresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                     .addComponent(jPanelChartError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jTabbedPaneErrores.addTab("Cantidad de Errores", jPanelErrores);
@@ -273,7 +295,7 @@ public class TabbedForm extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                     .addComponent(jPanelPorcentaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -341,7 +363,7 @@ public class TabbedForm extends javax.swing.JFrame {
                 .addGroup(jPanelCantidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                     .addComponent(jPanelAceptRech, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jTabbedPaneErrores.addTab("Acepdados y Rechazados", jPanelCantidad);
@@ -358,7 +380,7 @@ public class TabbedForm extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -415,11 +437,11 @@ public class TabbedForm extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPaneErrores))
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -430,7 +452,9 @@ public class TabbedForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
