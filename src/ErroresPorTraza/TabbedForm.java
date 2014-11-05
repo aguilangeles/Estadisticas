@@ -23,11 +23,11 @@ public class TabbedForm extends javax.swing.JFrame {
         jTable2.setModel(procesor.getCantidad());
         jTable3.setModel(procesor.getPormil());
         jTextArea1.setText(procesor.resultados());
-        
+
         setChartCantidadErrores();
         setChartAceptadosRechazados();
-        
-        
+        setChartCantidadErroresPorMil();
+
     }
 
     private void setChartCantidadErrores() {
@@ -38,6 +38,16 @@ public class TabbedForm extends javax.swing.JFrame {
         jPanelChartError.add(chartpanel1);
         this.setLocationRelativeTo(null);
     }
+
+    private void setChartCantidadErroresPorMil() {
+        ChartErroresxMil chartErrores = new ChartErroresxMil();
+        ChartPanel chartpanel1 = chartErrores.getChartPanel("Errores por mil", jTable3);
+        jPanelMill.removeAll();
+        jPanelMill.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jPanelMill.add(chartpanel1);
+        this.setLocationRelativeTo(null);
+    }
+
     private void setChartAceptadosRechazados() {
         Chartaceptrech aceptrech = new Chartaceptrech();
         ChartPanel chartpanel1 = aceptrech.getChartPanel("Estado de Trazas", jTable2);
@@ -72,6 +82,7 @@ public class TabbedForm extends javax.swing.JFrame {
         jPanelPorMil = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jPanelMill = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,19 +232,37 @@ public class TabbedForm extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable3);
 
+        jPanelMill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        javax.swing.GroupLayout jPanelMillLayout = new javax.swing.GroupLayout(jPanelMill);
+        jPanelMill.setLayout(jPanelMillLayout);
+        jPanelMillLayout.setHorizontalGroup(
+            jPanelMillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 426, Short.MAX_VALUE)
+        );
+        jPanelMillLayout.setVerticalGroup(
+            jPanelMillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanelPorMilLayout = new javax.swing.GroupLayout(jPanelPorMil);
         jPanelPorMil.setLayout(jPanelPorMilLayout);
         jPanelPorMilLayout.setHorizontalGroup(
             jPanelPorMilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPorMilLayout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 458, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanelMill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelPorMilLayout.setVerticalGroup(
             jPanelPorMilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPorMilLayout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 263, Short.MAX_VALUE))
+            .addGroup(jPanelPorMilLayout.createSequentialGroup()
+                .addComponent(jPanelMill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPaneErrores.addTab("tab3", jPanelPorMil);
@@ -292,6 +321,7 @@ public class TabbedForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelCantidad;
     private javax.swing.JPanel jPanelChartError;
     private javax.swing.JPanel jPanelErrores;
+    private javax.swing.JPanel jPanelMill;
     private javax.swing.JPanel jPanelPorMil;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

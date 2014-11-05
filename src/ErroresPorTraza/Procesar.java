@@ -48,8 +48,10 @@ public class Procesar {
     }
 
     public String resultados() {
-        String valor = "Tipo de Verificacion:" + filtro.getId()
+        String valor = 
+                "Tipo de Verificacion:" + filtro.getId()
                 + "\nTotal trazas :" + trazas.getTraza().size()
+                +"\n\tFILTROS APLICADOS"
                 + filtro.getLastfechas()
                 + filtro.getNombreDocumento()
                 + filtro.getLastusuario();
