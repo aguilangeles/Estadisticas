@@ -47,7 +47,9 @@ public class GetListadeTrazas {
                     + " estadoLote "
                     + " FROM qualitys.traza "
                     + filtroFinal.toString()
-                    + " and estadoLote is not null";
+                    + " and estadoLote is not null;";
+//                        System.out.println(query);
+
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
@@ -87,6 +89,7 @@ public class GetListadeTrazas {
                     + " and tac.estado = 1 "
                     + " group by tac.idcontrol "
                     + "; ";
+//            System.out.println(query);
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {

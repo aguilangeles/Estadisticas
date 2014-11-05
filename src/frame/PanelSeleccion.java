@@ -5,7 +5,7 @@
  */
 package frame;
 
-import ErroresPorTraza.Processç;
+import ErroresPorTraza.Procesar;
 import ErroresPorTraza.TabbedForm;
 import fecha.GetDates;
 import usuario.GetUsername;
@@ -537,12 +537,11 @@ public class PanelSeleccion extends javax.swing.JFrame {
 
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
         cantidades.setvalueoftraza(filtro.toString());//porque no lo hace?
-
         int aceptadas = cantidades.getFacept();
         int rechazadas = cantidades.getFrech();
         filtro.setNombreDocumento(jlNameTipodoc.getText());
         filtro.setLastusuario(jlUsername.getText());
-        final Processç procesor = new Processç(filtro, aceptadas, rechazadas);
+        final Procesar procesor = new Procesar(filtro, aceptadas, rechazadas);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

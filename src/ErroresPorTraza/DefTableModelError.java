@@ -13,12 +13,12 @@ import models.TipodeControl;
  *
  * @author aguilangeles@gmail.com
  */
-public class CantidaddeErrores {
+public class DefTableModelError {
     
-    private  DefaultTableModel errores;
+    private final  DefaultTableModel errores;
     
 
-    public CantidaddeErrores(GetListadeTrazas trazas) {
+    public DefTableModelError(GetListadeTrazas trazas) {
         this.errores= tableErrores(trazas);
     }
     

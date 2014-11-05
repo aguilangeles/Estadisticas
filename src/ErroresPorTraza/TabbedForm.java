@@ -17,18 +17,33 @@ public class TabbedForm extends javax.swing.JFrame {
     /**
      * Creates new form TabbedForm
      */
-    public TabbedForm(Processç procesor) {
+    public TabbedForm(Procesar procesor) {
         initComponents();
         jTable1.setModel(procesor.getErrorModel());
         jTable2.setModel(procesor.getCantidad());
         jTable3.setModel(procesor.getPormil());
         jTextArea1.setText(procesor.resultados());
         
+        setChartCantidadErrores();
+        setChartAceptadosRechazados();
+        
+        
+    }
+
+    private void setChartCantidadErrores() {
         ChartErrores chartError = new ChartErrores();
         ChartPanel chartpanel1 = chartError.getChartPanel("Cantidad de errores", jTable1);
         jPanelChartError.removeAll();
         jPanelChartError.setLayout(new FlowLayout(FlowLayout.LEFT));
         jPanelChartError.add(chartpanel1);
+        this.setLocationRelativeTo(null);
+    }
+    private void setChartAceptadosRechazados() {
+        Chartaceptrech aceptrech = new Chartaceptrech();
+        ChartPanel chartpanel1 = aceptrech.getChartPanel("Estado de Trazas", jTable2);
+        jPanelAceptRech.removeAll();
+        jPanelAceptRech.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jPanelAceptRech.add(chartpanel1);
         this.setLocationRelativeTo(null);
     }
 
@@ -51,6 +66,9 @@ public class TabbedForm extends javax.swing.JFrame {
         jPanelCantidad = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jPanelAceptRech = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         jPanelPorMil = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -140,19 +158,45 @@ public class TabbedForm extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
+        jPanelAceptRech.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        javax.swing.GroupLayout jPanelAceptRechLayout = new javax.swing.GroupLayout(jPanelAceptRech);
+        jPanelAceptRech.setLayout(jPanelAceptRechLayout);
+        jPanelAceptRechLayout.setHorizontalGroup(
+            jPanelAceptRechLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 448, Short.MAX_VALUE)
+        );
+        jPanelAceptRechLayout.setVerticalGroup(
+            jPanelAceptRechLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane5.setViewportView(jTextArea2);
+
         javax.swing.GroupLayout jPanelCantidadLayout = new javax.swing.GroupLayout(jPanelCantidad);
         jPanelCantidad.setLayout(jPanelCantidadLayout);
         jPanelCantidadLayout.setHorizontalGroup(
             jPanelCantidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCantidadLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 552, Short.MAX_VALUE))
+                .addGroup(jPanelCantidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5))
+                .addGap(90, 90, 90)
+                .addComponent(jPanelAceptRech, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelCantidadLayout.setVerticalGroup(
             jPanelCantidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCantidadLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 263, Short.MAX_VALUE))
+                .addGroup(jPanelCantidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCantidadLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+                    .addComponent(jPanelAceptRech, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPaneErrores.addTab("tab2", jPanelCantidad);
@@ -244,6 +288,7 @@ public class TabbedForm extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanelAceptRech;
     private javax.swing.JPanel jPanelCantidad;
     private javax.swing.JPanel jPanelChartError;
     private javax.swing.JPanel jPanelErrores;
@@ -252,10 +297,12 @@ public class TabbedForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPaneErrores;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
 }
