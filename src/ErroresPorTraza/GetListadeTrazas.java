@@ -23,6 +23,7 @@ public class GetListadeTrazas {
 
     List<Integer> idtrazaList = new ArrayList<>();
 
+    private int imagenes;
     
     private int aceptadas, rechazadas;
     List<TipodeControl> controles = new ArrayList<>();
@@ -57,6 +58,7 @@ public class GetListadeTrazas {
                     int muestr = conexion.resulset.getInt(2);
                     int estado = conexion.resulset.getInt(3);
                     poblarListaIdtraza(result);
+                    imagenes+=muestr;
                     trazacontrol = new TrazaControl(result, muestr, estado);
                     traza.add(trazacontrol);
                 }
@@ -140,6 +142,10 @@ public class GetListadeTrazas {
     }
     public List<TipodeControl> getControles() {
         return controles;
+    }
+
+    public int getImagenes() {
+        return imagenes;
     }
 
     

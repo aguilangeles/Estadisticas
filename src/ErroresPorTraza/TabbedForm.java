@@ -16,20 +16,26 @@ import org.jfree.chart.ChartPanel;
  */
 public class TabbedForm extends javax.swing.JFrame {
 
+    int suma;
+    private Procesar procesor;
+    private String tablaresult;
+
     /**
      * Creates new form TabbedForm
      */
     public TabbedForm(Procesar procesor) {
         initComponents();
+        this.suma = procesor.getSuma();
+        this.procesor = procesor;
         jTable1.setModel(procesor.getErrorModel());
         setSizeColumn(jTable1);
-        
+
         jTableErrores_2.setModel(procesor.getErrorModel());
         setSizeColumn(jTableErrores_2);
-        
+
         jTable2.setModel(procesor.getCantidad());
         setSizeColumn(jTable2);
-        
+
         jTable3.setModel(procesor.getPormil());
         setSizeColumnMil(jTable3);
         jTextArea1.setText(procesor.resultados());
@@ -45,6 +51,7 @@ public class TabbedForm extends javax.swing.JFrame {
         model1.getColumn(0).setPreferredWidth(300);
         model1.getColumn(1).setPreferredWidth(75);
     }
+
     private void setSizeColumnMil(JTable jTable1) {
         TableColumnModel model1 = jTable1.getColumnModel();
         model1.getColumn(0).setPreferredWidth(195);
@@ -60,8 +67,9 @@ public class TabbedForm extends javax.swing.JFrame {
         jPanelChartError.setLayout(new FlowLayout(FlowLayout.LEFT));
         jPanelChartError.add(chartpanel1);
         this.setLocationRelativeTo(null);
-        setChartPorcentaje(chartError.getTotales());
-
+        int totales = chartError.getTotales();
+        setChartPorcentaje(totales);
+        tablaresult = chartError.getSheet();
     }
 
     private void setChartCantidadErroresPorMil() {
@@ -75,7 +83,7 @@ public class TabbedForm extends javax.swing.JFrame {
 
     private void setChartAceptadosRechazados() {
         Chartaceptrech aceptrech = new Chartaceptrech();
-        ChartPanel chartpanel1 = aceptrech.getChartPanel("Estado de Trazas", jTable2);
+        ChartPanel chartpanel1 = aceptrech.getChartPanel("Estado de Trazas", jTable2, suma);
         jPanelAceptRech.removeAll();
         jPanelAceptRech.setLayout(new FlowLayout(FlowLayout.LEFT));
         jPanelAceptRech.add(chartpanel1);
@@ -144,6 +152,11 @@ public class TabbedForm extends javax.swing.JFrame {
         jButton1.setText("Volver");
 
         jButton2.setText("Guardar Resultados");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cerrar");
 
@@ -173,15 +186,14 @@ public class TabbedForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -251,7 +263,7 @@ public class TabbedForm extends javax.swing.JFrame {
         jPanelPorcentaje.setLayout(jPanelPorcentajeLayout);
         jPanelPorcentajeLayout.setHorizontalGroup(
             jPanelPorcentajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 438, Short.MAX_VALUE)
         );
         jPanelPorcentajeLayout.setVerticalGroup(
             jPanelPorcentajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,9 +296,9 @@ public class TabbedForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jPanelPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(19, 19, 19))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,6 +471,15 @@ public class TabbedForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        String valor = procesor.resultados() + tablaresult;
+        System.out.println("valor " + valor);
+        Write write = new Write();
+        Write.createNewSheet("Estadisticas", jButton1);
+        Write.writeReport(valor);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -25,9 +25,9 @@ public class Chartaceptrech extends JPanel {
     public Chartaceptrech() {
     }
 
-    public ChartPanel getChartPanel(String chartTitle, JTable table) {
+    public ChartPanel getChartPanel(String chartTitle, JTable table, int total) {
 
-        PieDataset dataset = creaDataset(table);
+        PieDataset dataset = creaDataset(table, total);
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(450, 354));
@@ -36,13 +36,14 @@ public class Chartaceptrech extends JPanel {
 
     }
 
-    private PieDataset creaDataset(JTable table) {
+    private PieDataset creaDataset(JTable table, int total) {
+
         DefaultPieDataset dataset = new DefaultPieDataset();
         for (int row = 0; row < table.getRowCount(); row++) {
             String nombre = (String) table.getValueAt(row, 0);
             int cantidad = (int) table.getValueAt(row, 1);
-            dataset.setValue(nombre, cantidad);
-
+            int porcentaje = (cantidad * 100 / total);
+            dataset.setValue(nombre, porcentaje);
         }
         return dataset;
     }
@@ -52,9 +53,10 @@ public class Chartaceptrech extends JPanel {
 //                createBarChart(title, "Cantidades", "Estado de las trazas", dataset, PlotOrientation.VERTICAL, true, true, false);
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+
         plot.setNoDataMessage("no data");
         plot.setCircular(false);
-        plot.setLabelGap(0.08);
+        plot.setLabelGap(0.02);
         return chart;
     }
 }

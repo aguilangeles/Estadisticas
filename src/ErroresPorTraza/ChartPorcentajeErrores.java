@@ -41,7 +41,7 @@ public class ChartPorcentajeErrores extends JPanel {
         for (int row = 0; row < table.getRowCount(); row++) {
             String nombre = (String) table.getValueAt(row, 0);
             int cantidad = (int) table.getValueAt(row, 1);
-            int porcentaje = (cantidad *100)/total;
+            int porcentaje = (cantidad * 100) / total;
             dataset.setValue(nombre, porcentaje);
 
         }
@@ -50,7 +50,6 @@ public class ChartPorcentajeErrores extends JPanel {
 
     private JFreeChart createChart(PieDataset dataset, String title) {
         JFreeChart chart = ChartFactory.createPieChart(title, dataset, true, true, false);
-//                createBarChart(title, "Cantidades", "Estado de las trazas", dataset, PlotOrientation.VERTICAL, true, true, false);
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         plot.setNoDataMessage("no data");

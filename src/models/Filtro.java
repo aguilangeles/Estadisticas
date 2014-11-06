@@ -63,7 +63,7 @@ public class Filtro {
             String string = adate.replace("and fecha_control  between", "");
             String string2 = string.replace(" and ", " al ");
             String string3 = string2.replace("%", "");
-            ultima = "\nFecha desde " + string3;
+            ultima = "\nFecha desde: " + string3;
 
         } else if (adate.contains("and fecha_control like")) {
             String string = adate.replace("and fecha_control like", "");

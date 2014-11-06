@@ -23,7 +23,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class ChartErrores extends JPanel {
 
-        private int totales = 0;
+    private int totales = 0;
+    private String sheet="";
+
     public ChartErrores() {
     }
 
@@ -43,6 +45,7 @@ public class ChartErrores extends JPanel {
         for (int row = 0; row < table.getRowCount(); row++) {
             String nombre = (String) table.getValueAt(row, 0);
             int cantidad = (int) table.getValueAt(row, 1);
+            sheet += "\n" + nombre + ":" + cantidad;
             totales += cantidad;
             result.setValue(cantidad, nombre, "");
         }
@@ -61,5 +64,10 @@ public class ChartErrores extends JPanel {
     public int getTotales() {
         return totales;
     }
+
+    public String getSheet() {
+        return sheet;
+    }
     
+
 }

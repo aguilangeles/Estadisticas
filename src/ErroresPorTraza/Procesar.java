@@ -5,11 +5,8 @@
  */
 package ErroresPorTraza;
 
-import models.TipodeControl;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.Filtro;
-import models.TrazaControl;
 
 /**
  *
@@ -24,6 +21,7 @@ public class Procesar {
     private final DefaultTableModel cantidad;
     private final DefaultTableModel pormil;
     private int totaltrazas;
+    private int suma;
 
     public Procesar(Filtro filtro, int aceptadas, int rechazadas) {
         this.filtro = filtro;
@@ -33,6 +31,7 @@ public class Procesar {
         this.errorModel = new DefTableModelError(trazas).getErrores();
         this.cantidad = new DefTableModelAceptados(aceptadas, rechazadas).getAceptRech();
         this.pormil = new DefTableModelMilErrores(trazas).getPormil();
+        this.suma = aceptadas+rechazadas;
     }
 
     public DefaultTableModel getErrorModel() {
@@ -48,10 +47,12 @@ public class Procesar {
     }
 
     public String resultados() {
-        String valor = 
-                "Tipo de Verificacion:" + filtro.getId()
-                + "\nTotal trazas :" + trazas.getTraza().size()
-                +"\n\tFILTROS APLICADOS"
+        String valor
+                = "Tipo de Verificacion:" + filtro.getId()
+                + "\nTotal Trazas:" + trazas.getTraza().size()
+                + "\nTotal de Imágenes:" +trazas.getImagenes()
+                + "\nTotal de Trazas Aceptadas:" +aceptadas
+                + "\nTotal de Trazas Rechazadas:"+rechazadas
                 + filtro.getLastfechas()
                 + filtro.getNombreDocumento()
                 + filtro.getLastusuario();
@@ -59,4 +60,18 @@ public class Procesar {
         return valor;
     }
 
+    public int getSuma() {
+        return suma;
+    }
+
+    public int getTotaltrazas() {
+        return totaltrazas;
+    }
+
+    public void setTotaltrazas(int totaltrazas) {
+        this.totaltrazas = totaltrazas;
+    }
+    
+
+    
 }
