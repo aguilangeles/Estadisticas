@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ErroresPorTraza;
+package defaultTableModels;
 
+import ErroresPorTraza.GetListadeTrazas;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.TipodeControl;
@@ -14,16 +15,16 @@ import models.TrazaControl;
  *
  * @author aguilangeles@gmail.com
  */
-public class DefTableModelMilErrores {
+public class TableModelErroresPorMil {
 
-    private final DefaultTableModel pormil;
+    private final DefaultTableModel erroresporMil;
 
-    public DefTableModelMilErrores(GetListadeTrazas trazas) {
+    public TableModelErroresPorMil(GetListadeTrazas trazas) {
 
-        this.pormil = tableErrorMil(trazas);
+        this.erroresporMil = modelMil(trazas);
     }
 
-    private DefaultTableModel tableErrorMil(GetListadeTrazas trazas) {
+    private DefaultTableModel modelMil(GetListadeTrazas trazas) {
         List<TipodeControl> controles = trazas.getControles();
         DefaultTableModel model = new DefaultTableModel();
         int muestra = totalimagenes(trazas);
@@ -37,12 +38,12 @@ public class DefTableModelMilErrores {
             String nombre = control.getNombre();
             int cantidad = control.getCantidad();
 
-            model.addRow(new Object[]{nombre, mill(cantidad, muestra), cantidad, muestra});
+            model.addRow(new Object[]{nombre, pormil(cantidad, muestra), cantidad, muestra});
         }
         return model;
     }
 
-    private Double mill(int error, int muestra) {
+    private Double pormil(int error, int muestra) {
         double aerror = (double) error;
         double amuestra = (double) muestra;
         double mil = (aerror / amuestra) * 1000;
@@ -64,7 +65,7 @@ public class DefTableModelMilErrores {
     }
 
     public DefaultTableModel getPormil() {
-        return pormil;
+        return erroresporMil;
     }
 
 }

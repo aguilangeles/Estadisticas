@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ErroresPorTraza;
+package charts;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,9 +20,9 @@ import org.jfree.data.general.PieDataset;
  *
  * @author aguilangeles@gmail.com
  */
-public class Chartaceptrech extends JPanel {
+public class AceptadosRechazadosPie extends JPanel {
 
-    public Chartaceptrech() {
+    public AceptadosRechazadosPie() {
     }
 
     public ChartPanel getChartPanel(String chartTitle, JTable table, int total) {

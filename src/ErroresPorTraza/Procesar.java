@@ -5,6 +5,9 @@
  */
 package ErroresPorTraza;
 
+import defaultTableModels.TableModelErroresPorMil;
+import defaultTableModels.TableModelTiposError;
+import defaultTableModels.TableModelAceptadosRechazados;
 import javax.swing.table.DefaultTableModel;
 import models.Filtro;
 
@@ -16,7 +19,7 @@ public class Procesar {
 
     private final Filtro filtro;
     private final int aceptadas, rechazadas;
-    GetListadeTrazas trazas = null;
+    private GetListadeTrazas trazas = null;
     private final DefaultTableModel errorModel;
     private final DefaultTableModel cantidad;
     private final DefaultTableModel pormil;
@@ -28,9 +31,9 @@ public class Procesar {
         this.aceptadas = aceptadas;
         this.rechazadas = rechazadas;
         this.trazas = new GetListadeTrazas(filtro, aceptadas, rechazadas);
-        this.errorModel = new DefTableModelError(trazas).getErrores();
-        this.cantidad = new DefTableModelAceptados(aceptadas, rechazadas).getAceptRech();
-        this.pormil = new DefTableModelMilErrores(trazas).getPormil();
+        this.errorModel = new TableModelTiposError(trazas).getErrores();
+        this.cantidad = new TableModelAceptadosRechazados(aceptadas, rechazadas).getAceptadoyRechazados();
+        this.pormil = new TableModelErroresPorMil(trazas).getPormil();
         this.suma = aceptadas+rechazadas;
     }
 

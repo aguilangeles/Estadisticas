@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ErroresPorTraza;
+package charts;
 
 import java.awt.Dimension;
-import java.text.DecimalFormat;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import org.jfree.chart.ChartFactory;
@@ -22,9 +21,12 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author aguilangeles@gmail.com
  */
-public class ChartErroresxMil extends JPanel {
+public class TiposErrorChart extends JPanel {
 
-    public ChartErroresxMil() {
+    private int sumatoriaCantidad = 0;
+    private String resultadosExcell="";
+
+    public TiposErrorChart() {
     }
 
     public ChartPanel getChartPanel(String chartTitle, JTable table) {
@@ -39,14 +41,15 @@ public class ChartErroresxMil extends JPanel {
     }
 
     private DefaultCategoryDataset createDataset(JTable table) {
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
-
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int row = 0; row < table.getRowCount(); row++) {
-            String nombre = (String) table.getValueAt(row, 0);
-            double cantidad = (double) table.getValueAt(row, 1);
-            result.setValue(cantidad, nombre, "");
+            String name = (String) table.getValueAt(row, 0);
+            int quantity = (int) table.getValueAt(row, 1);
+            resultadosExcell += "\n" + name + ":" + quantity;
+            sumatoriaCantidad += quantity;
+            dataset.setValue(quantity, name, "");
         }
-        return result;
+        return dataset;
     }
 
     private JFreeChart createChart(DefaultCategoryDataset dataset, String title) {
@@ -57,4 +60,14 @@ public class ChartErroresxMil extends JPanel {
         plot.setBackgroundAlpha(0.5f);
         return chart;
     }
+
+    public int getSumaCantidades() {
+        return sumatoriaCantidad;
+    }
+
+    public String getResultadosExcell() {
+        return resultadosExcell;
+    }
+    
+
 }

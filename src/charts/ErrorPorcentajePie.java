@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ErroresPorTraza;
+package charts;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,9 +20,9 @@ import org.jfree.data.general.PieDataset;
  *
  * @author aguilangeles@gmail.com
  */
-public class ChartPorcentajeErrores extends JPanel {
+public class ErrorPorcentajePie extends JPanel {
 
-    public ChartPorcentajeErrores() {
+    public ErrorPorcentajePie() {
     }
 
     public ChartPanel getChartPanel(String chartTitle, JTable table, int total) {
@@ -39,10 +39,10 @@ public class ChartPorcentajeErrores extends JPanel {
     private PieDataset creaDataset(JTable table, int total) {
         DefaultPieDataset dataset = new DefaultPieDataset();
         for (int row = 0; row < table.getRowCount(); row++) {
-            String nombre = (String) table.getValueAt(row, 0);
-            int cantidad = (int) table.getValueAt(row, 1);
-            int porcentaje = (cantidad * 100) / total;
-            dataset.setValue(nombre, porcentaje);
+            String name = (String) table.getValueAt(row, 0);
+            int quantity = (int) table.getValueAt(row, 1);
+            int porcentaje = (quantity * 100) / total;
+            dataset.setValue(name, porcentaje);
 
         }
         return dataset;

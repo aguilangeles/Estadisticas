@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ErroresPorTraza;
+package defaultTableModels;
 
+import ErroresPorTraza.GetListadeTrazas;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.TipodeControl;
@@ -13,12 +14,12 @@ import models.TipodeControl;
  *
  * @author aguilangeles@gmail.com
  */
-public class DefTableModelError {
+public class TableModelTiposError {
     
     private final  DefaultTableModel errores;
     
 
-    public DefTableModelError(GetListadeTrazas trazas) {
+    public TableModelTiposError(GetListadeTrazas trazas) {
         this.errores= tableErrores(trazas);
     }
     

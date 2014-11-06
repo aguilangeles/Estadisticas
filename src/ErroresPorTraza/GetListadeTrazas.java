@@ -24,10 +24,10 @@ public class GetListadeTrazas {
     List<Integer> idtrazaList = new ArrayList<>();
 
     private int imagenes;
-    
+
     private int aceptadas, rechazadas;
     List<TipodeControl> controles = new ArrayList<>();
-     List<TrazaControl> traza = new ArrayList<>();
+    List<TrazaControl> traza = new ArrayList<>();
 
     public GetListadeTrazas(Filtro filtroFinal, int aceptadas, int rechazadas) {
         this.aceptadas = aceptadas;
@@ -49,7 +49,6 @@ public class GetListadeTrazas {
                     + " FROM qualitys.traza "
                     + filtroFinal.toString()
                     + " and estadoLote is not null;";
-//                        System.out.println(query);
 
             conexion.executeQuery(query);
             try {
@@ -58,7 +57,7 @@ public class GetListadeTrazas {
                     int muestr = conexion.resulset.getInt(2);
                     int estado = conexion.resulset.getInt(3);
                     poblarListaIdtraza(result);
-                    imagenes+=muestr;
+                    imagenes += muestr;
                     trazacontrol = new TrazaControl(result, muestr, estado);
                     traza.add(trazacontrol);
                 }
@@ -109,7 +108,6 @@ public class GetListadeTrazas {
         return controles;
     }
 
-
     private String arraydeIdsTraza() {
         String numeros = idtrazaList.toString();
         String left = numeros.replace("[", "(");
@@ -140,6 +138,7 @@ public class GetListadeTrazas {
     public void setTraza(List<TrazaControl> traza) {
         this.traza = traza;
     }
+
     public List<TipodeControl> getControles() {
         return controles;
     }
@@ -147,9 +146,5 @@ public class GetListadeTrazas {
     public int getImagenes() {
         return imagenes;
     }
-
-    
-    
-    
 
 }

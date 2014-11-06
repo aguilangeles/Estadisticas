@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ErroresPorTraza;
+package defaultTableModels;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -11,12 +11,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aguilangeles@gmail.com
  */
-public class DefTableModelAceptados {
+public class TableModelAceptadosRechazados {
     
-    private DefaultTableModel aceptRech;
+    private DefaultTableModel ar;
 
-    public DefTableModelAceptados(int aceptadas, int rechazadas) {
-        this.aceptRech=tableCantidad(aceptadas, rechazadas);
+    public TableModelAceptadosRechazados(int aceptadas, int rechazadas) {
+        this.ar=tableCantidad(aceptadas, rechazadas);
     }
     
 
@@ -30,8 +30,8 @@ public class DefTableModelAceptados {
         return model;
     }
 
-    public DefaultTableModel getAceptRech() {
-        return aceptRech;
+    public DefaultTableModel getAceptadoyRechazados() {
+        return ar;
     }
         
 }

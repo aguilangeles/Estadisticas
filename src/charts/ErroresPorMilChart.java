@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ErroresPorTraza;
+package charts;
 
 import java.awt.Dimension;
 import javax.swing.JPanel;
@@ -21,12 +21,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author aguilangeles@gmail.com
  */
-public class ChartErrores extends JPanel {
+public class ErroresPorMilChart extends JPanel {
 
-    private int totales = 0;
-    private String sheet="";
-
-    public ChartErrores() {
+    public ErroresPorMilChart() {
     }
 
     public ChartPanel getChartPanel(String chartTitle, JTable table) {
@@ -42,12 +39,11 @@ public class ChartErrores extends JPanel {
 
     private DefaultCategoryDataset createDataset(JTable table) {
         DefaultCategoryDataset result = new DefaultCategoryDataset();
+
         for (int row = 0; row < table.getRowCount(); row++) {
-            String nombre = (String) table.getValueAt(row, 0);
-            int cantidad = (int) table.getValueAt(row, 1);
-            sheet += "\n" + nombre + ":" + cantidad;
-            totales += cantidad;
-            result.setValue(cantidad, nombre, "");
+            String name = (String) table.getValueAt(row, 0);
+            double quantity = (double) table.getValueAt(row, 1);
+            result.setValue(quantity, name, "");
         }
         return result;
     }
@@ -60,14 +56,4 @@ public class ChartErrores extends JPanel {
         plot.setBackgroundAlpha(0.5f);
         return chart;
     }
-
-    public int getTotales() {
-        return totales;
-    }
-
-    public String getSheet() {
-        return sheet;
-    }
-    
-
 }

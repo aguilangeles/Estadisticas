@@ -5,6 +5,11 @@
  */
 package ErroresPorTraza;
 
+import helpers.Write;
+import charts.TiposErrorChart;
+import charts.ErroresPorMilChart;
+import charts.ErrorPorcentajePie;
+import charts.AceptadosRechazadosPie;
 import frame.PanelSeleccion;
 import java.awt.FlowLayout;
 import javax.swing.JTable;
@@ -65,19 +70,19 @@ public class TabbedForm extends javax.swing.JFrame {
     }
 
     private void setChartCantidadErrores() {
-        ChartErrores chartError = new ChartErrores();
+        TiposErrorChart chartError = new TiposErrorChart();
         ChartPanel chartpanel1 = chartError.getChartPanel("Cantidad de errores", jTable1);
         jPanelChartError.removeAll();
         jPanelChartError.setLayout(new FlowLayout(FlowLayout.LEFT));
         jPanelChartError.add(chartpanel1);
         this.setLocationRelativeTo(null);
-        int totales = chartError.getTotales();
+        int totales = chartError.getSumaCantidades();
         setChartPorcentaje(totales);
-        tablaresult = chartError.getSheet();
+        tablaresult = chartError.getResultadosExcell();
     }
 
     private void setChartCantidadErroresPorMil() {
-        ChartErroresxMil chartErrores = new ChartErroresxMil();
+        ErroresPorMilChart chartErrores = new ErroresPorMilChart();
         ChartPanel chartpanel1 = chartErrores.getChartPanel("Errores por mil", jTable3);
         jPanelMill.removeAll();
         jPanelMill.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -86,7 +91,7 @@ public class TabbedForm extends javax.swing.JFrame {
     }
 
     private void setChartAceptadosRechazados() {
-        Chartaceptrech aceptrech = new Chartaceptrech();
+        AceptadosRechazadosPie aceptrech = new AceptadosRechazadosPie();
         ChartPanel chartpanel1 = aceptrech.getChartPanel("Estado de Trazas", jTable2, suma);
         jPanelAceptRech.removeAll();
         jPanelAceptRech.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -95,7 +100,7 @@ public class TabbedForm extends javax.swing.JFrame {
     }
 
     private void setChartPorcentaje(int tt) {
-        ChartPorcentajeErrores aceptrech = new ChartPorcentajeErrores();
+        ErrorPorcentajePie aceptrech = new ErrorPorcentajePie();
         ChartPanel chartpanel1 = aceptrech.getChartPanel("Porcentaje de errores", jTable1, tt);
         jPanelPorcentaje.removeAll();
         jPanelPorcentaje.setLayout(new FlowLayout(FlowLayout.LEFT));
