@@ -23,10 +23,12 @@ public class TabbedForm extends javax.swing.JFrame {
 
     /**
      * Creates new form TabbedForm
+     *
      * @param procesor
      */
     public TabbedForm(Procesar procesor) {
         initComponents();
+        this.setResizable(false);
         this.suma = procesor.getSuma();
         this.procesor = procesor;
         jTable1.setModel(procesor.getErrorModel());
@@ -499,13 +501,13 @@ public class TabbedForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PanelSeleccion().setVisible(true);
             }
         });
         dispose();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
