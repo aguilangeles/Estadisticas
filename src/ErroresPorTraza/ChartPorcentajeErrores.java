@@ -30,7 +30,7 @@ public class ChartPorcentajeErrores extends JPanel {
         PieDataset dataset = creaDataset(table, total);
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(450, 354));
+        chartPanel.setPreferredSize(new Dimension(450, 440));
         chartPanel.setMouseWheelEnabled(true);
         return chartPanel;
 

@@ -30,7 +30,7 @@ public class Chartaceptrech extends JPanel {
         PieDataset dataset = creaDataset(table, total);
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(450, 354));
+        chartPanel.setPreferredSize(new Dimension(440, 440));
         chartPanel.setMouseWheelEnabled(true);
         return chartPanel;
 
@@ -52,7 +52,7 @@ public class Chartaceptrech extends JPanel {
         JFreeChart chart = ChartFactory.createPieChart(title, dataset, true, true, false);
 //                createBarChart(title, "Cantidades", "Estado de las trazas", dataset, PlotOrientation.VERTICAL, true, true, false);
         PiePlot plot = (PiePlot) chart.getPlot();
-        plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+        plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 11));
 
         plot.setNoDataMessage("no data");
         plot.setCircular(false);

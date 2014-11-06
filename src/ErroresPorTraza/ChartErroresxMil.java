@@ -32,7 +32,7 @@ public class ChartErroresxMil extends JPanel {
         DefaultCategoryDataset dataset = createDataset(table);
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(450, 360));
+        chartPanel.setPreferredSize(new Dimension(450, 440));
         chartPanel.setMouseWheelEnabled(true);
         return chartPanel;
 
