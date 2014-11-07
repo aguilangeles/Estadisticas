@@ -21,8 +21,8 @@ public class TipoVerificacion extends JFrame {
     
     private javax.swing.JLabel jlNameTipodoc;
     private javax.swing.JLabel jlUsername;
-    private javax.swing.JRadioButton jrbCalidad;
-    private javax.swing.JRadioButton jrbDocumento;
+    private final javax.swing.JRadioButton jrbCalidad;
+    private final javax.swing.JRadioButton jrbDocumento;
     private javax.swing.JCheckBox jchDocumento;
     private javax.swing.JCheckBox jchFecha;
     private javax.swing.JCheckBox jchUsuario;

@@ -5,7 +5,7 @@
  */
 package ErroresPorTraza;
 
-import helpers.Write;
+import helpers.WriteReport;
 import charts.TiposErrorChart;
 import charts.ErroresPorMilChart;
 import charts.ErrorPorcentajePie;
@@ -494,9 +494,9 @@ public class TabbedForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String valor = procesor.resultados() + tablaresult;
-        Write write = new Write();
-        Write.createNewSheet("Estadisticas", jButton1);
-        Write.writeReport(valor);
+        WriteReport write = new WriteReport();
+        WriteReport.createNewSheet("Estadisticas", jButton1);
+        WriteReport.writeReport(valor);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

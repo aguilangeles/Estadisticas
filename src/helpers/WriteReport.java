@@ -19,7 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  *
  * @author aguilangeles@gmail.com
  */
-public class Write {
+public class WriteReport {
 
     static String xls = ".xls";
     private static String PATHNAME = "Reporte/Estadisticas_" + new GetTime().getDateForTXT() + xls;
@@ -27,7 +27,7 @@ public class Write {
     private String contenido;
     private static HSSFWorkbook libro;
 
-    public Write() {
+    public WriteReport() {
         libro = new HSSFWorkbook();
     }
 
@@ -55,18 +55,18 @@ public class Write {
                 try {
                     libro.write(elFichero);
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), Write.class.getName(), JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), WriteReport.class.getName(), JOptionPane.ERROR_MESSAGE);
                 }
                 elFichero.close();
             } catch (FileNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), Write.class.getName(), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), WriteReport.class.getName(), JOptionPane.ERROR_MESSAGE);
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), Write.class.getName(), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), WriteReport.class.getName(), JOptionPane.ERROR_MESSAGE);
             } finally {
                 try {
                     elFichero.close();
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), Write.class.getName(), JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), WriteReport.class.getName(), JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
