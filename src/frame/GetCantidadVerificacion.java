@@ -12,67 +12,96 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
+ * TRAE LAS CANTIDADES DE TRAZAS, ACEPTADAS, RECHAZADAS Y NULAS SEGUN EL ID
+ * VERIFICAION.
  *
  * @author aguilangeles@gmail.com
  */
 public class GetCantidadVerificacion {
 
-    private final JLabel numTrazas;
-    private final JLabel numAcept;
-    private final JLabel numRech;
-    private final JLabel numNull;
-    private final int idTraza;
-    private final String condition;
+    private final JLabel total, aceptadas, rechazadas, nulas;
+    private int ftotal, facept, frech, fnull;
 
-    public GetCantidadVerificacion(JLabel numTrazas, JLabel numAcept, JLabel numRech, JLabel numNull, int idTraza, String condition) {
-        this.numTrazas = numTrazas;
-        this.numAcept = numAcept;
-        this.numRech = numRech;
-        this.numNull = numNull;
-        this.idTraza = idTraza;
-        this.condition = condition;
-        getQuantityofTrazas(condition);
-        getQuantityof(numAcept, idTraza, "= '1'", "Total Aceptados: ", condition);// llena label de aceptados
-        getQuantityof(numRech, idTraza, "= '0'", "Total Rechazados: ", condition);//llena label de rechazados
-        getQuantityof(numNull, idTraza, "IS NULL", "Total Nulos: ", condition);// llena label null
+    public GetCantidadVerificacion(JLabel total, JLabel aceptadas, JLabel rechazadas, JLabel nulas) {
+        this.total = total;
+        this.aceptadas = aceptadas;
+        this.rechazadas = rechazadas;
+        this.nulas = nulas;
     }
 
-    private void getQuantityofTrazas(String condition) {
+    private void setlabels(int t, int a, int r, int n) {
+
+        total.setText("Total Trazas: " + t);
+        aceptadas.setText("Total Aceptadas: " + a);
+        rechazadas.setText("Total Rechazadas: " + r);
+        nulas.setText("Total Nulas: " + n);
+    }
+
+    public void setvalueoftraza(String condition1) {
+        //
+        ftotal = getQuantityofTrazas(condition1);
+        facept = getQuantityof("= '1'", condition1);
+        frech = getQuantityof("= '0'", condition1);
+        fnull = getQuantityof("IS NULL", condition1);
+        //
+        setlabels(ftotal, facept, frech, fnull);
+    }
+
+    private int getQuantityofTrazas(String condition) {
+        int result = 0;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT count(*) FROM qualitys.traza  where idVerificacion = " + idTraza + condition;
+            String query = "SELECT count(*)"
+                    + " FROM qualitys.traza "
+                    + condition;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
 
-                    int result = conexion.resulset.getInt(1);
-                    numTrazas.setText("Cantidad de trazas: " + result);
+                    result = conexion.resulset.getInt(1);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(GetCantidadVerificacion.class.getName()).log(Level.SEVERE, null, ex);
             }
             conexion.isConexionClose();
         }
+        return result;
     }
 
-    private void getQuantityof(JLabel aLabel, int idTraza, String value, String cantidadde, String condition) {
+    private int getQuantityof(String value, String condition) {
+        int result = 0;
         Conexion conexion = new Conexion();
         if (conexion.isConexion()) {
-            String query = "SELECT count(*) FROM qualitys.traza "
-                    + " where idverificacion = " + idTraza
-                    + " and estadoLote " + value + condition;
+            String query = "SELECT count(*) "
+                    + " FROM qualitys.traza "
+                    + condition
+                    + " and estadoLote "
+                    + value;
             conexion.executeQuery(query);
             try {
                 while (conexion.resulset.next()) {
-
-                    int result = conexion.resulset.getInt(1);
-                    aLabel.setText(cantidadde + result);
+                    result = conexion.resulset.getInt(1);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(GetCantidadVerificacion.class.getName()).log(Level.SEVERE, null, ex);
             }
             conexion.isConexionClose();
         }
+        return result;
     }
+
+    public void reset() {
+        setlabels(0, 0, 0, 0);
+    }
+
+    public int getFacept() {
+        return facept;
+    }
+
+    public int getFrech() {
+        return frech;
+    }
+
+
 
 }

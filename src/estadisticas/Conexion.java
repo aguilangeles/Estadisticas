@@ -4,6 +4,7 @@
  */
 package estadisticas;
 
+import estadisticas.ReadProperties.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,11 +32,12 @@ public class Conexion {
     }
 
     public boolean isConexion() {
-        String url = "localhost";
-        String base = "qualitys";
+        Database db = new ReadProperties().getUser();
+        String url = db.getUrl();
+        String base = db.getBase();
         String urlExtendida = "jdbc:mysql://" + url + "/" + base;
-        String user = "root";
-        String passw = "root";
+        String user = db.getName();
+        String passw = db.getPassword();
         try {
             Class.forName(DRIVER);
             conexion = DriverManager.getConnection(urlExtendida, user, passw);
